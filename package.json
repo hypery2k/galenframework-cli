@@ -1,0 +1,50 @@
+{
+  "name": "galenframework-cli",
+  "version": "1.6.2",
+  "description": "Automated testing of look and feel for your responsive websites",
+  "homepage": "https://github.com/hypery2k/galenframework-cli",
+  "bugs": {
+    "url": "https://github.com/hypery2k/galenframework-cli/issues"
+  },
+  "keywords": [
+    "galen",
+    "galenframework",
+    "responsive",
+    "test",
+    "testing",
+    "webdriver",
+    "selenium"
+  ],
+  "author": "Martin Reinhardt",
+  "scripts": {
+    "install": "node install.js",
+    "test": "nodeunit --reporter=minimal test/tests.js"
+  },
+  "bin": {
+    "galen": "bin/galen"
+  },
+  "preferGlobal": true,
+  "dependencies": {
+    "adm-zip": "0.4.4",
+    "fs-extra": "~0.16.0",
+    "kew": "0.4.0",
+    "npmconf": "2.1.1",
+    "progress": "1.1.8",
+    "request": "2.42.0",
+    "request-progress": "0.3.1",
+    "which": "~1.0.5",
+    "sys": "~0.0.1"
+  },
+  "devDependencies": {
+    "nodeunit": "0.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hypery2k/galenframework-cli.git"
+  },
+  "keywords": [
+    "galen"
+  ],
+  "license": "MIT",
+  "version": "1.6.2"
+}
