@@ -1,5 +1,6 @@
 
 # galenframework-cli
+[![Build Status](https://travis-ci.org/hypery2k/galenframework-cli.svg)](https://travis-ci.org/hypery2k/galenframework-cli)
 
 > The command line tool to use [Galen](http://galenframework.com).
 
