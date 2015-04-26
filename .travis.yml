@@ -6,8 +6,11 @@ node_js:
   - "0.8"
 script:
   - npm test
-  - sudo npm install . -g
+  - npm install . -g
+  - ./runTests.sh
 before_install:
-  - sudo npm install -g npm
+  - npm install -g npm
   - sudo apt-get update -qq
   - sudo apt-get install default-jre
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
