@@ -24,4 +24,4 @@ build: off
 test_script:
   - npm test
   - npm install . -g
-  - ./runTests.sh
+  - .\runTests
