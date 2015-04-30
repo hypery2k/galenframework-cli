@@ -1,0 +1,26 @@
+# appveyor file
+# http://www.appveyor.com/docs/appveyor-yml
+environment:
+  matrix:
+  # node.js
+  - nodejs_version: "0.10"
+  - nodejs_version: "0.11"
+  # io.js
+  - nodejs_version: "1.0"
+
+platform:
+  - x86
+  - x64
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm install -g npm
+  - node --version
+  - npm --version
+
+build: off
+
+test_script:
+  - npm test
+  - npm install . -g
+  - ./runTests.sh
