@@ -3,6 +3,7 @@ First search if the issue is already described!
 If not create a new issue:
 
 * Tell about your environment:
+  * node version
   * java version
   * galen version
   * used browser and version
