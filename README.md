@@ -1,7 +1,7 @@
 
 # galenframework-cli
 
-[![Build Status](https://travis-ci.org/hypery2k/galenframework-cli.svg?branch=v1.6.3)](https://travis-ci.org/hypery2k/galenframework-cli) [![Build status](https://ci.appveyor.com/api/projects/status/fbwy88pc9ia6429w/branch/v1.6.3?svg=true)](https://ci.appveyor.com/project/hypery2k/galenframework-cli/branch/v1.6.3)
+[![Build Status](https://travis-ci.org/hypery2k/galenframework-cli.svg?branch=v1.6.3)](https://travis-ci.org/hypery2k/galenframework-cli) [![Build status](https://ci.appveyor.com/api/projects/status/fbwy88pc9ia6429w/branch/master?tag=v1.6.3&svg=true)](https://ci.appveyor.com/project/hypery2k/galenframework-cli/branch/master?tag=v1.6.3)
 
  [![npm version](https://badge.fury.io/js/galenframework-cli.svg)](http://badge.fury.io/js/galenframework-cli) [![Dependency Status](https://david-dm.org/hypery2k/galenframework-cli.svg)](https://david-dm.org/hypery2k/galenframework-cli) [![devDependency Status](https://david-dm.org/hypery2k/galenframework-cli/dev-status.svg)](https://david-dm.org/hypery2k/galenframework-cli#info=devDependencies) 
 
