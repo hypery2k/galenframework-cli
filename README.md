@@ -1,7 +1,8 @@
 
 # galenframework-cli
 
-[![Build Status](https://travis-ci.org/hypery2k/galenframework-cli.svg)](https://travis-ci.org/hypery2k/galenframework-cli) [![Build status](https://ci.appveyor.com/api/projects/status/fbwy88pc9ia6429w?svg=true)](https://ci.appveyor.com/project/hypery2k/galenframework-cli)
+[![Build Status](https://travis-ci.org/hypery2k/galenframework-cli.svg?branch=v1.6.3)](https://travis-ci.org/hypery2k/galenframework-cli) [![Build status](https://ci.appveyor.com/api/projects/status/fbwy88pc9ia6429w/branch/v1.6.3?svg=true)](https://ci.appveyor.com/project/hypery2k/galenframework-cli/branch/v1.6.3)
+
  [![npm version](https://badge.fury.io/js/galenframework-cli.svg)](http://badge.fury.io/js/galenframework-cli) [![Dependency Status](https://david-dm.org/hypery2k/galenframework-cli.svg)](https://david-dm.org/hypery2k/galenframework-cli) [![devDependency Status](https://david-dm.org/hypery2k/galenframework-cli/dev-status.svg)](https://david-dm.org/hypery2k/galenframework-cli#info=devDependencies) 
 
 [![Join the chat at https://gitter.im/hypery2k/galenframework-cli](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hypery2k/galenframework-cli?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
