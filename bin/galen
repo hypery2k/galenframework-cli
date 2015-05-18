@@ -3,7 +3,7 @@
 var sys = require('sys');
 var exec = require('child_process').exec;
 var curDir = require("path").resolve('.');
-var baseDir = require('path').dirname(require.main.filename).replace(/\s/g, '\\ ');
+var baseDir = require('path').dirname(require.main.filename);
 
 function puts(error, stdout, stderr) {
 	console.log(stdout);
@@ -20,5 +20,5 @@ var args = process.argv.join(' ');
 if (process.platform === 'win32') {
         exec(baseDir + '/../lib/galen/galen.bat ' + args, puts);
 } else  {
-        exec(baseDir + '/../lib/galen/galen ' + args, puts);
+        exec(baseDir.replace(/\s/g, '\\ ') + '/../lib/galen/galen ' + args, puts);
 }
