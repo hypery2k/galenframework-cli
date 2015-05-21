@@ -20,5 +20,5 @@ var args = process.argv.join(' ');
 if (process.platform === 'win32') {
         exec(baseDir + '/../lib/galen/galen.bat ' + args, puts);
 } else  {
-        exec(baseDir + '/../lib/galen/galen ' + args, puts);
+        exec(baseDir.replace(/\s/g, '\\ ') + '/../lib/galen/galen ' + args, puts);
 }
