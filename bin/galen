@@ -25,3 +25,7 @@ galenProcess.on('error', function (error) {
     console.error(error);
     process.exit(1);
 });
+
+galenProcess.on('exit', function (exitCode) {
+    process.exit(exitCode);
+});
