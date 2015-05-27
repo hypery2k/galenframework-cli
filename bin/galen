@@ -23,4 +23,5 @@ var galenProcess = spawn(programPath, args, childProcessOptions);
 
 galenProcess.on('error', function (error) {
     console.error(error);
+    process.exit(1);
 });
