@@ -13,10 +13,11 @@ function puts(error, stdout, stderr) {
         console.error(error);
     }
 }
+
 // remove node args
-process.argv.splice(0, 2);
-// create arguments
-var args = process.argv.join(' ');
+var args = process.argv.slice(2);
+// create arguments string
+args = args.join(' ');
 
 if (process.platform === 'win32') {
         exec(baseDir + '/../lib/galen/galen.bat ' + args, puts);
