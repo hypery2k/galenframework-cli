@@ -1,26 +1,26 @@
 #!/usr/bin/env node
 
 var sys = require('sys');
-var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 var path = require('path');
 var curDir = path.resolve('.');
 var baseDir = path.dirname(require.main.filename);
-
-function puts(error, stdout, stderr) {
-    console.log(stdout);
-    console.error(stderr);
-    if (error !== null) {
-        console.error(error);
-    }
-}
+var childProcessOptions = {
+    stdio: 'inherit'
+};
 
 // remove node args
 var args = process.argv.slice(2);
-// create arguments string
-args = args.join(' ');
 
+var programPath;
 if (process.platform === 'win32') {
-        exec(baseDir + '/../lib/galen/galen.bat ' + args, puts);
+    programPath = path.resolve(baseDir, '../lib/galen/galen.bat');
 } else  {
-        exec(baseDir.replace(/\s/g, '\\ ') + '/../lib/galen/galen ' + args, puts);
+    programPath = path.resolve(baseDir, '../lib/galen/galen');
 }
+
+var galenProcess = spawn(programPath, args, childProcessOptions);
+
+galenProcess.on('error', function (error) {
+    console.error(error);
+});
