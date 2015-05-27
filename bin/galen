@@ -3,7 +3,6 @@
 var sys = require('sys');
 var spawn = require('child_process').spawn;
 var path = require('path');
-var curDir = path.resolve('.');
 var baseDir = path.dirname(require.main.filename);
 var childProcessOptions = {
     stdio: 'inherit'
