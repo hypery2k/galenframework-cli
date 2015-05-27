@@ -2,8 +2,9 @@
 
 var sys = require('sys');
 var exec = require('child_process').exec;
-var curDir = require("path").resolve('.');
-var baseDir = require('path').dirname(require.main.filename);
+var path = require('path');
+var curDir = path.resolve('.');
+var baseDir = path.dirname(require.main.filename);
 
 function puts(error, stdout, stderr) {
 	console.log(stdout);
