@@ -31,9 +31,7 @@
     "npmconf": "2.1.1",
     "progress": "1.1.8",
     "request": "2.55.0",
-    "request-progress": "0.3.1",
-    "which": "~1.1.1",
-    "sys": "~0.0.1"
+    "request-progress": "0.3.1"
   },
   "devDependencies": {
     "nodeunit": "0.9.1"

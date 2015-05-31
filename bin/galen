@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-var sys = require('sys');
 var spawn = require('child_process').spawn;
 var path = require('path');
 var baseDir = path.dirname(require.main.filename);
