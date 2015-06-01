@@ -45,17 +45,17 @@ var pkgPath = path.join(libPath, 'galen')
 var galenPath = null
 var tmpPath = null
 
-// If the user manually installed galenframework-cli, we want
+// If the user manually installed galen, we want
 // to use the existing version.
 //
-// Do not re-use a manually-installed galenframework-cli with
+// Do not re-use a manually-installed galen with
 // a different version.
 //
-// Do not re-use an npm-installed galenframework-cli, because
+// Do not re-use an npm-installed galen, because
 // that can lead to weird circular dependencies between
 // local versions and global versions.
 var whichDeferred = kew.defer()
-which('galenframework-cli', whichDeferred.makeNodeResolver())
+which('galen', whichDeferred.makeNodeResolver())
 whichDeferred.promise
   .then(function (result) {
     galenPath = result
