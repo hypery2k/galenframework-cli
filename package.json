@@ -45,5 +45,7 @@
     "galen"
   ],
   "preferGlobal": "true",
-  "license": "MIT"
+  "license": "MIT",
+  "_npmVersion": "2.6.0",
+  "_nodeVersion": "1.4.1"
 }
