@@ -2,9 +2,9 @@
 # galenframework-cli
 
 
-[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE) [![npm version](https://badge.fury.io/js/galenframework-cli.svg)](http://badge.fury.io/js/galenframework-cli) [![Dependency Status](https://david-dm.org/hypery2k/galenframework-cli.svg)](https://david-dm.org/hypery2k/galenframework-cli) [![devDependency Status](https://david-dm.org/hypery2k/galenframework-cli/dev-status.svg)](https://david-dm.org/hypery2k/galenframework-cli#info=devDependencies) 
 
-[![Build Status](https://travis-ci.org/hypery2k/galenframework-cli.svg?branch=master)](https://travis-ci.org/hypery2k/galenframework-cli) [![Build status](https://ci.appveyor.com/api/projects/status/fbwy88pc9ia6429w/branch/master?svg=true)](https://ci.appveyor.com/project/hypery2k/galenframework-cli/branch/master) [![npm version](https://badge.fury.io/js/galenframework-cli.svg)](http://badge.fury.io/js/galenframework-cli) [![Dependency Status](https://david-dm.org/hypery2k/galenframework-cli.svg)](https://david-dm.org/hypery2k/galenframework-cli) [![devDependency Status](https://david-dm.org/hypery2k/galenframework-cli/dev-status.svg)](https://david-dm.org/hypery2k/galenframework-cli#info=devDependencies) 
+[![Build Status](https://travis-ci.org/hypery2k/galenframework-cli.svg?branch=master)](https://travis-ci.org/hypery2k/galenframework-cli) [![Build status](https://ci.appveyor.com/api/projects/status/fbwy88pc9ia6429w/branch/master?svg=true)](https://ci.appveyor.com/project/hypery2k/galenframework-cli/branch/master)
 
 [![Join the chat at https://gitter.im/hypery2k/galenframework-cli](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hypery2k/galenframework-cli?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=15642797)](https://www.bountysource.com/trackers/15642797-hypery2k-galenframework-cli?utm_source=15642797&utm_medium=shield&utm_campaign=TRACKER_BADGE) [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=mreinhardt&url=https://github.com/hypery2k/galenframework-cli&title=badges&language=&tags=github&category=software)
 
