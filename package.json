@@ -26,11 +26,11 @@
   "preferGlobal": true,
   "dependencies": {
     "adm-zip": "0.4.7",
-    "fs-extra": "~0.20.0",
+    "fs-extra": "~0.22.1",
     "kew": "0.6.0",
     "npmconf": "2.1.2",
     "progress": "1.1.8",
-    "request": "2.58.0",
+    "request": "2.60.0",
     "request-progress": "0.3.1",
     "which": "~1.1.1"
   },
