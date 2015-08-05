@@ -13,7 +13,9 @@
     "test",
     "testing",
     "webdriver",
-    "selenium"
+    "selenium",
+    "TDD",
+    "BDD"
   ],
   "author": "Martin Reinhardt",
   "scripts": {
@@ -23,7 +25,7 @@
   "bin": {
     "galen": "bin/galen"
   },
-  "preferGlobal": true,
+  "preferGlobal": "true",
   "dependencies": {
     "adm-zip": "0.4.7",
     "fs-extra": "~0.22.1",
@@ -32,7 +34,8 @@
     "progress": "1.1.8",
     "request": "2.60.0",
     "request-progress": "0.3.1",
-    "which": "~1.1.1"
+    "which": "~1.1.1",
+    "yargs": "^3.17.1"
   },
   "devDependencies": {
     "nodeunit": "0.9.1"
@@ -41,10 +44,6 @@
     "type": "git",
     "url": "git+https://github.com/hypery2k/galenframework-cli.git"
   },
-  "keywords": [
-    "galen"
-  ],
-  "preferGlobal": "true",
   "license": "MIT",
   "_npmVersion": "2.6.0",
   "_nodeVersion": "1.4.1"
