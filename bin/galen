@@ -2,12 +2,9 @@
 
 // basic bash completion
 var argv = require('yargs')
-    .usage('This is my awesome program\n\nUsage: $0 [options]')
+    .usage('Galen Framework is an open-source tool for testing layout and responsive design of web applications.\n\nUsage: $0 [options]')
     .completion('completion', function (current, argv) {
-        // 'current' is the current command being completed.
-        // 'argv' is the parsed arguments so far.
-        // simply return an array of completions.
-        return [
+        var result = [
             'test',
             'check',
             'dump',
@@ -15,6 +12,25 @@ var argv = require('yargs')
             'help',
             'version'
         ];
+        // 'current' is the current command being completed.
+        // 'argv' is the parsed arguments so far.
+        // simply return an array of completions.
+        console.log('=>' + JSON.stringify(argv) + "<=");
+        if (current) {
+            switch (current) {
+                case 'test':
+                    result = [
+                        '--htmlreport',
+                        '--testngreport'
+                    ];
+                    break;
+                case 'check':
+                    break;
+                case 'dump':
+                    break;
+            }
+        }
+        return result;
     })
     .argv;
 
