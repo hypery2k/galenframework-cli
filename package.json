@@ -21,9 +21,9 @@
   "scripts": {
     "install": "node install.js",
     "postinstall": "node postinstall.js",
-    "test": "./node_modules/.bin/nodeunit --reporter=minimal test/tests.js",
-    "pretest": "./node_modules/jshint/bin/jshint lib",
-    "coverage": "istanbul -- cover ./node_modules/.bin/nodeunit test/tests.js && istanbul-coveralls --no-rm"
+    "test": "nodeunit --reporter=minimal test/tests.js",
+    "pretest": "jshint lib",
+    "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
   },
   "bin": {
     "galen": "bin/galen"
