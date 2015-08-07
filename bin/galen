@@ -2,44 +2,44 @@
 
 // basic bash completion
 var argv = require('yargs')
-    .usage('Galen Framework is an open-source tool for testing layout and responsive design of web applications.\n\nUsage: $0 [options]')
-    .completion('completion', function (current, argv) {
-        var result = [
-            'test',
-            'check',
-            'dump',
-            'config',
-            'help',
-            'version'
-        ];
-        // 'current' is the current command being completed.
-        // 'argv' is the parsed arguments so far.
-        // simply return an array of completions.
-        console.log('=>' + JSON.stringify(argv) + "<=");
-        if (current) {
-            switch (current) {
-                case 'test':
-                    result = [
-                        '--htmlreport',
-                        '--testngreport'
-                    ];
-                    break;
-                case 'check':
-                    break;
-                case 'dump':
-                    break;
-            }
-        }
-        return result;
-    })
-    .argv;
+  .usage('Galen Framework is an open-source tool for testing layout and responsive design of web applications.\n\nUsage: $0 [options]')
+  .completion('completion', function (current, argv) {
+    var result = [
+      'test',
+      'check',
+      'dump',
+      'config',
+      'help',
+      'version'
+    ];
+    // 'current' is the current command being completed.
+    // 'argv' is the parsed arguments so far.
+    // simply return an array of completions.
+    console.log('=>' + JSON.stringify(argv) + "<=");
+    if (current) {
+      switch (current) {
+        case 'test':
+          result = [
+            '--htmlreport',
+            '--testngreport'
+          ];
+          break;
+        case 'check':
+          break;
+        case 'dump':
+          break;
+      }
+    }
+    return result;
+  })
+  .argv;
 
 
 var spawn = require('child_process').spawn;
 var path = require('path');
 var baseDir = path.dirname(require.main.filename);
 var childProcessOptions = {
-    stdio: 'inherit'
+  stdio: 'inherit'
 };
 
 // remove node args
@@ -47,18 +47,18 @@ var args = process.argv.slice(2);
 
 var programPath;
 if (process.platform === 'win32') {
-    programPath = path.resolve(baseDir, '../lib/galen/galen.bat');
+  programPath = path.resolve(baseDir, '../lib/galen/galen.bat');
 } else {
-    programPath = path.resolve(baseDir, '../lib/galen/galen');
+  programPath = path.resolve(baseDir, '../lib/galen/galen');
 }
 
 var galenProcess = spawn(programPath, args, childProcessOptions);
 
 galenProcess.on('error', function (error) {
-    console.error(error);
-    process.exit(1);
+  console.error(error);
+  process.exit(1);
 });
 
 galenProcess.on('exit', function (exitCode) {
-    process.exit(exitCode);
+  process.exit(exitCode);
 });

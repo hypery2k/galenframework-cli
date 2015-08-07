@@ -2,5 +2,7 @@
 node_modules/*
 lib/galen/*
 lib/location.js
+coverage/*
 
+# IDE
 .idea/*

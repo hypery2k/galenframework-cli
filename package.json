@@ -17,10 +17,15 @@
     "TDD",
     "BDD"
   ],
+  "files": [
+    "lib/*.js"
+  ],
   "author": "Martin Reinhardt",
   "scripts": {
     "install": "node install.js",
-    "test": "nodeunit --reporter=minimal test/tests.js"
+    "test": "./node_modules/.bin/nodeunit --reporter=minimal test/tests.js",
+    "pretest": "./node_modules/jshint/bin/jshint lib",
+    "coverage": "istanbul -- cover ./node_modules/.bin/nodeunit test/tests.js && istanbul-coveralls --no-rm"
   },
   "bin": {
     "galen": "bin/galen"
@@ -38,13 +43,19 @@
     "yargs": "^3.17.1"
   },
   "devDependencies": {
-    "nodeunit": "0.9.1"
+    "coveralls": "^2.11.3",
+    "istanbul": "^0.3.17",
+    "istanbul-coveralls": "^1.0.3",
+    "jscoverage": "^0.6.0",
+    "jshint": "^2.8.0",
+    "nodeunit": "^0.9.1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hypery2k/galenframework-cli.git"
   },
   "license": "MIT",
+  "_galenVersion": "2.0.5",
   "_npmVersion": "2.6.0",
   "_nodeVersion": "1.4.1"
 }
