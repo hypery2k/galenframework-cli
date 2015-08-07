@@ -6,7 +6,9 @@
 
 > The command line tool to use [Galen](http://galenframework.com).
 
-[![NPM](https://nodei.co/npm/galenframework-cli.png)](https://nodei.co/npm/galenframework-cli/)
+[![NPM](https://nodei.co/npm/galenframework-cli.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/galenframework-cli/)
+
+[![NPM](https://nodei.co/npm-dl/galenframework-cli.png)](https://nodei.co/npm/galenframework-cli/)
 
 [Galen](http://galenframework.com) allows automated testing of look and feel for your responsive websites.
 
