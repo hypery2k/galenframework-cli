@@ -104,6 +104,8 @@ whichDeferred.promise
     var fileName = downloadUrl.split('/').pop()
     var downloadedFile = path.join(tmpPath, fileName)
 
+    console.log('Running at platform: ' + process.platform)
+
     // Start the install.
     if (!fs.existsSync(downloadedFile)) {
       console.log('Downloading', downloadUrl)
