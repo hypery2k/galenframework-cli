@@ -23,6 +23,15 @@ You must have Java 6+ installed.
 
 > (sudo) npm install -g galenframework-cli
 
+If you want to enable tab completion on Linux, run
+
+> galen completion >> ~/.~/.bashrc
+or
+> galen completion >> ~/.~/.zshrc
+
+On Mac OS X, run
+> galen completion >> ~/.~/.profile
+
 In case of errors within Ubuntu/Debian, e.g.
 ```
 sh: 1: node: not find
