@@ -9,7 +9,7 @@ script:
   - export COVERALLS_REPO_TOKEN=mqVTe91nICY38tHlFFtmZIjbzpghGZyos
   - npm install . -g
   - npm test
-  - npm coverage
+  - npm run coverage
   - ./runTests.sh
 before_install:
   - npm install -g npm
