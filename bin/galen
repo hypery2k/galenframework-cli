@@ -45,6 +45,9 @@ var childProcessOptions = {
 // remove node args
 var args = process.argv.slice(2);
 
+// adding chromedriver
+args.push('-Dwebdriver.chrome.driver=' + path.resolve(baseDir, '../node_modules/chromedriver/bin/chromedriver'));
+
 var programPath;
 if (process.platform === 'win32') {
   programPath = path.resolve(baseDir, '../lib/galen/galen.bat');
