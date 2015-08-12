@@ -15,24 +15,46 @@ var argv = require('yargs')
     // 'current' is the current command being completed.
     // 'argv' is the parsed arguments so far.
     // simply return an array of completions.
-    console.log('=>' + JSON.stringify(argv) + "<=");
     if (current) {
+      argv=[];
       switch (current) {
         case 'test':
           result = [
+            '<specFile>.gspec',
             '--htmlreport',
-            '--testngreport'
+            '--testngreport',
+            '--jsonreport',
+            '--filter',
+            '--parallel-tests'
           ];
           break;
         case 'check':
+          result = [
+            '<specFile>.test',
+            '--url',
+            '--size',
+            '--javascript',
+            '--include',
+            '--exclude',
+            '--htmlreport',
+            '--testngreport',
+            '--jsonreport'
+          ];
           break;
         case 'dump':
+          result = [
+            '<specFile>.gspec',
+            '--url',
+            '--size',
+            '--export',
+            '--max-width',
+            '--max-height',
+          ];
           break;
       }
     }
     return result;
-  })
-  .argv;
+  }).argv;
 
 
 var spawn = require('child_process').spawn;
