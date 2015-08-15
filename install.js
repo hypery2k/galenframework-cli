@@ -125,14 +125,41 @@ whichDeferred.promise
     var location = libPath;
     writeLocationFile(location);
 
-    console.log('Done. galen binary available at', location);
+    console.log('Done. galen binary available at ', location);
     // Ensure executable is executable by all users
     fs.chmodSync(location, '755');
     fs.chmodSync(libPath + '/galen/galen', '755');
     fs.chmodSync(libPath + '/galen/galen.bat', '755');
 
-    console.log('Done. galen binary available at', location);
-    exit(0);
+    var platform = process.platform
+    // offer safari driver installtion
+    if (platform === 'darwin') {
+      var npmconfDeferred = kew.defer();
+      npmconf.load(npmconfDeferred.makeNodeResolver());
+      npmconfDeferred.promise.then(function (conf) {
+        var downloadUrl = process.env.SAFARIDRIVER_CDNURL || 'http://selenium-release.storage.googleapis.com/2.45/SafariDriver.safariextz';
+        var fileName = downloadUrl.split('/').pop();
+        var downloadedFile = path.join(tmpPath, fileName);
+        if (!fs.existsSync(downloadedFile)) {
+          console.log('Downloading', downloadUrl);
+          console.log('Saving to', downloadedFile);
+          return requestBinary(getRequestOptions(conf), downloadedFile);
+        } else {
+          console.log('Download already available at', downloadedFile);
+          return downloadedFile;
+        }
+      }).then(function (downloadedFile) {
+        // request to open safari extension installation
+        var spawn = require('child_process').spawn
+        spawn('open', [downloadedFile]);
+        exit(0);
+      }).fail(function (err) {
+        console.error('Safari Driver installation failed', err, err.stack);
+        exit(1);
+      });
+    } else {
+      exit(0);
+    }
   })
   .fail(function (err) {
     console.error('Galen installation failed', err, err.stack);
