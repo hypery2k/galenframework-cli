@@ -4,6 +4,7 @@ node_js:
   - "0.12"
   - "0.10"
   - "iojs"
+  - "iojs-v1.0.4"
 script:
   - export COVERALLS_SERVICE_NAME=travis-ci
   - export COVERALLS_REPO_TOKEN=mqVTe91nICY38tHlFFtmZIjbzpghGZyos
