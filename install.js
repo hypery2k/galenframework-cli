@@ -133,7 +133,7 @@ whichDeferred.promise
 
     var platform = process.platform
     // offer safari driver installtion
-    if (platform === 'darwin') {
+    if (false && platform === 'darwin') {
       var npmconfDeferred = kew.defer();
       npmconf.load(npmconfDeferred.makeNodeResolver());
       npmconfDeferred.promise.then(function (conf) {
