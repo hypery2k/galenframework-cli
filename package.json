@@ -1,6 +1,6 @@
 {
   "name": "galenframework-cli",
-  "version": "2.0.11-dev",
+  "version": "2.1.0-dev",
   "description": "Automated testing of look and feel for your responsive websites",
   "homepage": "https://github.com/hypery2k/galenframework-cli",
   "bugs": {
