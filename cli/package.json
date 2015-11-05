@@ -1,0 +1,61 @@
+{
+  "name": "galenframework-cli",
+  "version": "2.1.3-dev",
+  "description": "Automated testing of look and feel for your responsive websites",
+  "homepage": "https://github.com/hypery2k/galenframework-cli",
+  "bugs": {
+    "url": "https://github.com/hypery2k/galenframework-cli/issues"
+  },
+  "keywords": [
+    "galen",
+    "galenframework",
+    "responsive",
+    "test",
+    "testing",
+    "webdriver",
+    "selenium",
+    "TDD",
+    "BDD"
+  ],
+  "author": "Martin Reinhardt",
+  "scripts": {
+    "install": "node install.js",
+    "postinstall": "node postinstall.js",
+    "test": "nodeunit --reporter=minimal test/tests.js",
+    "pretest": "jshint lib",
+    "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
+  },
+  "bin": {
+    "galen": "node_modules/galenframework/bin/galen"
+  },
+  "preferGlobal": "true",
+  "dependencies": {
+    "adm-zip": "^0.4.7",
+    "fs-extra": "^0.23.0",
+    "kew": "0.6.0",
+    "npmconf": "2.1.2",
+    "progress": "1.1.8",
+    "request": "2.60.0",
+    "request-progress": "0.3.1",
+    "which": "^1.1.1",
+    "yargs": "^3.18.0",
+    "galenframework": "2.1.0",
+-    "chromedriver": "*",
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.3",
+    "istanbul": "^0.3.17",
+    "istanbul-coveralls": "^1.0.3",
+    "jscoverage": "^0.6.0",
+    "jshint": "^2.8.0",
+    "nodeunit": "^0.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hypery2k/galenframework-cli.git"
+  },
+  "license": "MIT",
+  "_galenVersion": "2.1.2",
+  "_npmVersion": "2.6.0",
+  "_nodeVersion": "1.4.1"
+}

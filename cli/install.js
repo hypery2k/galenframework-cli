@@ -132,8 +132,8 @@ whichDeferred.promise
     fs.chmodSync(libPath + '/galen/galen.bat', '755');
 
     var platform = process.platform
-    // offer safari driver installtion
-    if (false && platform === 'darwin') {
+    // offer safari driver installation
+    if (platform === 'darwin') {
       var npmconfDeferred = kew.defer();
       npmconf.load(npmconfDeferred.makeNodeResolver());
       npmconfDeferred.promise.then(function (conf) {

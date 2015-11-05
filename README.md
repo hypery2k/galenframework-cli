@@ -4,10 +4,13 @@
 
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE) [![npm version](https://badge.fury.io/js/galenframework-cli.svg)](http://badge.fury.io/js/galenframework-cli) [![Dependency Status](https://david-dm.org/hypery2k/galenframework-cli.svg)](https://david-dm.org/hypery2k/galenframework-cli) [![devDependency Status](https://david-dm.org/hypery2k/galenframework-cli/dev-status.svg)](https://david-dm.org/hypery2k/galenframework-cli#info=devDependencies)
 
-> The command line tool to use [Galen](http://galenframework.com).
+> Just the node wrapper for [Galen](http://galenframework.com).
+
+[![NPM](https://nodei.co/npm/galenframework.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/galenframework/)
+
+> The command line tool to use [Galen](http://galenframework.com). This includes the wrapper above and webdriver downloads for different browsers
 
 [![NPM](https://nodei.co/npm/galenframework-cli.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/galenframework-cli/)
-
 
 [Galen](http://galenframework.com) allows automated testing of look and feel for your responsive websites.
 

@@ -1,8 +1,12 @@
 *.log
-node_modules/*
-lib/galen/*
-lib/location.js
-coverage/*
+core/node_modules/*
+cli/node_modules/*
+core/lib/galen/*
+cli/lib/galen/*
+core/lib/location.js
+lcli/ib/location.js
+core/coverage/*
+cli/coverage/*
 
 # IDE
 .idea/*
