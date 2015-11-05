@@ -130,6 +130,7 @@ whichDeferred.promise
     fs.chmodSync(location, '755');
     fs.chmodSync(libPath + '/galen/galen', '755');
     fs.chmodSync(libPath + '/galen/galen.bat', '755');
+    exit(0);
   })
   .fail(function (err) {
     console.error('Galen installation failed', err, err.stack);
