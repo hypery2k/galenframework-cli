@@ -23,6 +23,8 @@ script:
   - npm run coverage
   - ./runTests.sh
 before_install:
+  - npm install -g npm
+before_script:
   - npm install -g jshint
   - npm install -g istanbul
   - "export DISPLAY=:99.0"
