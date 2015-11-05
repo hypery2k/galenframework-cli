@@ -26,6 +26,7 @@ before_install:
 before_script:
   - npm install -g jshint
   - npm install -g istanbul
+  - npm install -g nodeunit
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 notifications:

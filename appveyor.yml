@@ -16,6 +16,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - npm install -g jshint
   - npm install -g istanbul
+  - npm install -g nodeunit
   - node --version
   - npm --version
   - npm install
