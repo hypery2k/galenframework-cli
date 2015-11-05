@@ -20,6 +20,7 @@
   "author": "Martin Reinhardt",
   "scripts": {
     "install": "node install.js",
+    "postinstall": "node postinstall.js",
     "test": "nodeunit --reporter=minimal test/tests.js",
     "pretest": "jshint -c ../.jshintrc lib",
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
@@ -38,8 +39,7 @@
     "request-progress": "0.3.1",
     "which": "^1.1.1",
     "yargs": "^3.18.0",
-    "galenframework": "2.1.0",
-    "chromedriver": "*"
+    "galenframework": "2.1.0"
   },
   "devDependencies": {
     "coveralls": "^2.11.3",

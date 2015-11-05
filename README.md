@@ -2,17 +2,17 @@
 
 [Galen](http://galenframework.com) allows automated testing of look and feel for your responsive websites.
 
-[![Build Status](https://travis-ci.org/hypery2k/galenframework-cli.svg?branch=master)](https://travis-ci.org/hypery2k/galenframework-cli) [![Build status](https://ci.appveyor.com/api/projects/status/fbwy88pc9ia6429w/branch/master?svg=true)](https://ci.appveyor.com/project/hypery2k/galenframework-cli/branch/master) [![Coverage Status](https://coveralls.io/repos/hypery2k/galenframework-cli/badge.svg?branch=master&service=github)](https://coveralls.io/github/hypery2k/galenframework-cli?branch=master)
+[![Build Status](https://travis-ci.org/hypery2k/galenframework-cli.svg?branch=master)](https://travis-ci.org/hypery2k/galenframework-cli) [![Build status](https://ci.appveyor.com/api/projects/status/fbwy88pc9ia6429w/branch/master?svg=true)](https://ci.appveyor.com/project/hypery2k/galenframework-cli/branch/master)
 
 > Just the node wrapper for [Galen](http://galenframework.com).
 
-[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE) [![npm version](https://badge.fury.io/js/galenframework.svg)](http://badge.fury.io/js/galenframework) [![Dependency Status](https://david-dm.org/hypery2k/galenframework.svg)](https://david-dm.org/hypery2k/galenframework) [![devDependency Status](https://david-dm.org/hypery2k/galenframework/dev-status.svg)](https://david-dm.org/hypery2k/galenframework#info=devDependencies)
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE) [![npm version](https://badge.fury.io/js/galenframework.svg)](http://badge.fury.io/js/galenframework) [![Dependency Status](https://david-dm.org/hypery2k/galenframework.svg)](https://david-dm.org/hypery2k/galenframework) [![devDependency Status](https://david-dm.org/hypery2k/galenframework/dev-status.svg)](https://david-dm.org/hypery2k/galenframework#info=devDependencies)[![Coverage Status](https://coveralls.io/repos/hypery2k/galenframework/badge.svg?branch=master&service=github)](https://coveralls.io/github/hypery2k/galenframework?branch=master)
 
 [![NPM](https://nodei.co/npm/galenframework.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/galenframework/)
 
 > The command line tool to use [Galen](http://galenframework.com). This includes the wrapper above and webdriver downloads for different browsers
 
-[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE) [![npm version](https://badge.fury.io/js/galenframework-cli.svg)](http://badge.fury.io/js/galenframework-cli) [![Dependency Status](https://david-dm.org/hypery2k/galenframework-cli.svg)](https://david-dm.org/hypery2k/galenframework-cli) [![devDependency Status](https://david-dm.org/hypery2k/galenframework-cli/dev-status.svg)](https://david-dm.org/hypery2k/galenframework-cli#info=devDependencies)
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE) [![npm version](https://badge.fury.io/js/galenframework-cli.svg)](http://badge.fury.io/js/galenframework-cli) [![Dependency Status](https://david-dm.org/hypery2k/galenframework-cli.svg)](https://david-dm.org/hypery2k/galenframework-cli) [![devDependency Status](https://david-dm.org/hypery2k/galenframework-cli/dev-status.svg)](https://david-dm.org/hypery2k/galenframework-cli#info=devDependencies)[![Coverage Status](https://coveralls.io/repos/hypery2k/galenframework-cli/badge.svg?branch=master&service=github)](https://coveralls.io/github/hypery2k/galenframework-cli?branch=master)
 
 [![NPM](https://nodei.co/npm/galenframework-cli.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/galenframework-cli/)
 

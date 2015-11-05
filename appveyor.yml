@@ -14,7 +14,7 @@ platform:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm install -g npm
+  - npm install -g npm istanbul jshint
   - node --version
   - npm --version
   - npm install

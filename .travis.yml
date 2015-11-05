@@ -20,7 +20,7 @@ script:
   - npm run coverage
   - ./runTests.sh
 before_install:
-  - npm install -g npm
+  - npm install -g npm istanbul jshint
   - sudo apt-get update -qq
   - sudo apt-get install default-jre
   - "export DISPLAY=:99.0"
