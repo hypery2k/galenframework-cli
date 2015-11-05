@@ -1,6 +1,6 @@
 {
   "name": "galenframework",
-  "version": "2.1.0-dev",
+  "version": "2.1.1-dev",
   "description": "Automated testing of look and feel for your responsive websites",
   "homepage": "https://github.com/hypery2k/galenframework-cli",
   "bugs": {
@@ -20,7 +20,6 @@
   "author": "Martin Reinhardt",
   "scripts": {
     "install": "node install.js",
-    "postinstall": "node postinstall.js",
     "test": "nodeunit --reporter=minimal test/tests.js",
     "pretest": "jshint lib",
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
