@@ -8,13 +8,6 @@ var fs = require('fs')
 var path = require('path')
 var helper = require('../lib/helper')
 
-
-exports.testDownload = function(test) {
-	test.expect(1)
-	test.ok(fs.existsSync(helper.path), 'Binary file should have been downloaded')
-	test.done()
-}
-
 exports.testCleanPath = function(test) {
 	test.expect(5)
 	test.equal('/Users/hypery2k/bin', helper.cleanPath('/Users/hypery2k/bin:./bin'))
