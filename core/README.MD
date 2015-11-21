@@ -8,6 +8,8 @@
 
 [![NPM](https://nodei.co/npm/galenframework.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/galenframework/)
 
+If you want to install Galen as CLI command install the [CLI-module](https://www.npmjs.com/package/galenframework-cli)
+
 ## Installation
 
 You must have Java 6+ installed.
