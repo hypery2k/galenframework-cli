@@ -30,6 +30,7 @@
   },
   "preferGlobal": "true",
   "dependencies": {
+    "galenframework": "2.1.2",
     "adm-zip": "^0.4.7",
     "fs-extra": "^0.23.0",
     "kew": "0.6.0",
@@ -39,7 +40,6 @@
     "request-progress": "0.3.1",
     "which": "^1.1.1",
     "yargs": "^3.18.0",
-    "galenframework": "2.1.2",
     "chromedriver": "*"
   },
   "devDependencies": {
@@ -55,7 +55,6 @@
     "url": "git+https://github.com/hypery2k/galenframework-cli.git"
   },
   "license": "MIT",
-  "_galenVersion": "2.1.2",
   "_npmVersion": "2.6.0",
   "_nodeVersion": "1.4.1"
 }
