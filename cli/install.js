@@ -6,16 +6,13 @@
 
 'use strict';
 
-var requestProgress = require('request-progress');
-var Progress = require('progress');
 var cp = require('child_process');
 var fs = require('fs-extra');
 var helper = require('./lib/helper');
 var kew = require('kew');
 var npmconf = require('npmconf');
 var path = require('path');
-var request = require('request');
-var url = require('url');
+var httpreq = require('httpreq');
 var which = require('which');
 
 var originalPath = process.env.PATH;
@@ -84,15 +81,14 @@ whichDeferred.promise
     if (platform === 'darwin') {
       var npmconfDeferred = kew.defer();
       npmconf.load(npmconfDeferred.makeNodeResolver());
-      npmconfDeferred.promise.then(function (conf) {
+      npmconfDeferred.promise.then(function () {
         var downloadUrl = process.env.SAFARIDRIVER_CDNURL ||
         'http://selenium-release.storage.googleapis.com/2.45/SafariDriver.safariextz';
         var fileName = downloadUrl.split('/').pop();
         var downloadedFile = path.join(tmpPath, fileName);
         if (!fs.existsSync(downloadedFile)) {
           console.log('Downloading', downloadUrl);
-          console.log('Saving to', downloadedFile);
-          return requestBinary(downloadUrl, getRequestOptions(conf), downloadedFile);
+          return requestBinary(downloadUrl, downloadedFile);
         } else {
           console.log('Download already available at', downloadedFile);
           return downloadedFile;
@@ -100,6 +96,7 @@ whichDeferred.promise
       }).then(function (downloadedFile) {
         // request to open safari extension installation
         var spawn = require('child_process').spawn;
+          console.log('Opening file ', downloadedFile);
         spawn('open', [downloadedFile]);
         exit(0);
       }).fail(function (err) {
@@ -152,92 +149,25 @@ function findSuitableTempDirectory(npmConf) {
 }
 
 
-function getRequestOptions(downloadUrl, conf) {
-  var strictSSL = conf.get('strict-ssl');
-  if (process.version == 'v0.10.34') {
-    console.log('Node v0.10.34 detected, turning off strict ssl due to https://github.com/joyent/node/issues/8894');
-    strictSSL = false;
-  }
-
-
-  var options = {
-    uri: downloadUrl,
-    encoding: null, // Get response as a buffer
-    followRedirect: true, // The default download path redirects to a CDN URL.
-    headers: {},
-    strictSSL: strictSSL
-  };
-
-  var proxyUrl = conf.get('https-proxy') || conf.get('http-proxy') || conf.get('proxy');
-  if (proxyUrl) {
-
-    // Print using proxy
-    var proxy = url.parse(proxyUrl);
-    if (proxy.auth) {
-      // Mask password
-      proxy.auth = proxy.auth.replace(/:.*$/, ':******');
-    }
-    console.log('Using proxy ' + url.format(proxy));
-
-    // Enable proxy
-    options.proxy = proxyUrl;
-
-    // If going through proxy, use the user-agent string from the npm config
-    options.headers['User-Agent'] = conf.get('user-agent');
-  }
-
-  // Use certificate authority settings from npm
-  var ca = conf.get('ca');
-  if (ca) {
-    console.log('Using npmconf ca');
-    options.ca = ca;
-  }
-
-  return options;
-}
-
-
-function requestBinary(requestOptions, filePath) {
-  var deferred = kew.defer();
-
-  var writePath = filePath + '-download-' + Date.now();
-
+function requestBinary(url, dest) {
+ var deferred = kew.defer();
   console.log('Receiving...');
-  var bar = null;
-  requestProgress(request(requestOptions, function (error, response, body) {
-    console.log('');
-    if (!error && response.statusCode === 200) {
-      fs.writeFileSync(writePath, body);
-      console.log('Received ' + Math.floor(body.length / 1024) + 'K total.');
-      fs.renameSync(writePath, filePath);
-      deferred.resolve(filePath);
 
-    } else if (response) {
-      console.error('Error requesting archive.\n' +
-        'Status: ' + response.statusCode + '\n' +
-        'Request options: ' + JSON.stringify(requestOptions, null, 2) + '\n' +
-        'Response headers: ' + JSON.stringify(response.headers, null, 2) + '\n' +
-        'Make sure your network and proxy settings are correct.\n\n');
-      exit(1);
-    } else if (error && error.stack && error.stack.indexOf('SELF_SIGNED_CERT_IN_CHAIN') != -1) {
+  httpreq.get(url,{binary: true}, function (err, res){
+    if (err) {
+      deferred.reject(err);
       console.error('Error making request.');
-      exit(1);
-    } else if (error) {
-      console.error('Error making request.\n' + error.stack + '\n\n' +
-        'Please report this full log at https://github.com/hypery2k/galenframework/issues');
-      exit(1);
     } else {
-      console.error('Something unexpected happened, please report this full ' +
-        'log at https://github.com/hypery2k/galenframework/issues');
-      exit(1);
+      fs.writeFile(dest, res.body, function (err) {
+        if(err) {
+          deferred.reject(err);
+          console.log('Error writing file');
+        } else {
+          console.log('Saved to', dest);
+          deferred.resolve(dest);
+        }
+      });
     }
-  })).on('progress', function (state) {
-    if (!bar) {
-      bar = new Progress('  [:bar] :percent :etas', {total: state.total, width: 40});
-    }
-    bar.curr = state.received;
-    bar.tick(0);
   });
-
   return deferred.promise;
 }
