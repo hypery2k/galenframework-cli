@@ -17,10 +17,11 @@ var npmconf = require('npmconf');
 var path = require('path');
 var request = require('request');
 var url = require('url');
-var util = require('util');
 var which = require('which');
 
-var cdnUrl = process.env.npm_config_galen_url || process.env.GALEN_CDNURL || 'https://github.com/galenframework/galen/releases/download/';
+var cdnUrl = process.env.npm_config_galen_url ||
+  process.env.GALEN_CDNURL ||
+  'https://github.com/galenframework/galen/releases/download/';
 var downloadUrl = cdnUrl + '/galen-' + helper.version + '/galen-bin-' + helper.version + '.zip';
 
 var originalPath = process.env.PATH;
@@ -84,13 +85,12 @@ whichDeferred.promise
       writeLocationFile(galenPath);
       console.log('galenframework is already installed at', galenPath + '.');
       exit(0);
-
     } else {
       console.log('galenframework detected, but wrong version', stdout.trim(), '@', galenPath + '.');
       throw new Error('Wrong version');
     }
   })
-  .fail(function (err) {
+  .fail(function () {
     // Trying to use a local file failed, so initiate download and install
     // steps instead.
     var npmconfDeferred = kew.defer();
@@ -141,10 +141,10 @@ whichDeferred.promise
 function writeLocationFile(location) {
   console.log('Writing location.js file');
   if (process.platform === 'win32') {
-    location = location.replace(/\\/g, '\\\\')
+    location = location.replace(/\\/g, '\\\\');
   }
   fs.writeFileSync(path.join(libPath, 'location.js'),
-    'module.exports.location = \'' + location + '\';')
+    'module.exports.location = \'' + location + '\';');
 }
 
 function exit(code) {
@@ -231,9 +231,6 @@ function getRequestOptions(conf) {
 
 function requestBinary(requestOptions, filePath) {
   var deferred = kew.defer();
-
-  var count = 0;
-  var notifiedCount = 0;
   var writePath = filePath + '-download-' + Date.now();
 
   console.log('Receiving...');
@@ -303,16 +300,16 @@ function extractDownload(filePath) {
 
   } else {
     console.log('Extracting tar contents (via spawned process)');
-    cp.execFile('tar', ['jxf', filePath], options, function (err, stdout, stderr) {
+    cp.execFile('tar', ['jxf', filePath], options, function (err) {
       if (err) {
         console.error('Error extracting archive');
         deferred.reject(err);
       } else {
         deferred.resolve(extractedPath);
       }
-    })
+    });
   }
-  return deferred.promise
+  return deferred.promise;
 }
 
 
@@ -331,5 +328,5 @@ function copyIntoPlace(extractedPath, targetPath) {
 
     console.log('Could not find extracted file', files);
     throw new Error('Could not find extracted file');
-  })
+  });
 }

@@ -8,7 +8,6 @@
 
 var requestProgress = require('request-progress');
 var progress = require('progress');
-var AdmZip = require('adm-zip');
 var cp = require('child_process');
 var fs = require('fs-extra');
 var helper = require('./lib/helper');
@@ -17,7 +16,6 @@ var npmconf = require('npmconf');
 var path = require('path');
 var request = require('request');
 var url = require('url');
-var util = require('util');
 var which = require('which');
 
 var originalPath = process.env.PATH;
@@ -37,8 +35,6 @@ process.on('exit', function () {
 // put ./bin on their path
 process.env.PATH = helper.cleanPath(originalPath);
 
-var libPath = path.join(__dirname, 'lib');
-var pkgPath = path.join(libPath, 'galen');
 var galenPath = null;
 var tmpPath = null;
 
@@ -75,33 +71,35 @@ whichDeferred.promise
       return checkVersionDeferred.promise;
     }
   })
-  .then(function (stdout) {
-    console.log('galenframework-cli detected');    var npmconfDeferred = kew.defer();
+  .then(function () {
+    console.log('galenframework-cli detected');
+    var npmconfDeferred = kew.defer();
     npmconf.load(npmconfDeferred.makeNodeResolver());
     return npmconfDeferred.promise;
   })
   .then(function (conf) {
     tmpPath = findSuitableTempDirectory(conf);
-    var platform = process.platform
+    var platform = process.platform;
     // offer safari driver installation
     if (platform === 'darwin') {
       var npmconfDeferred = kew.defer();
       npmconf.load(npmconfDeferred.makeNodeResolver());
       npmconfDeferred.promise.then(function (conf) {
-        var downloadUrl = process.env.SAFARIDRIVER_CDNURL || 'http://selenium-release.storage.googleapis.com/2.45/SafariDriver.safariextz';
+        var downloadUrl = process.env.SAFARIDRIVER_CDNURL ||
+        'http://selenium-release.storage.googleapis.com/2.45/SafariDriver.safariextz';
         var fileName = downloadUrl.split('/').pop();
         var downloadedFile = path.join(tmpPath, fileName);
         if (!fs.existsSync(downloadedFile)) {
           console.log('Downloading', downloadUrl);
           console.log('Saving to', downloadedFile);
-          return requestBinary(getRequestOptions(conf), downloadedFile);
+          return requestBinary(downloadUrl, getRequestOptions(conf), downloadedFile);
         } else {
           console.log('Download already available at', downloadedFile);
           return downloadedFile;
         }
       }).then(function (downloadedFile) {
         // request to open safari extension installation
-        var spawn = require('child_process').spawn
+        var spawn = require('child_process').spawn;
         spawn('open', [downloadedFile]);
         exit(0);
       }).fail(function (err) {
@@ -116,16 +114,6 @@ whichDeferred.promise
     console.error('Galen installation failed', err, err.stack);
     exit(1);
   });
-
-
-function writeLocationFile(location) {
-  console.log('Writing location.js file');
-  if (process.platform === 'win32') {
-    location = location.replace(/\\/g, '\\\\')
-  }
-  fs.writeFileSync(path.join(libPath, 'location.js'),
-    'module.exports.location = \'' + location + '\';')
-}
 
 function exit(code) {
   validExit = true;
@@ -164,7 +152,7 @@ function findSuitableTempDirectory(npmConf) {
 }
 
 
-function getRequestOptions(conf) {
+function getRequestOptions(downloadUrl, conf) {
   var strictSSL = conf.get('strict-ssl');
   if (process.version == 'v0.10.34') {
     console.log('Node v0.10.34 detected, turning off strict ssl due to https://github.com/joyent/node/issues/8894');
@@ -212,8 +200,6 @@ function getRequestOptions(conf) {
 function requestBinary(requestOptions, filePath) {
   var deferred = kew.defer();
 
-  var count = 0;
-  var notifiedCount = 0;
   var writePath = filePath + '-download-' + Date.now();
 
   console.log('Receiving...');
@@ -254,62 +240,4 @@ function requestBinary(requestOptions, filePath) {
   });
 
   return deferred.promise;
-}
-
-
-function extractDownload(filePath) {
-  var deferred = kew.defer();
-  // extract to a unique directory in case multiple processes are
-  // installing and extracting at once
-  var extractedPath = filePath + '-extract-' + Date.now();
-  var options = {cwd: extractedPath};
-
-  fs.mkdirsSync(extractedPath, '0777');
-  // Make double sure we have 0777 permissions; some operating systems
-  // default umask does not allow write by default.
-  fs.chmodSync(extractedPath, '0777');
-
-  if (filePath.substr(-4) === '.zip') {
-    console.log('Extracting zip contents');
-
-    try {
-      var zip = new AdmZip(filePath);
-      zip.extractAllTo(extractedPath, true);
-      deferred.resolve(extractedPath);
-    } catch (err) {
-      console.error('Error extracting zip');
-      deferred.reject(err);
-    }
-
-  } else {
-    console.log('Extracting tar contents (via spawned process)');
-    cp.execFile('tar', ['jxf', filePath], options, function (err, stdout, stderr) {
-      if (err) {
-        console.error('Error extracting archive');
-        deferred.reject(err);
-      } else {
-        deferred.resolve(extractedPath);
-      }
-    })
-  }
-  return deferred.promise
-}
-
-
-function copyIntoPlace(extractedPath, targetPath) {
-  console.log('Removing', targetPath);
-  return kew.nfcall(fs.remove, targetPath).then(function () {
-    // Look for the extracted directory, so we can rename it.
-    var files = fs.readdirSync(extractedPath);
-    for (var i = 0; i < files.length; i++) {
-      var file = path.join(extractedPath, files[i]);
-      if (fs.statSync(file).isDirectory() && file.indexOf(helper.version) != -1) {
-        console.log('Copying extracted folder', file, '->', targetPath);
-        return kew.nfcall(fs.move, file, targetPath);
-      }
-    }
-
-    console.log('Could not find extracted file', files);
-    throw new Error('Could not find extracted file');
-  })
 }

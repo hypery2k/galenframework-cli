@@ -22,7 +22,7 @@
     "install": "node install.js",
     "postinstall": "node postinstall.js",
     "test": "nodeunit --reporter=minimal test/tests.js",
-    "pretest": "jshint -c ../.jshintrc lib/*.js",
+    "pretest": "jshint -c ../.jshintrc lib/*.js && jshint -c ../.jshintrc *.js",
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
   },
   "bin": {
@@ -30,7 +30,6 @@
   },
   "preferGlobal": "true",
   "dependencies": {
-    "adm-zip": "0.4.7",
     "chromedriver": "*",
     "fs-extra": "0.26.2",
     "galenframework": "2.1.3",

@@ -8,7 +8,7 @@
   "noempty": true,
   "nonew": true,
   "trailing": true,
-  "maxlen": 100,
+  "maxlen": 120,
   "boss": true,
   "eqnull": true,
   "expr": true,
