@@ -1,24 +1,21 @@
 {
+  "unused": true,
   "node": true,
-  "browser": true,
-  "esnext": true,
   "bitwise": true,
-  "camelcase": true,
-  "curly": true,
-  "eqeqeq": true,
   "immed": true,
-  "indent": 2,
-  "latedef": true,
   "newcap": true,
   "noarg": true,
-  "quotmark": "single",
-  "undef": true,
-  "unused": true,
-  "strict": true,
+  "noempty": true,
+  "nonew": true,
   "trailing": true,
-  "smarttabs": true,
-  "globals": {
-    "app": false,
-    "angular": false
-  }
+  "maxlen": 100,
+  "boss": true,
+  "eqnull": true,
+  "expr": true,
+  "laxbreak": true,
+  "loopfunc": true,
+  "sub": true,
+  "undef": true,
+  "quotmark": "single",
+  "evil": true
 }
