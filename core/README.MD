@@ -16,10 +16,6 @@ You must have Java 6+ installed.
 
 > (sudo) npm install -g galenframework
 
-
-On Mac OS X, run
-> galen completion >> ~/.~/.profile
-
 In case of errors within Ubuntu/Debian, e.g.
 ```
 sh: 1: node: not find
