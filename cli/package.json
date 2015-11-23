@@ -33,7 +33,7 @@
     "adm-zip": "0.4.7",
     "chromedriver": "*",
     "fs-extra": "0.26.2",
-    "galenframework": "2.1.2",
+    "galenframework": "2.1.3",
     "kew": "0.7.0",
     "npmconf": "2.1.2",
     "path": "0.12.7",
