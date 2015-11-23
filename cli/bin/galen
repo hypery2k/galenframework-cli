@@ -72,9 +72,9 @@ args.push('-Dwebdriver.chrome.driver=' + path.resolve(baseDir, '../node_modules/
 
 var programPath;
 if (process.platform === 'win32') {
-  programPath = path.resolve(baseDir, '../lib/galen/galen.bat');
+  programPath = path.resolve(baseDir, '../node_modules/galenframework/lib/galen/galen.bat');
 } else {
-  programPath = path.resolve(baseDir, '../lib/galen/galen');
+  programPath = path.resolve(baseDir, '../node_modules/galenframework/lib/galen/galen');
 }
 
 var galenProcess = spawn(programPath, args, childProcessOptions);

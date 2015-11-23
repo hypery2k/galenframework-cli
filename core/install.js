@@ -36,7 +36,7 @@ process.on('exit', function () {
 });
 
 // NPM adds bin directories to the path, which will cause `which` to find the
-// bin for this package not the actual galenframework-cli bin.  Also help out people who
+// bin for this package not the actual galenframework bin.  Also help out people who
 // put ./bin on their path
 process.env.PATH = helper.cleanPath(originalPath);
 
@@ -63,7 +63,7 @@ whichDeferred.promise
 
     // Horrible hack to avoid problems during global install. We check to see if
     // the file `which` found is our own bin script.
-    if (galenPath.indexOf(path.join('npm', 'galenframework-cli')) !== -1) {
+    if (galenPath.indexOf(path.join('npm', 'galenframework')) !== -1) {
       console.log('Looks like an `npm install -g` on windows; unable to check for already installed version.');
       throw new Error('Global install');
     }
@@ -82,11 +82,11 @@ whichDeferred.promise
     var version = stdout.trim();
     if (helper.version == version) {
       writeLocationFile(galenPath);
-      console.log('galenframework-cli is already installed at', galenPath + '.');
+      console.log('galenframework is already installed at', galenPath + '.');
       exit(0);
 
     } else {
-      console.log('galenframework-cli detected, but wrong version', stdout.trim(), '@', galenPath + '.');
+      console.log('galenframework detected, but wrong version', stdout.trim(), '@', galenPath + '.');
       throw new Error('Wrong version');
     }
   })
@@ -163,7 +163,7 @@ function findSuitableTempDirectory(npmConf) {
   ];
 
   for (var i = 0; i < candidateTmpDirs.length; i++) {
-    var candidatePath = path.join(candidateTmpDirs[i], 'galenframework-cli');
+    var candidatePath = path.join(candidateTmpDirs[i], 'galenframework');
 
     try {
       fs.mkdirsSync(candidatePath, '0777');

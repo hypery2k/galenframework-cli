@@ -20,9 +20,6 @@ var url = require('url');
 var util = require('util');
 var which = require('which');
 
-var cdnUrl = process.env.npm_config_galen_url || process.env.GALEN_CDNURL || 'https://github.com/galenframework/galen/releases/download/';
-var downloadUrl = cdnUrl + '/galen-' + helper.version + '/galen-bin-' + helper.version + '.zip';
-
 var originalPath = process.env.PATH;
 
 // If the process exits without going through exit(), then we did not complete.
@@ -79,58 +76,12 @@ whichDeferred.promise
     }
   })
   .then(function (stdout) {
-    var version = stdout.trim();
-    if (helper.version == version) {
-      writeLocationFile(galenPath);
-      console.log('galenframework-cli is already installed at', galenPath + '.');
-      exit(0);
-
-    } else {
-      console.log('galenframework-cli detected, but wrong version', stdout.trim(), '@', galenPath + '.');
-      throw new Error('Wrong version');
-    }
-  })
-  .fail(function (err) {
-    // Trying to use a local file failed, so initiate download and install
-    // steps instead.
-    var npmconfDeferred = kew.defer();
+    console.log('galenframework-cli detected');    var npmconfDeferred = kew.defer();
     npmconf.load(npmconfDeferred.makeNodeResolver());
     return npmconfDeferred.promise;
   })
   .then(function (conf) {
     tmpPath = findSuitableTempDirectory(conf);
-
-    var fileName = downloadUrl.split('/').pop();
-    var downloadedFile = path.join(tmpPath, fileName);
-
-    console.log('Running at platform: ' + process.platform);
-
-    // Start the install.
-    if (!fs.existsSync(downloadedFile)) {
-      console.log('Downloading', downloadUrl);
-      console.log('Saving to', downloadedFile);
-      return requestBinary(getRequestOptions(conf), downloadedFile);
-    } else {
-      console.log('Download already available at', downloadedFile);
-      return downloadedFile;
-    }
-  })
-  .then(function (downloadedFile) {
-    return extractDownload(downloadedFile);
-  })
-  .then(function (extractedPath) {
-    return copyIntoPlace(extractedPath, pkgPath);
-  })
-  .then(function () {
-    var location = libPath;
-    writeLocationFile(location);
-
-    console.log('Done. galen binary available at ', location);
-    // Ensure executable is executable by all users
-    fs.chmodSync(location, '755');
-    fs.chmodSync(libPath + '/galen/galen', '755');
-    fs.chmodSync(libPath + '/galen/galen.bat', '755');
-
     var platform = process.platform
     // offer safari driver installation
     if (platform === 'darwin') {
