@@ -7,7 +7,7 @@
 'use strict';
 
 var requestProgress = require('request-progress');
-var progress = require('progress');
+var Progress = require('progress');
 var cp = require('child_process');
 var fs = require('fs-extra');
 var helper = require('./lib/helper');
@@ -233,7 +233,7 @@ function requestBinary(requestOptions, filePath) {
     }
   })).on('progress', function (state) {
     if (!bar) {
-      bar = new progress('  [:bar] :percent :etas', {total: state.total, width: 40});
+      bar = new Progress('  [:bar] :percent :etas', {total: state.total, width: 40});
     }
     bar.curr = state.received;
     bar.tick(0);
