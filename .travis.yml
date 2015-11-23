@@ -14,7 +14,6 @@ script:
   - npm install . -g
   - npm test
   - npm run coverage
-  - ./runTests.sh
   - cd ..
   - cd cli
   - npm install . -g

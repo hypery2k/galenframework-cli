@@ -15,7 +15,7 @@ platform:
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm install -g jshint
-  - npm install -g istanbul
+  - npm install -g istanbul istanbul-coveralls
   - npm install -g nodeunit
   - node --version
   - npm --version
@@ -27,7 +27,6 @@ test_script:
   - cd core
   - npm test
   - npm install . -g
-  - .\runTests
   - cd ..
   - cd cli
   - npm test
