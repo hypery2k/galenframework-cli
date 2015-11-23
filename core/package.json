@@ -21,7 +21,7 @@
   "scripts": {
     "install": "node install.js",
     "test": "nodeunit --reporter=minimal test/tests.js",
-    "pretest": "jshint lib",
+    "pretest": "jshint -c ../.jshintrc lib/*.js",
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
   },
   "dependencies": {
