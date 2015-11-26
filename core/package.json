@@ -24,6 +24,9 @@
     "pretest": "jshint -c ../.jshintrc lib/*.js && jshint -c ../.jshintrc *.js",
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
   },
+  "bin": {
+      "galen": "bin/galen"
+  },
   "dependencies": {
     "adm-zip": "^0.4.7",
     "fs-extra": "^0.23.0",
