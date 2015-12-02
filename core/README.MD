@@ -23,3 +23,12 @@ sh: 1: node: not find
 
 Then you need to install  nodejs-legacy:
 > (sudo) apt-get install nodejs-legacy
+
+
+## Author
+
+[Martin Reinhardt](https://github.com/hypery2k)
+
+![Martin Reinhardt](https://s.gravatar.com/avatar/9fa901119c90e051cd6a84ca26c99043?size=496&amp;default=retro)
+
+Thanks for Obvious and their PhantomJS project for heavy inspiration! Check their project on [Github](https://github.com/Obvious/phantomjs).
