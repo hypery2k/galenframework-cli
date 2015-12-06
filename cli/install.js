@@ -83,7 +83,7 @@ whichDeferred.promise
       npmconf.load(npmconfDeferred.makeNodeResolver());
       npmconfDeferred.promise.then(function () {
         var downloadUrl = process.env.SAFARIDRIVER_CDNURL ||
-        'http://selenium-release.storage.googleapis.com/2.45/SafariDriver.safariextz';
+        'http://selenium-release.storage.googleapis.com/2.48/SafariDriver.safariextz';
         var fileName = downloadUrl.split('/').pop();
         var downloadedFile = path.join(tmpPath, fileName);
         if (!fs.existsSync(downloadedFile)) {
