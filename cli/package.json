@@ -1,6 +1,6 @@
 {
   "name": "galenframework-cli",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Automated testing of look and feel for your responsive websites",
   "homepage": "https://github.com/hypery2k/galenframework-cli",
   "bugs": {
@@ -32,7 +32,7 @@
   "dependencies": {
     "chromedriver": "*",
     "fs-extra": "0.26.2",
-    "galenframework": "2.2.0",
+    "galenframework": "2.2.1",
     "httpreq": "0.4.13",
     "kew": "0.7.0",
     "npmconf": "2.1.2",
@@ -53,7 +53,7 @@
     "url": "git+https://github.com/hypery2k/galenframework-cli.git"
   },
   "license": "MIT",
-  "_galenVersion": "2.2.0",
+  "_galenVersion": "2.2.1",
   "_npmVersion": "2.6.0",
   "_nodeVersion": "1.4.1"
 }
