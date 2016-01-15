@@ -6,6 +6,9 @@ node_js:
   - "0.12"
   - "4.0"
   - "5.0"
+env:
+  - NPM_VERSION=3
+  - NPM_VERSION=2
 script:
   - export COVERALLS_SERVICE_NAME=travis-ci
   - export COVERALLS_REPO_TOKEN=mqVTe91nICY38tHlFFtmZIjbzpghGZyos
@@ -20,7 +23,7 @@ script:
   - npm run coverage
   - ./runTests.sh
 before_install:
-  - npm install -g npm
+  - npm install -g npm@$NPM_VERSION
 before_script:
   - npm install -g jshint
   - npm install -g istanbul
