@@ -1,1 +1,1 @@
-module.exports.location = '../lib';
+module.exports.location = '';

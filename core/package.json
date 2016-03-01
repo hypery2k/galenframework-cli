@@ -1,7 +1,7 @@
 {
   "name": "galenframework",
   "version": "2.2.2-dev",
-  "description": "Automated testing of look and feel for your responsive websites",
+  "description": "The command line tool to use the Galen Framework. This includes the wrapper above and webdriver downloads for different browsers",
   "homepage": "https://github.com/hypery2k/galenframework-cli",
   "bugs": {
     "url": "https://github.com/hypery2k/galenframework-cli/issues"
