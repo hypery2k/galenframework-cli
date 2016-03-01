@@ -2,6 +2,9 @@
 # http://www.appveyor.com/docs/appveyor-yml
 environment:
   matrix:
+  # NPM
+  - npm_version: "2"
+  - npm_version: "3"
   # node.js
   - nodejs_version: "0.10"
   - nodejs_version: "0.12"
@@ -14,13 +17,14 @@ platform:
   - x64
 
 install:
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Install-Product node $env:nodejs_version and NPM $env:npm_version
+  - node --version
+  - npm --version
+  - npm install -g npm@$env:npm_version
   - npm install -g jshint
   - npm install -g istanbul
   - npm install -g istanbul-coveralls
   - npm install -g nodeunit
-  - node --version
-  - npm --version
 
 build: off
 
