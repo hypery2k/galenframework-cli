@@ -68,9 +68,7 @@ var childProcessOptions = {
 var args = process.argv.slice(2);
 
 // adding chromedriver
-
-var chromedriverPath = require(path.join(__dirname, '..', 'node_modules', 'chromedriver','bin')).path
-args.push('-Dwebdriver.chrome.driver=' + path.resolve(chromedriverPath, 'chromedriver'));
+args.push('-Dwebdriver.chrome.driver=' + path.resolve(baseDir, '../node_modules/chromedriver/lib/chromedriver/chromedriver'));
 
 var programPath;
 if (process.platform === 'win32') {
