@@ -6,9 +6,7 @@ environment:
   - npm_version: "2"
   - npm_version: "3"
   # node.js
-  - nodejs_version: "0.10"
   - nodejs_version: "0.12"
-  - nodejs_version: "3"
   - nodejs_version: "4"
   - nodejs_version: "5"
 
