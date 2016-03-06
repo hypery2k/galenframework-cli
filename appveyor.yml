@@ -20,7 +20,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - node --version
   - npm --version
-  - npm install -g npm@npm_version
+  - npm install -g npm@%npm_version%
   - npm install -g jshint
   - npm install -g istanbul
   - npm install -g istanbul-coveralls
