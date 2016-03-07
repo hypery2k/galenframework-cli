@@ -1,0 +1,16 @@
+@@ table browsers
+    | browerName | browser |
+    | Chrome     | chrome  |
+    | Firefox    | firefox |
+@@ table devices
+    | deviceName | tags      | size     |
+    | Mobile     | mobile    | 320x600  |
+    | Tablet     | tablet    | 640x480  |
+    | Desktop    | desktop   | 1024x800 |
+
+@@ parameterized using browsers
+@@ parameterized using devices
+@@ groups home, page
+bootstrap page on ${deviceName} in ${browerName} browser
+  selenium ${browser} ${websiteUrl} ${size}
+    check specs/bootstrap.gspec --include "${device}"
