@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 language: node_js
 after_success: npm run coverage && cat ./coverage/lcov.info | coveralls
 node_js:
