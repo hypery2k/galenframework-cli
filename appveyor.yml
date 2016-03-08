@@ -1,24 +1,26 @@
 # appveyor file
 # http://www.appveyor.com/docs/appveyor-yml
 environment:
-  matrix:
-  # NPM
-  - npm_version: "2"
-  - npm_version: "3"
-  # node.js
-  - nodejs_version: "0.12"
-  - nodejs_version: "4"
-  - nodejs_version: "5"
+    matrix:
+        - JAVA_HOME: C:\Program Files\Java\jdk1.7.0
+        - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+        # NPM
+        - NPM_VERSION: "2"
+        - NPM_VERSION: "3"
+        # node.js
+        - NODE_VERSION: "0.12"
+        - NODE_VERSION: "4"
+        - NODE_VERSION: "5"
 
 platform:
   - x86
   - x64
 
 install:
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Install-Product node $env:NODE_VERSION
   - node --version
   - npm --version
-  - npm install -g npm@%npm_version%
+  - npm install -g npm@%NPM_VERSION%
   - npm install -g jshint
   - npm install -g istanbul
   - npm install -g istanbul-coveralls
