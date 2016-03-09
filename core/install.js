@@ -112,11 +112,14 @@ whichDeferred.promise
       return requestBinary(getRequestOptions(conf), downloadedFile);
     } else {
       console.log('Download already available at', downloadedFile);
-      return downloadedFile;
+      return {
+        requestOptions: getRequestOptions(conf),
+        downloadedFile: downloadedFile
+      };
     }
   })
-  .then(function (downloadedFile) {
-    return extractDownload(downloadedFile, false);
+  .then(function (response) {
+    return extractDownload(response.downloadedFile, response.requestOptions, false);
   })
   .then(function (extractedPath) {
     return copyIntoPlace(extractedPath, pkgPath);
@@ -265,7 +268,10 @@ function requestBinary(requestOptions, filePath) {
       fs.writeFileSync(writePath, body);
       console.log('Received ' + Math.floor(body.length / 1024) + 'K total.');
       fs.renameSync(writePath, filePath);
-      deferred.resolve(filePath);
+      deferred.resolve({
+        requestOptions: requestOptions,
+        downloadedFile: filePath
+      });
 
     } else if (response) {
       console.error('Error requesting archive.\n' +
@@ -300,11 +306,12 @@ function requestBinary(requestOptions, filePath) {
 /**
  * Extracts the given Archive
  * @param {string} filePath - path of the ZIP archive to extract
+ * @param {object} requestOptions - request options for retry attempt
  * @param {boolean} retry - set to true if it's already an retry attempt
  * @returns {*} - path of the extracted archive content
  * @function
  */
-function extractDownload(filePath, retry) {
+function extractDownload(filePath, requestOptions, retry) {
   var deferred = kew.defer();
   // extract to a unique directory in case multiple processes are
   // installing and extracting at once
@@ -334,9 +341,9 @@ function extractDownload(filePath, retry) {
       if (err) {
         if (!retry) {
           console.log('Error during extracting. Trying to download again.');
-          fs.unlinkSync(downloadedFile);
-          requestBinary(getRequestOptions(conf), filePath).then(function (downloadedFile) {
-            return extractDownload(downloadedFile, true);
+          fs.unlinkSync(filePath);
+          return requestBinary(requestOptions, filePath).then(function (downloadedFile) {
+            return extractDownload(downloadedFile, requestOptions, true);
           });
         } else {
           deferred.reject(err);
