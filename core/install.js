@@ -137,7 +137,10 @@ whichDeferred.promise
     exit(1);
   });
 
-
+/**
+ * Save the destination directory back
+ * @param {string} location - path of the directory
+ */
 function writeLocationFile(location) {
   console.log('Writing location.js file');
   if (process.platform === 'win32') {
@@ -147,13 +150,23 @@ function writeLocationFile(location) {
     'module.exports.location = \'' + location + '\';');
 }
 
+/**
+ * Exit helper function
+ * @param {int} code - exit code
+ * @function
+ */
 function exit(code) {
   validExit = true;
   process.env.PATH = originalPath;
   process.exit(code || 0);
 }
 
-
+/**
+ * Function to find an writable temp directory
+ * @param {object} npmConf - current NPM configuration
+ * @returns {string} representing suitable temp directory
+ * @function
+ */
 function findSuitableTempDirectory(npmConf) {
   var now = Date.now();
   var candidateTmpDirs = [
@@ -183,7 +196,12 @@ function findSuitableTempDirectory(npmConf) {
   exit(1);
 }
 
-
+/**
+ * Create request opions object
+ * @param {object} conf - current NPM config
+ * @returns {{uri: string, encoding: null, followRedirect: boolean, headers: {}, strictSSL: *}}
+ * @function
+ */
 function getRequestOptions(conf) {
   var strictSSL = conf.get('strict-ssl');
   if (process.version == 'v0.10.34') {
@@ -228,7 +246,13 @@ function getRequestOptions(conf) {
   return options;
 }
 
-
+/**
+ * Downloads binary file
+ * @param {object} requestOptions - to use for HTTP call
+ * @param {string} filePath - download URL
+ * @returns {*}
+ * @function
+ */
 function requestBinary(requestOptions, filePath) {
   var deferred = kew.defer();
   var writePath = filePath + '-download-' + Date.now();
@@ -273,7 +297,13 @@ function requestBinary(requestOptions, filePath) {
   return deferred.promise;
 }
 
-
+/**
+ * Extracts the given Archive
+ * @param {string} filePath - path of the ZIP archive to extract
+ * @param {boolean} retry - set to true if it's already an retry attempt
+ * @returns {*} - path of the extracted archive content
+ * @function
+ */
 function extractDownload(filePath, retry) {
   var deferred = kew.defer();
   // extract to a unique directory in case multiple processes are
@@ -320,7 +350,13 @@ function extractDownload(filePath, retry) {
   return deferred.promise;
 }
 
-
+/**
+ * Helper function to move folder contents to target directory
+ * @param {string} extractedPath - source directory path
+ * @param {string} targetPath - target directory path
+ * @returns {string} {!Promise.<RESULT>} promise for chaing
+ * @function
+ */
 function copyIntoPlace(extractedPath, targetPath) {
   console.log('Removing', targetPath);
   return kew.nfcall(fs.remove, targetPath).then(function () {
