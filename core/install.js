@@ -116,7 +116,7 @@ whichDeferred.promise
     }
   })
   .then(function (downloadedFile) {
-    return extractDownload(downloadedFile);
+    return extractDownload(downloadedFile, false);
   })
   .then(function (extractedPath) {
     return copyIntoPlace(extractedPath, pkgPath);
@@ -255,11 +255,11 @@ function requestBinary(requestOptions, filePath) {
       exit(1);
     } else if (error) {
       console.error('Error making request.\n' + error.stack + '\n\n' +
-        'Please report this full log at https://github.com/hypery2k/galenframework/issues');
+        'Please report this full log at https://github.com/hypery2k/galenframework-cli/issues');
       exit(1);
     } else {
       console.error('Something unexpected happened, please report this full ' +
-        'log at https://github.com/hypery2k/galenframework/issues');
+        'log at https://github.com/hypery2k/galenframework-cli/issues');
       exit(1);
     }
   })).on('progress', function (state) {
@@ -274,7 +274,7 @@ function requestBinary(requestOptions, filePath) {
 }
 
 
-function extractDownload(filePath) {
+function extractDownload(filePath, retry) {
   var deferred = kew.defer();
   // extract to a unique directory in case multiple processes are
   // installing and extracting at once
@@ -302,8 +302,16 @@ function extractDownload(filePath) {
     console.log('Extracting tar contents (via spawned process)');
     cp.execFile('tar', ['jxf', filePath], options, function (err) {
       if (err) {
-        console.error('Error extracting archive');
-        deferred.reject(err);
+        if (!retry) {
+          console.log('Error during extracting. Trying to download again.');
+          fs.unlinkSync(downloadedFile);
+          requestBinary(getRequestOptions(conf), filePath).then(function (downloadedFile) {
+            return extractDownload(downloadedFile, true);
+          });
+        } else {
+          deferred.reject(err);
+          console.error('Error extracting archive');
+        }
       } else {
         deferred.resolve(extractedPath);
       }
