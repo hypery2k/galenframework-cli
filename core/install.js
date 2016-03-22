@@ -7,6 +7,7 @@
 'use strict';
 
 var requestProgress = require('request-progress');
+var replace = require('replace-in-file');
 var Progress = require('progress');
 var AdmZip = require('adm-zip');
 var cp = require('child_process');
@@ -131,9 +132,22 @@ whichDeferred.promise
     console.log('Done. galen binary available at ', location);
     // Ensure executable is executable by all users
     fs.chmodSync(location, '755');
-    fs.chmodSync(libPath + '/galen/galen', '755');
-    fs.chmodSync(libPath + '/galen/galen.bat', '755');
-    exit(0);
+    fs.chmodSync(location + '/galen/galen', '755');
+    fs.chmodSync(location + '/galen/galen.bat', '755');
+    replace({
+        files: location + '/galen/galen.bat',
+        replace: 'com.galenframework.GalenMain %*',
+        with: 'com.galenframework.GalenMain %* -Djna.nosys=true'
+      },
+      function (error, changedFiles) {
+        //Catch errors
+        if (error) {
+          console.error('Error occurred:', error);
+        }
+        //List changed files
+        console.log('Modified files:', changedFiles.join(', '));
+        exit(0);
+      });
   })
   .fail(function (err) {
     console.error('Galen installation failed', err, err.stack);
