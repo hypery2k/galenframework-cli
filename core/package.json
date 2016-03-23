@@ -21,7 +21,7 @@
   "scripts": {
     "install": "node install.js",
     "test": "nodeunit --reporter=minimal test/tests.js",
-    "pretest": "jshint -c ../.jshintrc lib/*.js && jshint -c ../.jshintrc *.js",
+    "pretest": "jshint -c ../.jshintrc --filename *.js && jshint -c ../.jshintrc --filename lib/*.js && jshint -c ../.jshintrc --filename test/*.js",
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
   },
   "bin": {
@@ -33,6 +33,7 @@
     "kew": "0.6.0",
     "npmconf": "2.1.2",
     "progress": "1.1.8",
+    "replace-in-file": "1.0.2",
     "request": "2.60.0",
     "request-progress": "0.3.1",
     "which": "^1.1.1",
