@@ -4,7 +4,10 @@ after_success: npm run coverage && cat ./coverage/lcov.info | coveralls
 node_js:
   - "0.12"
   - "4.0"
+  - "4.3"
+  - "4"
   - "5.0"
+  - "5"
 env:
   - NPM_VERSION=3
   - NPM_VERSION=2

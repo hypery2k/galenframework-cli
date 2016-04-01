@@ -9,7 +9,10 @@ environment:
         - NPM_VERSION: "3"
         # node.js
         - NODE_VERSION: "0.12"
+        - NODE_VERSION: "4.0"
+        - NODE_VERSION: "4.3"
         - NODE_VERSION: "4"
+        - NODE_VERSION: "5.0"
         - NODE_VERSION: "5"
 
 platform:

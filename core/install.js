@@ -7,6 +7,7 @@
 'use strict';
 
 var requestProgress = require('request-progress');
+var replace = require('replace-in-file');
 var Progress = require('progress');
 var AdmZip = require('adm-zip');
 var cp = require('child_process');
@@ -112,11 +113,14 @@ whichDeferred.promise
       return requestBinary(getRequestOptions(conf), downloadedFile);
     } else {
       console.log('Download already available at', downloadedFile);
-      return downloadedFile;
+      return {
+        requestOptions: getRequestOptions(conf),
+        downloadedFile: downloadedFile
+      };
     }
   })
-  .then(function (downloadedFile) {
-    return extractDownload(downloadedFile);
+  .then(function (response) {
+    return extractDownload(response.downloadedFile, response.requestOptions, false);
   })
   .then(function (extractedPath) {
     return copyIntoPlace(extractedPath, pkgPath);
@@ -128,16 +132,32 @@ whichDeferred.promise
     console.log('Done. galen binary available at ', location);
     // Ensure executable is executable by all users
     fs.chmodSync(location, '755');
-    fs.chmodSync(libPath + '/galen/galen', '755');
-    fs.chmodSync(libPath + '/galen/galen.bat', '755');
-    exit(0);
+    fs.chmodSync(location + '/galen/galen', '755');
+    fs.chmodSync(location + '/galen/galen.bat', '755');
+    replace({
+        files: location + '/galen/galen.bat',
+        replace: 'com.galenframework.GalenMain %*',
+        with: 'com.galenframework.GalenMain %* -Djna.nosys=true'
+      },
+      function (error, changedFiles) {
+        //Catch errors
+        if (error) {
+          console.error('Error occurred:', error);
+        }
+        //List changed files
+        console.log('Modified files:', changedFiles.join(', '));
+        exit(0);
+      });
   })
   .fail(function (err) {
     console.error('Galen installation failed', err, err.stack);
     exit(1);
   });
 
-
+/**
+ * Save the destination directory back
+ * @param {string} location - path of the directory
+ */
 function writeLocationFile(location) {
   console.log('Writing location.js file');
   if (process.platform === 'win32') {
@@ -147,19 +167,29 @@ function writeLocationFile(location) {
     'module.exports.location = \'' + location + '\';');
 }
 
+/**
+ * Exit helper function
+ * @param {int} code - exit code
+ * @function
+ */
 function exit(code) {
   validExit = true;
   process.env.PATH = originalPath;
   process.exit(code || 0);
 }
 
-
+/**
+ * Function to find an writable temp directory
+ * @param {object} npmConf - current NPM configuration
+ * @returns {string} representing suitable temp directory
+ * @function
+ */
 function findSuitableTempDirectory(npmConf) {
   var now = Date.now();
   var candidateTmpDirs = [
     process.env.TMPDIR || process.env.TEMP || npmConf.get('tmp'),
-    '/tmp',
-    path.join(process.cwd(), 'tmp')
+    path.join(process.cwd(), 'tmp',
+      '/tmp')
   ];
 
   for (var i = 0; i < candidateTmpDirs.length; i++) {
@@ -183,7 +213,12 @@ function findSuitableTempDirectory(npmConf) {
   exit(1);
 }
 
-
+/**
+ * Create request opions object
+ * @param {object} conf - current NPM config
+ * @returns {{uri: string, encoding: null, followRedirect: boolean, headers: {}, strictSSL: *}}
+ * @function
+ */
 function getRequestOptions(conf) {
   var strictSSL = conf.get('strict-ssl');
   if (process.version == 'v0.10.34') {
@@ -228,7 +263,13 @@ function getRequestOptions(conf) {
   return options;
 }
 
-
+/**
+ * Downloads binary file
+ * @param {object} requestOptions - to use for HTTP call
+ * @param {string} filePath - download URL
+ * @returns {*}
+ * @function
+ */
 function requestBinary(requestOptions, filePath) {
   var deferred = kew.defer();
   var writePath = filePath + '-download-' + Date.now();
@@ -241,7 +282,10 @@ function requestBinary(requestOptions, filePath) {
       fs.writeFileSync(writePath, body);
       console.log('Received ' + Math.floor(body.length / 1024) + 'K total.');
       fs.renameSync(writePath, filePath);
-      deferred.resolve(filePath);
+      deferred.resolve({
+        requestOptions: requestOptions,
+        downloadedFile: filePath
+      });
 
     } else if (response) {
       console.error('Error requesting archive.\n' +
@@ -255,11 +299,11 @@ function requestBinary(requestOptions, filePath) {
       exit(1);
     } else if (error) {
       console.error('Error making request.\n' + error.stack + '\n\n' +
-        'Please report this full log at https://github.com/hypery2k/galenframework/issues');
+        'Please report this full log at https://github.com/hypery2k/galenframework-cli/issues');
       exit(1);
     } else {
       console.error('Something unexpected happened, please report this full ' +
-        'log at https://github.com/hypery2k/galenframework/issues');
+        'log at https://github.com/hypery2k/galenframework-cli/issues');
       exit(1);
     }
   })).on('progress', function (state) {
@@ -273,8 +317,15 @@ function requestBinary(requestOptions, filePath) {
   return deferred.promise;
 }
 
-
-function extractDownload(filePath) {
+/**
+ * Extracts the given Archive
+ * @param {string} filePath - path of the ZIP archive to extract
+ * @param {object} requestOptions - request options for retry attempt
+ * @param {boolean} retry - set to true if it's already an retry attempt
+ * @returns {*} - path of the extracted archive content
+ * @function
+ */
+function extractDownload(filePath, requestOptions, retry) {
   var deferred = kew.defer();
   // extract to a unique directory in case multiple processes are
   // installing and extracting at once
@@ -302,8 +353,16 @@ function extractDownload(filePath) {
     console.log('Extracting tar contents (via spawned process)');
     cp.execFile('tar', ['jxf', filePath], options, function (err) {
       if (err) {
-        console.error('Error extracting archive');
-        deferred.reject(err);
+        if (!retry) {
+          console.log('Error during extracting. Trying to download again.');
+          fs.unlinkSync(filePath);
+          return requestBinary(requestOptions, filePath).then(function (downloadedFile) {
+            return extractDownload(downloadedFile, requestOptions, true);
+          });
+        } else {
+          deferred.reject(err);
+          console.error('Error extracting archive');
+        }
       } else {
         deferred.resolve(extractedPath);
       }
@@ -312,7 +371,13 @@ function extractDownload(filePath) {
   return deferred.promise;
 }
 
-
+/**
+ * Helper function to move folder contents to target directory
+ * @param {string} extractedPath - source directory path
+ * @param {string} targetPath - target directory path
+ * @returns {string} {!Promise.<RESULT>} promise for chaing
+ * @function
+ */
 function copyIntoPlace(extractedPath, targetPath) {
   console.log('Removing', targetPath);
   return kew.nfcall(fs.remove, targetPath).then(function () {

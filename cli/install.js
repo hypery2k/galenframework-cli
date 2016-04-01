@@ -83,7 +83,7 @@ whichDeferred.promise
       npmconf.load(npmconfDeferred.makeNodeResolver());
       npmconfDeferred.promise.then(function () {
         var downloadUrl = process.env.SAFARIDRIVER_CDNURL ||
-        'http://selenium-release.storage.googleapis.com/2.48/SafariDriver.safariextz';
+          'http://selenium-release.storage.googleapis.com/2.48/SafariDriver.safariextz';
         var fileName = downloadUrl.split('/').pop();
         var downloadedFile = path.join(tmpPath, fileName);
         if (!fs.existsSync(downloadedFile)) {
@@ -96,8 +96,10 @@ whichDeferred.promise
       }).then(function (downloadedFile) {
         // request to open safari extension installation
         var spawn = require('child_process').spawn;
-          console.log('Opening file ', downloadedFile);
-        spawn('open', [downloadedFile]);
+        console.log('Opening file ', downloadedFile);
+        spawn('open', [downloadedFile], {
+          detached: true
+        });
         exit(0);
       }).fail(function (err) {
         console.error('Safari Driver installation failed', err, err.stack);
@@ -150,16 +152,16 @@ function findSuitableTempDirectory(npmConf) {
 
 
 function requestBinary(url, dest) {
- var deferred = kew.defer();
+  var deferred = kew.defer();
   console.log('Receiving...');
 
-  httpreq.get(url,{binary: true}, function (err, res){
+  httpreq.get(url, {binary: true}, function (err, res) {
     if (err) {
       deferred.reject(err);
       console.error('Error making request.');
     } else {
       fs.writeFile(dest, res.body, function (err) {
-        if(err) {
+        if (err) {
           deferred.reject(err);
           console.log('Error writing file');
         } else {
