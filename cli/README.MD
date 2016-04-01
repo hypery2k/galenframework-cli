@@ -8,6 +8,8 @@
 
 [![NPM](https://nodei.co/npm/galenframework-cli.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/galenframework-cli/)
 
+[![Dependency Status](https://david-dm.org/hypery2k/galenframework-cli.svg)](https://david-dm.org/hypery2k/galenframework-cli) [![devDependency Status](https://david-dm.org/hypery2k/galenframework-cli/dev-status.svg)](https://david-dm.org/hypery2k/galenframework-cli#info=devDependencies)[![Coverage Status](https://coveralls.io/repos/hypery2k/galenframework-cli/badge.svg?branch=master&service=github)](https://coveralls.io/github/hypery2k/galenframework-cli?branch=master)
+
 ## Installation
 
 You must have Java 6+ installed.

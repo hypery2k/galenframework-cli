@@ -1,6 +1,6 @@
 {
   "name": "galenframework-cli",
-  "version": "2.3.0",
+  "version": "2.2.4",
   "description": "Just the node wrapper for the Galen Framework.",
   "homepage": "https://github.com/hypery2k/galenframework-cli",
   "bugs": {

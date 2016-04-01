@@ -4,9 +4,6 @@
 
 [![Build Status](https://travis-ci.org/hypery2k/galenframework-cli.svg?branch=master)](https://travis-ci.org/hypery2k/galenframework-cli) [![Build status](https://ci.appveyor.com/api/projects/status/fbwy88pc9ia6429w/branch/master?svg=true)](https://ci.appveyor.com/project/hypery2k/galenframework-cli/branch/master) [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
-[![Dependency Status](https://david-dm.org/hypery2k/galenframework-cli.svg)](https://david-dm.org/hypery2k/galenframework-cli) [![devDependency Status](https://david-dm.org/hypery2k/galenframework-cli/dev-status.svg)](https://david-dm.org/hypery2k/galenframework-cli#info=devDependencies)[![Coverage Status](https://coveralls.io/repos/hypery2k/galenframework-cli/badge.svg?branch=master&service=github)](https://coveralls.io/github/hypery2k/galenframework-cli?branch=master)
-
-
 The [core](core/) module is just the node wrapper for [Galen](http://galenframework.com) and can be used within CI environments
 
 The [CLI](cli/) module is a command line module for [Galen](http://galenframework.com). This includes the core above and webdriver downloads for different browsers.
