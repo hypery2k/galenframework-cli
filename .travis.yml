@@ -1,4 +1,5 @@
 sudo: required
+dist: trusty
 language: node_js
 after_success: npm run coverage && cat ./coverage/lcov.info | coveralls
 node_js:
@@ -8,6 +9,17 @@ node_js:
   - "4"
   - "5.0"
   - "5"
+  - "stable"
+addons:
+  # From some tests it seems you can only have one firefox addon.
+  # Adding two results in the last one defined being the one installed.
+  firefox: latest
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+      - google-chrome-beta
 env:
   - NPM_VERSION=3
   - NPM_VERSION=2
@@ -25,10 +37,7 @@ script:
   - npm run coverage
   - ./runTests.sh
 before_install:
-  - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  - sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-  - sudo apt-get update
-  - sudo apt-get install google-chrome-stable
+  - sudo apt-get update -qq
   - npm install -g npm@$NPM_VERSION
 before_script:
   - npm install -g jshint
