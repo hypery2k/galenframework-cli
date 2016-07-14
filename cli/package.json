@@ -19,6 +19,7 @@
   ],
   "author": "Martin Reinhardt",
   "scripts": {
+    "galen": "bin/galen",
     "install": "node install.js",
     "postinstall": "node postinstall.js",
     "test": "nodeunit --reporter=minimal test/tests.js",
@@ -26,9 +27,6 @@
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
   },
   "bin": {
-    "galen": "bin/galen"
-  },
-  "scripts": {
     "galen": "bin/galen"
   },
   "preferGlobal": "true",
