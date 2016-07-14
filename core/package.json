@@ -27,6 +27,9 @@
   "bin": {
     "galen": "bin/galen"
   },
+  "scripts": {
+    "galen": "bin/galen"
+  },
   "dependencies": {
     "adm-zip": "^0.4.7",
     "fs-extra": "^0.23.0",

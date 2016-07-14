@@ -28,6 +28,9 @@
   "bin": {
     "galen": "bin/galen"
   },
+  "scripts": {
+    "galen": "bin/galen"
+  },
   "preferGlobal": "true",
   "dependencies": {
     "chromedriver": "*",
