@@ -29,7 +29,7 @@ node {
       def currentVersionCore = sh(returnStdout: true, script: "cd core && npm version | grep \"{\" | tr -s ':'  | cut -d \"'\" -f 2").trim()
       def newVersionCore = "${currentVersionCore}-${buildNumber}"
       sh "cd core && npm version ${newVersionCore} --no-git-tag-version && npm publish --tag next"
-      def currentVersionCli = sh(returnStdout: true, script: "cd cli && npm version | grep \"{\" | tr -s ':'  | cut -d \"'\" -f 2").trim()
+      def currentVersionCli = sh(returnStdout: true, script: "cd cli && npm version | grep \"{\" | tr -s ':'  | cut -d \"'\" -f 4").trim()
       def newVersionCli = "${currentVersionCli}-${buildNumber}"
       sh "cd cli && npm version ${newVersionCli} --no-git-tag-version && npm publish --tag next"
     }
