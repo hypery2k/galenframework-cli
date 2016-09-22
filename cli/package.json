@@ -33,7 +33,7 @@
   "dependencies": {
     "chromedriver": "*",
     "fs-extra": "0.26.2",
-    "galenframework": "2.3.0",
+    "galenframework": "2.3.1",
     "httpreq": "0.4.13",
     "kew": "0.7.0",
     "npmconf": "2.1.2",
