@@ -6,7 +6,10 @@ cli/lib/galen/*
 core/lib/location.js
 lcli/ib/location.js
 core/coverage/*
+core/target/*
 cli/coverage/*
+cli/target/*
+
 
 # IDE
 .idea/*
