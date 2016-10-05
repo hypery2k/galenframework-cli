@@ -82,7 +82,9 @@ whichDeferred.promise
     }
   })
   .then(function (stdout) {
-    var version = stdout.trim();
+    var regex = /^Version: ([0-9\.]+)$/
+    var result = stdout.trim().match(regex);
+    var version = result[1];
     if (helper.version == version) {
       writeLocationFile(galenPath);
       log.info('galenframework is already installed at', galenPath + '.');
