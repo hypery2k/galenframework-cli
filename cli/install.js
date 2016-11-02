@@ -1,4 +1,4 @@
-// Copyright 2015 Martin Reinhardt
+// Copyright 2016 Martin Reinhardt
 
 /*
  * This simply downloads Galen
@@ -14,6 +14,7 @@ var npmconf = require('npmconf');
 var path = require('path');
 var httpreq = require('httpreq');
 var which = require('which');
+var log = require('npmlog');
 
 var originalPath = process.env.PATH;
 
@@ -22,7 +23,7 @@ var validExit = false;
 
 process.on('exit', function () {
   if (!validExit) {
-    console.log('Install exited unexpectedly');
+    log.info('Install exited unexpectedly');
     exit(1);
   }
 });
@@ -54,13 +55,13 @@ whichDeferred.promise
     // Horrible hack to avoid problems during global install. We check to see if
     // the file `which` found is our own bin script.
     if (galenPath.indexOf(path.join('npm', 'galenframework-cli')) !== -1) {
-      console.log('Looks like an `npm install -g` on windows; unable to check for already installed version.');
+      log.info('Looks like an `npm install -g` on windows; unable to check for already installed version.');
       throw new Error('Global install');
     }
 
     var contents = fs.readFileSync(galenPath, 'utf8');
     if (/NPM_INSTALL_MARKER/.test(contents)) {
-      console.log('Looks like an `npm install -g`; unable to check for already installed version.');
+      log.info('Looks like an `npm install -g`; unable to check for already installed version.');
       throw new Error('Global install');
     } else {
       var checkVersionDeferred = kew.defer();
@@ -69,7 +70,7 @@ whichDeferred.promise
     }
   })
   .then(function () {
-    console.log('galenframework-cli detected');
+    log.info('galenframework-cli detected');
     var npmconfDeferred = kew.defer();
     npmconf.load(npmconfDeferred.makeNodeResolver());
     return npmconfDeferred.promise;
@@ -87,22 +88,22 @@ whichDeferred.promise
         var fileName = downloadUrl.split('/').pop();
         var downloadedFile = path.join(tmpPath, fileName);
         if (!fs.existsSync(downloadedFile)) {
-          console.log('Downloading', downloadUrl);
+          log.info('Downloading', downloadUrl);
           return requestBinary(downloadUrl, downloadedFile);
         } else {
-          console.log('Download already available at', downloadedFile);
+          log.info('Download already available at', downloadedFile);
           return downloadedFile;
         }
       }).then(function (downloadedFile) {
         // request to open safari extension installation
         var spawn = require('child_process').spawn;
-        console.log('Opening file ', downloadedFile);
+        log.info('Opening file ', downloadedFile);
         spawn('open', [downloadedFile], {
           detached: true
         });
         exit(0);
       }).fail(function (err) {
-        console.error('Safari Driver installation failed', err, err.stack);
+        log.error('Safari Driver installation failed', err, err.stack);
         exit(1);
       });
     } else {
@@ -110,7 +111,7 @@ whichDeferred.promise
     }
   })
   .fail(function (err) {
-    console.error('Galen installation failed', err, err.stack);
+    log.error('Galen installation failed', err, err.stack);
     exit(1);
   });
 
@@ -142,30 +143,30 @@ function findSuitableTempDirectory(npmConf) {
       fs.unlinkSync(testFile);
       return candidatePath;
     } catch (e) {
-      console.log(candidatePath, 'is not writable:', e.message);
+      log.info(candidatePath, 'is not writable:', e.message);
     }
   }
 
-  console.error('Can not find a writable tmp directory.');
+  log.error('Can not find a writable tmp directory.');
   exit(1);
 }
 
 
 function requestBinary(url, dest) {
   var deferred = kew.defer();
-  console.log('Receiving...');
+  log.info('Receiving...');
 
   httpreq.get(url, {binary: true}, function (err, res) {
     if (err) {
       deferred.reject(err);
-      console.error('Error making request.');
+      log.error('Error making request.');
     } else {
       fs.writeFile(dest, res.body, function (err) {
         if (err) {
           deferred.reject(err);
-          console.log('Error writing file');
+          log.info('Error writing file');
         } else {
-          console.log('Saved to', dest);
+          log.info('Saved to', dest);
           deferred.resolve(dest);
         }
       });

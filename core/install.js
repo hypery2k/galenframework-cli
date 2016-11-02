@@ -1,4 +1,4 @@
-// Copyright 2015 Martin Reinhardt
+// Copyright 2016 Martin Reinhardt
 
 /*
  * This simply downloads Galen
@@ -19,6 +19,7 @@ var path = require('path');
 var request = require('request');
 var url = require('url');
 var which = require('which');
+var log = require('npmlog');
 
 var cdnUrl = process.env.npm_config_galen_url ||
   process.env.GALEN_CDNURL ||
@@ -32,7 +33,7 @@ var validExit = false;
 
 process.on('exit', function () {
   if (!validExit) {
-    console.log('Install exited unexpectedly');
+    log.error('Install exited unexpectedly');
     exit(1);
   }
 });
@@ -66,13 +67,13 @@ whichDeferred.promise
     // Horrible hack to avoid problems during global install. We check to see if
     // the file `which` found is our own bin script.
     if (galenPath.indexOf(path.join('npm', 'galenframework')) !== -1) {
-      console.log('Looks like an `npm install -g` on windows; unable to check for already installed version.');
+      log.info('Looks like an `npm install -g` on windows; unable to check for already installed version.');
       throw new Error('Global install');
     }
 
     var contents = fs.readFileSync(galenPath, 'utf8');
     if (/NPM_INSTALL_MARKER/.test(contents)) {
-      console.log('Looks like an `npm install -g`; unable to check for already installed version.');
+      log.info('Looks like an `npm install -g`; unable to check for already installed version.');
       throw new Error('Global install');
     } else {
       var checkVersionDeferred = kew.defer();
@@ -81,13 +82,15 @@ whichDeferred.promise
     }
   })
   .then(function (stdout) {
-    var version = stdout.trim();
+    var regex = /^Version: ([0-9\.]+)$/
+    var result = stdout.trim().match(regex);
+    var version = result[1];
     if (helper.version == version) {
       writeLocationFile(galenPath);
-      console.log('galenframework is already installed at', galenPath + '.');
+      log.info('galenframework is already installed at', galenPath + '.');
       exit(0);
     } else {
-      console.log('galenframework detected, but wrong version', stdout.trim(), '@', galenPath + '.');
+      log.info('galenframework detected, but wrong version', stdout.trim(), '@', galenPath + '.');
       throw new Error('Wrong version');
     }
   })
@@ -104,15 +107,15 @@ whichDeferred.promise
     var fileName = downloadUrl.split('/').pop();
     var downloadedFile = path.join(tmpPath, fileName);
 
-    console.log('Running at platform: ' + process.platform);
+    log.info('Running at platform: ' + process.platform);
 
     // Start the install.
     if (!fs.existsSync(downloadedFile)) {
-      console.log('Downloading', downloadUrl);
-      console.log('Saving to', downloadedFile);
+      log.info('Downloading', downloadUrl);
+      log.info('Saving to', downloadedFile);
       return requestBinary(getRequestOptions(conf), downloadedFile);
     } else {
-      console.log('Download already available at', downloadedFile);
+      log.info('Download already available at', downloadedFile);
       return {
         requestOptions: getRequestOptions(conf),
         downloadedFile: downloadedFile
@@ -129,7 +132,7 @@ whichDeferred.promise
     var location = libPath;
     writeLocationFile(location);
 
-    console.log('Done. galen binary available at ', location);
+    log.info('Done. galen binary available at ', location);
     // Ensure executable is executable by all users
     fs.chmodSync(location, '755');
     fs.chmodSync(location + '/galen/galen', '755');
@@ -142,15 +145,15 @@ whichDeferred.promise
       function (error, changedFiles) {
         //Catch errors
         if (error) {
-          console.error('Error occurred:', error);
+          log.error('Error occurred:', error);
         }
         //List changed files
-        console.log('Modified files:', changedFiles.join(', '));
+        log.info('Modified files:', changedFiles.join(', '));
         exit(0);
       });
   })
   .fail(function (err) {
-    console.error('Galen installation failed', err, err.stack);
+    log.error('Galen installation failed', err, err.stack);
     exit(1);
   });
 
@@ -159,7 +162,7 @@ whichDeferred.promise
  * @param {string} location - path of the directory
  */
 function writeLocationFile(location) {
-  console.log('Writing location.js file');
+  log.info('Writing location.js file');
   if (process.platform === 'win32') {
     location = location.replace(/\\/g, '\\\\');
   }
@@ -205,11 +208,11 @@ function findSuitableTempDirectory(npmConf) {
       fs.unlinkSync(testFile);
       return candidatePath;
     } catch (e) {
-      console.log(candidatePath, 'is not writable:', e.message);
+      log.info(candidatePath, 'is not writable:', e.message);
     }
   }
 
-  console.error('Can not find a writable tmp directory.');
+  log.error('Can not find a writable tmp directory.');
   exit(1);
 }
 
@@ -222,7 +225,7 @@ function findSuitableTempDirectory(npmConf) {
 function getRequestOptions(conf) {
   var strictSSL = conf.get('strict-ssl');
   if (process.version == 'v0.10.34') {
-    console.log('Node v0.10.34 detected, turning off strict ssl due to https://github.com/joyent/node/issues/8894');
+    log.info('Node v0.10.34 detected, turning off strict ssl due to https://github.com/joyent/node/issues/8894');
     strictSSL = false;
   }
 
@@ -244,7 +247,7 @@ function getRequestOptions(conf) {
       // Mask password
       proxy.auth = proxy.auth.replace(/:.*$/, ':******');
     }
-    console.log('Using proxy ' + url.format(proxy));
+    log.info('Using proxy ' + url.format(proxy));
 
     // Enable proxy
     options.proxy = proxyUrl;
@@ -256,7 +259,7 @@ function getRequestOptions(conf) {
   // Use certificate authority settings from npm
   var ca = conf.get('ca');
   if (ca) {
-    console.log('Using npmconf ca');
+    log.info('Using npmconf ca');
     options.ca = ca;
   }
 
@@ -274,13 +277,13 @@ function requestBinary(requestOptions, filePath) {
   var deferred = kew.defer();
   var writePath = filePath + '-download-' + Date.now();
 
-  console.log('Receiving...');
+  log.info('Receiving...');
   var bar = null;
   requestProgress(request(requestOptions, function (error, response, body) {
-    console.log('');
+    log.info('');
     if (!error && response.statusCode === 200) {
       fs.writeFileSync(writePath, body);
-      console.log('Received ' + Math.floor(body.length / 1024) + 'K total.');
+      log.info('Received ' + Math.floor(body.length / 1024) + 'K total.');
       fs.renameSync(writePath, filePath);
       deferred.resolve({
         requestOptions: requestOptions,
@@ -288,21 +291,21 @@ function requestBinary(requestOptions, filePath) {
       });
 
     } else if (response) {
-      console.error('Error requesting archive.\n' +
+      log.error('Error requesting archive.\n' +
         'Status: ' + response.statusCode + '\n' +
         'Request options: ' + JSON.stringify(requestOptions, null, 2) + '\n' +
         'Response headers: ' + JSON.stringify(response.headers, null, 2) + '\n' +
         'Make sure your network and proxy settings are correct.\n\n');
       exit(1);
     } else if (error && error.stack && error.stack.indexOf('SELF_SIGNED_CERT_IN_CHAIN') != -1) {
-      console.error('Error making request.');
+      log.error('Error making request.');
       exit(1);
     } else if (error) {
-      console.error('Error making request.\n' + error.stack + '\n\n' +
+      log.error('Error making request.\n' + error.stack + '\n\n' +
         'Please report this full log at https://github.com/hypery2k/galenframework-cli/issues');
       exit(1);
     } else {
-      console.error('Something unexpected happened, please report this full ' +
+      log.error('Something unexpected happened, please report this full ' +
         'log at https://github.com/hypery2k/galenframework-cli/issues');
       exit(1);
     }
@@ -338,30 +341,30 @@ function extractDownload(filePath, requestOptions, retry) {
   fs.chmodSync(extractedPath, '0777');
 
   if (filePath.substr(-4) === '.zip') {
-    console.log('Extracting zip contents');
+    log.info('Extracting zip contents');
 
     try {
       var zip = new AdmZip(filePath);
       zip.extractAllTo(extractedPath, true);
       deferred.resolve(extractedPath);
     } catch (err) {
-      console.error('Error extracting zip');
+      log.error('Error extracting zip');
       deferred.reject(err);
     }
 
   } else {
-    console.log('Extracting tar contents (via spawned process)');
+    log.info('Extracting tar contents (via spawned process)');
     cp.execFile('tar', ['jxf', filePath], options, function (err) {
       if (err) {
         if (!retry) {
-          console.log('Error during extracting. Trying to download again.');
+          log.info('Error during extracting. Trying to download again.');
           fs.unlinkSync(filePath);
           return requestBinary(requestOptions, filePath).then(function (downloadedFile) {
             return extractDownload(downloadedFile, requestOptions, true);
           });
         } else {
           deferred.reject(err);
-          console.error('Error extracting archive');
+          log.error('Error extracting archive');
         }
       } else {
         deferred.resolve(extractedPath);
@@ -379,19 +382,19 @@ function extractDownload(filePath, requestOptions, retry) {
  * @function
  */
 function copyIntoPlace(extractedPath, targetPath) {
-  console.log('Removing', targetPath);
+  log.info('Removing', targetPath);
   return kew.nfcall(fs.remove, targetPath).then(function () {
     // Look for the extracted directory, so we can rename it.
     var files = fs.readdirSync(extractedPath);
     for (var i = 0; i < files.length; i++) {
       var file = path.join(extractedPath, files[i]);
       if (fs.statSync(file).isDirectory() && file.indexOf(helper.version) != -1) {
-        console.log('Copying extracted folder', file, '->', targetPath);
+        log.info('Copying extracted folder', file, '->', targetPath);
         return kew.nfcall(fs.move, file, targetPath);
       }
     }
 
-    console.log('Could not find extracted file', files);
+    log.info('Could not find extracted file', files);
     throw new Error('Could not find extracted file');
   });
 }

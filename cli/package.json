@@ -22,7 +22,7 @@
     "galen": "bin/galen",
     "install": "node install.js",
     "postinstall": "node postinstall.js",
-    "test": "nodeunit --reporter=minimal test/tests.js",
+    "test": "nodeunit --reporter=junit test/tests.js --output target",
     "pretest": "jshint -c ../.jshintrc --filename *.js && jshint -c ../.jshintrc --filename lib/*.js && jshint -c ../.jshintrc --filename test/*.js",
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
   },
@@ -33,10 +33,11 @@
   "dependencies": {
     "chromedriver": "*",
     "fs-extra": "0.26.2",
-    "galenframework": "2.3.0",
+    "galenframework": "2.3.1",
     "httpreq": "0.4.13",
     "kew": "0.7.0",
     "npmconf": "2.1.2",
+    "npmlog": "4.0.0",
     "path": "0.12.7",
     "which": "1.2.0",
     "yargs": "3.30.0"

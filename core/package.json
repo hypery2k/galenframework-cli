@@ -1,6 +1,6 @@
 {
   "name": "galenframework",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "The command line tool to use the Galen Framework. This includes the wrapper above and webdriver downloads for different browsers",
   "homepage": "https://github.com/hypery2k/galenframework-cli",
   "bugs": {
@@ -21,8 +21,9 @@
   "scripts": {
     "galen": "bin/galen",
     "install": "node install.js",
-    "test": "nodeunit --reporter=minimal test/tests.js",
+    "test": "nodeunit --reporter=junit test/tests.js --output target",
     "pretest": "jshint -c ../.jshintrc --filename *.js && jshint -c ../.jshintrc --filename lib/*.js && jshint -c ../.jshintrc --filename test/*.js",
+    "prepublish": "npm run test",
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
   },
   "bin": {
@@ -33,6 +34,7 @@
     "fs-extra": "^0.23.0",
     "kew": "0.6.0",
     "npmconf": "2.1.2",
+    "npmlog": "4.0.0",
     "progress": "1.1.8",
     "replace-in-file": "1.0.2",
     "request": "2.60.0",
@@ -53,7 +55,7 @@
     "url": "git+https://github.com/hypery2k/galenframework-cli.git"
   },
   "license": "MIT",
-  "_galenVersion": "2.3.0",
+  "_galenVersion": "2.3.1",
   "_npmVersion": "2.6.0",
   "_nodeVersion": "1.4.1"
 }
