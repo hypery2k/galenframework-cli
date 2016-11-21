@@ -30,8 +30,8 @@
     "galen": "bin/galen"
   },
   "dependencies": {
-    "adm-zip": "^0.4.7",
-    "fs-extra": "^0.23.0",
+    "adm-zip": "0.4.7",
+    "fs-extra": "0.23.0",
     "kew": "0.6.0",
     "npmconf": "2.1.2",
     "npmlog": "4.0.0",
@@ -39,23 +39,23 @@
     "replace-in-file": "1.0.2",
     "request": "2.60.0",
     "request-progress": "0.3.1",
-    "which": "^1.1.1",
-    "yargs": "^3.18.0"
+    "which": "1.1.1",
+    "yargs": "3.18.0"
   },
   "devDependencies": {
-    "coveralls": "^2.11.3",
-    "istanbul": "^0.3.17",
-    "istanbul-coveralls": "^1.0.3",
-    "jscoverage": "^0.6.0",
-    "jshint": "^2.8.0",
-    "nodeunit": "^0.9.1"
+    "coveralls": "2.11.3",
+    "istanbul": "0.3.17",
+    "istanbul-coveralls": "1.0.3",
+    "jscoverage": "0.6.0",
+    "jshint": "2.8.0",
+    "nodeunit": "0.9.1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hypery2k/galenframework-cli.git"
   },
   "license": "MIT",
-  "_galenVersion": "2.3.1",
+  "_galenVersion": "2.3.2",
   "_npmVersion": "2.6.0",
   "_nodeVersion": "1.4.1"
 }
