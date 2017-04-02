@@ -5,6 +5,7 @@ properties properties: [
 
 node {
   def buildNumber = env.BUILD_NUMBER
+  def branchName = env.BRANCH_NAME
   def workspace = env.WORKSPACE
   def buildUrl = env.BUILD_URL
 
