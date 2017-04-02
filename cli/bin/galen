@@ -79,6 +79,13 @@ if (process.platform === 'win32') {
   chromePath += '.exe';
 }
 args.push('-Dwebdriver.chrome.driver=' + chromePath);
+// adding geckodriver
+
+var geckoPath = path.resolve(baseDir, '../node_modules/geckodriver/bin/geckodriver');
+if (process.platform === 'win32') {
+  geckoPath += '.exe';
+}
+args.push('-Dwebdriver.gecko.driver=' + geckoPath);
 
 var programPath;
 if (process.platform === 'win32') {
