@@ -30,12 +30,10 @@ script:
   - export COVERALLS_REPO_TOKEN=mqVTe91nICY38tHlFFtmZIjbzpghGZyos
   - cd core
   - npm install .
-  - npm test
   - npm run coverage
   - cd ..
   - cd cli
   - npm install . -g
-  - npm test
   - npm run coverage
   - ./runTests.sh
 before_install:
