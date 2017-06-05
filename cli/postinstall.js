@@ -3,7 +3,7 @@
 /*
  * This simply downloads Galen
  */
- 'use strict';
+'use strict';
 
 var cp = require('child_process');
 var fs = require('fs-extra');
@@ -13,6 +13,7 @@ var npmconf = require('npmconf');
 var path = require('path');
 var httpreq = require('httpreq');
 var which = require('which');
+var npmWhich = require('npm-which')(process.cwd());
 var log = require('npmlog');
 
 var originalPath = process.env.PATH;
@@ -48,9 +49,21 @@ var whichDeferred = kew.defer();
 which('galen', whichDeferred.makeNodeResolver());
 whichDeferred.promise
   .then(function (result) {
-    galenPath = result;
+    return installAdditionalDrivers(result);
+  })
+  .fail(function (err) {
+    npmWhich('galen', function (err, result) {
+      if (err) {
+        log.error('Galen installation failed', err, err.stack);
+        exit(1);
+      } else {
+        return installAdditionalDrivers(result);
+      }
+    })
+  });
 
-
+function installAdditionalDrivers(galenPath) {
+  return kew.defer().promise.then(function () {
     // Horrible hack to avoid problems during global install. We check to see if
     // the file `which` found is our own bin script.
     if (galenPath.indexOf(path.join('npm', 'galenframework-cli')) !== -1) {
@@ -68,51 +81,49 @@ whichDeferred.promise
       return checkVersionDeferred.promise;
     }
   })
-  .then(function () {
-    log.info('galenframework-cli detected');
-    var npmconfDeferred = kew.defer();
-    npmconf.load(npmconfDeferred.makeNodeResolver());
-    return npmconfDeferred.promise;
-  })
-  .then(function (conf) {
-    tmpPath = findSuitableTempDirectory(conf);
-    var platform = process.platform;
-    // offer safari driver installation
-    if (platform === 'darwin') {
+    .then(function () {
+      log.info('galenframework-cli detected');
       var npmconfDeferred = kew.defer();
       npmconf.load(npmconfDeferred.makeNodeResolver());
-      npmconfDeferred.promise.then(function () {
-        var downloadUrl = process.env.SAFARIDRIVER_CDNURL ||
-          'https://selenium-release.storage.googleapis.com/2.48/SafariDriver.safariextz';
-        var fileName = downloadUrl.split('/').pop();
-        var downloadedFile = path.join(tmpPath, fileName);
-        if (!fs.existsSync(downloadedFile)) {
-          log.info('Downloading', downloadUrl);
-          return requestBinary(downloadUrl, downloadedFile);
-        } else {
-          log.info('Download already available at', downloadedFile);
-          return downloadedFile;
-        }
-      }).then(function (downloadedFile) {
-        // request to open safari extension installation
-        var spawn = require('child_process').spawn;
-        log.info('Opening file ', downloadedFile);
-        spawn('open', [downloadedFile], {
-          detached: true
+      return npmconfDeferred.promise;
+    })
+    .then(function (conf) {
+      tmpPath = findSuitableTempDirectory(conf);
+      var platform = process.platform;
+      // offer safari driver installation
+      if (platform === 'darwin') {
+        var npmconfDeferred = kew.defer();
+        npmconf.load(npmconfDeferred.makeNodeResolver());
+        npmconfDeferred.promise.then(function () {
+          var downloadUrl = process.env.SAFARIDRIVER_CDNURL ||
+            'https://selenium-release.storage.googleapis.com/2.48/SafariDriver.safariextz';
+          var fileName = downloadUrl.split('/').pop();
+          var downloadedFile = path.join(tmpPath, fileName);
+          if (!fs.existsSync(downloadedFile)) {
+            log.info('Downloading', downloadUrl);
+            return requestBinary(downloadUrl, downloadedFile);
+          } else {
+            log.info('Download already available at', downloadedFile);
+            return downloadedFile;
+          }
+        }).then(function (downloadedFile) {
+          // request to open safari extension installation
+          var spawn = require('child_process').spawn;
+          log.info('Opening file ', downloadedFile);
+          spawn('open', [downloadedFile], {
+            detached: true
+          });
+          exit(0);
+        }).fail(function (err) {
+          log.error('Safari Driver installation failed', err, err.stack);
+          exit(1);
         });
+      } else {
         exit(0);
-      }).fail(function (err) {
-        log.error('Safari Driver installation failed', err, err.stack);
-        exit(1);
-      });
-    } else {
-      exit(0);
-    }
-  })
-  .fail(function (err) {
-    log.error('Galen installation failed', err, err.stack);
-    exit(1);
-  });
+      }
+    })
+})
+  }
 
 function exit(code) {
   validExit = true;
@@ -155,7 +166,7 @@ function requestBinary(url, dest) {
   var deferred = kew.defer();
   log.info('Receiving...');
 
-  httpreq.get(url, {binary: true}, function (err, res) {
+  httpreq.get(url, { binary: true }, function (err, res) {
     if (err) {
       deferred.reject(err);
       log.error('Error making request.');

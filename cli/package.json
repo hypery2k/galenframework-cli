@@ -32,10 +32,11 @@
   "dependencies": {
     "chromedriver": "2.28.0",
     "fs-extra": "0.26.2",
-    "galenframework": "2.3.3-develop-17",
+    "galenframework": "2.3.3-develop-22",
     "geckodriver": "1.5.0",
     "httpreq": "0.4.13",
     "kew": "0.7.0",
+    "npm-which": "3.0.1",
     "npmconf": "2.1.2",
     "npmlog": "4.0.0",
     "path": "0.12.7",
