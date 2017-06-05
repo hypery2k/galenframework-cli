@@ -20,7 +20,7 @@
   "author": "Martin Reinhardt",
   "scripts": {
     "galen": "bin/galen",
-    "install": "node install.js",
+    "postinstall": "node postinstall.js",
     "test": "nodeunit --reporter=junit test/tests.js --output target",
     "pretest": "jshint -c ../.jshintrc --filename *.js && jshint -c ../.jshintrc --filename lib/helper.js && jshint -c ../.jshintrc --filename test/*.js",
     "prepublish": "npm run test",
