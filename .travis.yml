@@ -12,6 +12,7 @@ node_js:
   - "5"
   - "6"
   - "7"
+  - "8"
   - "stable"
 addons:
   # From some tests it seems you can only have one firefox addon.
@@ -24,6 +25,7 @@ addons:
       - google-chrome-stable
       - google-chrome-beta
 env:
+  - NPM_VERSION=5
   - NPM_VERSION=4
   - NPM_VERSION=3
   - NPM_VERSION=2
