@@ -53,17 +53,20 @@ whichDeferred.promise
   })
   .fail(function (err) {
     npmWhich('galen', function (err, result) {
+
       if (err) {
         log.error('Galen installation failed', err, err.stack);
         exit(1);
       } else {
         return installAdditionalDrivers(result);
       }
-    })
+    });
   });
 
 function installAdditionalDrivers(galenPath) {
-  return kew.defer().promise.then(function () {
+  var defer = kew.defer();
+  defer.resolve();
+  defer.promise.then(function () {
     // Horrible hack to avoid problems during global install. We check to see if
     // the file `which` found is our own bin script.
     if (galenPath.indexOf(path.join('npm', 'galenframework-cli')) !== -1) {
@@ -73,6 +76,7 @@ function installAdditionalDrivers(galenPath) {
 
     var contents = fs.readFileSync(galenPath, 'utf8');
     if (/NPM_INSTALL_MARKER/.test(contents)) {
+
       log.info('Looks like an `npm install -g`; unable to check for already installed version.');
       throw new Error('Global install');
     } else {
@@ -122,8 +126,7 @@ function installAdditionalDrivers(galenPath) {
         exit(0);
       }
     })
-})
-  }
+};
 
 function exit(code) {
   validExit = true;
