@@ -54,5 +54,10 @@
     "type": "git",
     "url": "git+https://github.com/hypery2k/galenframework-cli.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "engine-strict": true,
+  "engines": {
+    "node": ">= 4",
+    "npm": ">= 3"
+  }
 }
