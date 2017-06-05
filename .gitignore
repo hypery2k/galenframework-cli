@@ -8,6 +8,7 @@ lcli/ib/location.js
 core/coverage/*
 core/target/*
 cli/coverage/*
+cli/tmp/*
 cli/target/*
 
 
