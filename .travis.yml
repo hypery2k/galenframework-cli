@@ -38,6 +38,7 @@ script:
   - cd ..
   - cd cli
   - mkdir -p tmp
+  - cd tmp
   - npm init -f
   - npm install ..
   - ../runTestsLocal.sh
