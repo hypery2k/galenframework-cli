@@ -5,14 +5,14 @@ after_success: npm run coverage && cat ./coverage/lcov.info | coveralls
 
 env:
   matrix:
-    - node_js="4" NPM_VERSION="3"
-    - node_js="5" NPM_VERSION="3"
-    - node_js="5" NPM_VERSION="3"
-    - node_js="6" NPM_VERSION="3"
-    - node_js="6" NPM_VERSION="4"
-    - node_js="7" NPM_VERSION="3"
-    - node_js="7" NPM_VERSION="4"
-    - node_js="8" NPM_VERSION="5"
+    - NODE_VERSION="4" NPM_VERSION="3"
+    - NODE_VERSION="5" NPM_VERSION="3"
+    - NODE_VERSION="5" NPM_VERSION="3"
+    - NODE_VERSION="6" NPM_VERSION="3"
+    - NODE_VERSION="6" NPM_VERSION="4"
+    - NODE_VERSION="7" NPM_VERSION="3"
+    - NODE_VERSION="7" NPM_VERSION="4"
+    - NODE_VERSION="8" NPM_VERSION="5"
 
 addons:
   # From some tests it seems you can only have one firefox addon.
@@ -44,6 +44,8 @@ script:
   - ./runTests.sh
 before_install:
   - sudo apt-get update -qq
+  - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+  - source ~/.nvm/nvm.sh && nvm install $NODE_VERSION && nvm use $NODE_VERSION
   # Build Tools
   - npm install -g npm@$NPM_VERSION
   # Show environment info
