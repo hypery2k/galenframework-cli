@@ -58,7 +58,7 @@ var tmpPath = null;
 // that can lead to weird circular dependencies between
 // local versions and global versions.
 var whichDeferred = kew.defer();
-// which('galen', whichDeferred.makeNodeResolver());
+which('galen', whichDeferred.makeNodeResolver());
 whichDeferred.promise
   .then(function (result) {
     galenPath = result;
@@ -91,17 +91,18 @@ whichDeferred.promise
       exit(0);
     } else {
       log.info('galenframework detected, but wrong version', stdout.trim(), '@', galenPath + '.');
-      throw new Error('Wrong version');
+      downloadAndInstallGalen();
     }
   })
-  .fail(function () {
-    // Trying to use a local file failed, so initiate download and install
-    // steps instead.
-    var npmconfDeferred = kew.defer();
-    npmconf.load(npmconfDeferred.makeNodeResolver());
-    return npmconfDeferred.promise;
-  })
-  .then(function (conf) {
+  .fail(downloadAndInstallGalen);
+
+
+function downloadAndInstallGalen() {
+  // Trying to use a local file failed, so initiate download and install
+  // steps instead.
+  var npmconfDeferred = kew.defer();
+  npmconf.load(npmconfDeferred.makeNodeResolver());
+  return npmconfDeferred.promise.then(function (conf) {
     tmpPath = findSuitableTempDirectory(conf);
 
     var fileName = downloadUrl.split('/').pop();
@@ -122,40 +123,41 @@ whichDeferred.promise
       };
     }
   })
-  .then(function (response) {
-    return extractDownload(response.downloadedFile, response.requestOptions, false);
-  })
-  .then(function (extractedPath) {
-    return copyIntoPlace(extractedPath, pkgPath);
-  })
-  .then(function () {
-    var location = libPath;
-    writeLocationFile(location);
+    .then(function (response) {
+      return extractDownload(response.downloadedFile, response.requestOptions, false);
+    })
+    .then(function (extractedPath) {
+      return copyIntoPlace(extractedPath, pkgPath);
+    })
+    .then(function () {
+      var location = libPath;
+      writeLocationFile(location);
 
-    log.info('Done. galen binary available at ', location);
-    // Ensure executable is executable by all users
-    fs.chmodSync(location, '755');
-    fs.chmodSync(location + '/galen/galen', '755');
-    fs.chmodSync(location + '/galen/galen.bat', '755');
-    replace({
+      log.info('Done. galen binary available at ', location);
+      // Ensure executable is executable by all users
+      fs.chmodSync(location, '755');
+      fs.chmodSync(location + '/galen/galen', '755');
+      fs.chmodSync(location + '/galen/galen.bat', '755');
+      replace({
         files: location + '/galen/galen.bat',
         replace: 'com.galenframework.GalenMain %*',
         with: 'com.galenframework.GalenMain %* -Djna.nosys=true'
       },
-      function (error, changedFiles) {
-        //Catch errors
-        if (error) {
-          log.error('Error occurred:', error);
-        }
-        //List changed files
-        log.info('Modified files:', changedFiles.join(', '));
-        exit(0);
-      });
-  })
-  .fail(function (err) {
-    log.error('Galen installation failed', err, err.stack);
-    exit(1);
-  });
+        function (error, changedFiles) {
+          //Catch errors
+          if (error) {
+            log.error('Error occurred:', error);
+          }
+          //List changed files
+          log.info('Modified files:', changedFiles.join(', '));
+          exit(0);
+        });
+    })
+    .fail(function (err) {
+      log.error('Galen installation failed', err, err.stack);
+      exit(1);
+    });
+}
 
 /**
  * Save the destination directory back
@@ -311,7 +313,7 @@ function requestBinary(requestOptions, filePath) {
     }
   })).on('progress', function (state) {
     if (!bar) {
-      bar = new Progress('  [:bar] :percent :etas', {total: state.total, width: 40});
+      bar = new Progress('  [:bar] :percent :etas', { total: state.total, width: 40 });
     }
     bar.curr = state.received;
     bar.tick(0);
@@ -333,7 +335,7 @@ function extractDownload(filePath, requestOptions, retry) {
   // extract to a unique directory in case multiple processes are
   // installing and extracting at once
   var extractedPath = filePath + '-extract-' + Date.now();
-  var options = {cwd: extractedPath};
+  var options = { cwd: extractedPath };
 
   fs.mkdirsSync(extractedPath, '0777');
   // Make double sure we have 0777 permissions; some operating systems
