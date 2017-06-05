@@ -58,7 +58,7 @@ var tmpPath = null;
 // that can lead to weird circular dependencies between
 // local versions and global versions.
 var whichDeferred = kew.defer();
-which('galen', whichDeferred.makeNodeResolver());
+// which('galen', whichDeferred.makeNodeResolver());
 whichDeferred.promise
   .then(function (result) {
     galenPath = result;

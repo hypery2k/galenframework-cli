@@ -44,7 +44,11 @@ script:
   - ./runTests.sh
 before_install:
   - sudo apt-get update -qq
+  # Build Tools
   - npm install -g npm@$NPM_VERSION
+  # Show environment info
+  - node --version
+  - npm --version
 before_script:
   - npm install -g jshint
   - npm install -g istanbul
