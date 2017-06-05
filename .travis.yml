@@ -35,6 +35,11 @@ script:
   - npm run coverage
   - cd ..
   - cd cli
+  - mkdir -p tmp
+  - npm init -f
+  - npm install ..
+  - ../runTestsLocal.sh
+  - cd ..
   - npm install . -g
   - npm run coverage
   - ./runTests.sh
