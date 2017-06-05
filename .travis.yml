@@ -12,7 +12,6 @@ env:
     - NODE_VERSION="6" NPM_VERSION="4"
     - NODE_VERSION="7" NPM_VERSION="3"
     - NODE_VERSION="7" NPM_VERSION="4"
-    - NODE_VERSION="8" NPM_VERSION="5"
 
 addons:
   # From some tests it seems you can only have one firefox addon.
