@@ -85,7 +85,7 @@ whichDeferred.promise
     var regex = /^Version: ([0-9\.]+)$/
     var result = stdout.trim().match(regex);
     var version = result[1];
-    if (helper.version == version) {
+    if (helper.version === version) {
       writeLocationFile(galenPath);
       log.info('galenframework is already installed at', galenPath + '.');
       exit(0);
@@ -226,11 +226,6 @@ function findSuitableTempDirectory(npmConf) {
  */
 function getRequestOptions(conf) {
   var strictSSL = conf.get('strict-ssl');
-  if (process.version == 'v0.10.34') {
-    log.info('Node v0.10.34 detected, turning off strict ssl due to https://github.com/joyent/node/issues/8894');
-    strictSSL = false;
-  }
-
 
   var options = {
     uri: downloadUrl,
@@ -390,7 +385,7 @@ function copyIntoPlace(extractedPath, targetPath) {
     var files = fs.readdirSync(extractedPath);
     for (var i = 0; i < files.length; i++) {
       var file = path.join(extractedPath, files[i]);
-      if (fs.statSync(file).isDirectory() && file.indexOf(helper.version) != -1) {
+      if (fs.statSync(file).isDirectory() && file.indexOf(helper.version) !== -1) {
         log.info('Copying extracted folder', file, '->', targetPath);
         return kew.nfcall(fs.move, file, targetPath);
       }
