@@ -1,5 +1,5 @@
-<a name=""></a>
-# [](https://github.com/hypery2k/galenframework-cli/compare/v2.3.3...v) (2017-06-14)
+<a name="2.3.4"></a>
+## [2.3.4](https://github.com/hypery2k/galenframework-cli/compare/v2.3.3...v2.3.4) (2017-06-14)
 
 
 ### Bug Fixes
