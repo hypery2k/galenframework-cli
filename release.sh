@@ -10,5 +10,6 @@ git pull --rebase && \
   conventional-changelog -p angular -i CHANGELOG.md -s -r 0 -k cli/package.json && \
   git add CHANGELOG.md && git commit -m 'chore(changelog): Updated CHANGELOG.md' && \
   git checkout master && git merge develop && git push && \
-  git tag -a v$PACKAGE_VERSION -m "Version $PACKAGE_VERSION" && git push --tags && \
+  git tag -a "v$PACKAGE_VERSION" -m "Version $PACKAGE_VERSION" && git push --tags && \
+  echo "Created a new tag, v$PACKAGE_VERSION" && \
   git checkout develop
