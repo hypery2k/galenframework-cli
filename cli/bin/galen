@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 
+var util = require('util'),
+  yargs = require('yargs');
+
+var DEBUG_ENV = 'galen';
+
+var debugLog = util.debuglog(DEBUG_ENV);
+
 // basic bash completion
-require('yargs')
+yargs
   .usage('Galen Framework is an open-source tool for testing layout and responsive design of web applications.\n\nUsage: $0 [options]')
   .completion('completion', function (current, argv) {
     var args = argv,
@@ -94,6 +101,10 @@ if (process.platform === 'win32') {
   programPath = path.resolve(baseDir, '../node_modules/galenframework/lib/galen/galen');
 }
 
+
+debugLog('Using following programPath:', programPath);
+debugLog('     ->                args:', args);
+debugLog('     -> childProcessOptions:', childProcessOptions);
 var galenProcess = spawn(programPath, args, childProcessOptions);
 
 galenProcess.on('error', function (error) {
