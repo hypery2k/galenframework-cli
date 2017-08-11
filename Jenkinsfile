@@ -21,6 +21,7 @@ node {
 
   try {
     stage('Checkout') {
+      cleanWs()
       checkout scm
     }
 
