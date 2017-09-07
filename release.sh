@@ -4,7 +4,7 @@ PACKAGE_VERSION=$(cat cli/package.json \
   | grep version \
   | head -1 \
   | awk -F: '{ print $2 }' \
-  | sed 's/[",]//g')
+  | sed 's/[",]//g' | sed 's/[ ,]//g')
 
 git pull --rebase && \
   conventional-changelog -p angular -i CHANGELOG.md -s -r 0 -k cli/package.json && \
