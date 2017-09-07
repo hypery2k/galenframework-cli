@@ -1,6 +1,6 @@
 {
   "name": "galenframework",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "description": "The command line tool to use the Galen Framework. This includes the wrapper above and webdriver downloads for different browsers",
   "homepage": "https://github.com/hypery2k/galenframework-cli",
   "bugs": {
@@ -59,7 +59,5 @@
     "node": ">= 4",
     "npm": ">= 3"
   },
-  "_galenVersion": "2.3.4",
-  "_npmVersion": "2.6.0",
-  "_nodeVersion": "1.4.1"
+  "_galenVersion": "2.3.5"
 }
