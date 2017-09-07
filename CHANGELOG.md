@@ -1,3 +1,19 @@
+<a name="2.3.5"></a>
+## [2.3.5](https://github.com/hypery2k/galenframework-cli/compare/v2.3.4...v2.3.5) (2017-09-07)
+
+
+### Bug Fixes
+
+* **package:** update chromedriver to version 2.31.0 ([6188fd8](https://github.com/hypery2k/galenframework-cli/commit/6188fd8))
+
+
+### Features
+
+* **debugging:** Adding debugging feature ([1856ccb](https://github.com/hypery2k/galenframework-cli/commit/1856ccb))
+* **debugging:** Adding debugging feature ([510f8ec](https://github.com/hypery2k/galenframework-cli/commit/510f8ec))
+
+
+
 <a name="2.3.4"></a>
 ## [2.3.4](https://github.com/hypery2k/galenframework-cli/compare/v2.3.3...v2.3.4) (2017-06-14)
 
