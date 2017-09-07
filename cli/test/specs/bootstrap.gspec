@@ -1,5 +1,5 @@
 @objects
-  bootstrap-logo		span.bs-docs-booticon
+  bootstrap-logo		.bd-masthead .img-fluid
 
 # concrete layout tests
 
