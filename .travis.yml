@@ -5,13 +5,14 @@ after_success: npm run coverage && cat ./coverage/lcov.info | coveralls
 
 env:
   matrix:
-    - NODE_VERSION="4" NPM_VERSION="3"
-    - NODE_VERSION="5" NPM_VERSION="3"
-    - NODE_VERSION="5" NPM_VERSION="3"
-    - NODE_VERSION="6" NPM_VERSION="3"
-    - NODE_VERSION="6" NPM_VERSION="4"
-    - NODE_VERSION="7" NPM_VERSION="3"
-    - NODE_VERSION="7" NPM_VERSION="4"
+    - NODE_VERSION="4" NPM_VERSION="3" DISPLAY=:99
+    - NODE_VERSION="5" NPM_VERSION="3" DISPLAY=:99
+    - NODE_VERSION="5" NPM_VERSION="3" DISPLAY=:99
+    - NODE_VERSION="6" NPM_VERSION="3" DISPLAY=:99
+    - NODE_VERSION="6" NPM_VERSION="4" DISPLAY=:99
+    - NODE_VERSION="7" NPM_VERSION="3" DISPLAY=:99
+    - NODE_VERSION="7" NPM_VERSION="4" DISPLAY=:99
+    - NODE_VERSION="8" NPM_VERSION="5" DISPLAY=:99
 
 addons:
   # From some tests it seems you can only have one firefox addon.
@@ -23,6 +24,9 @@ addons:
     packages:
       - google-chrome-stable
       - google-chrome-beta
+cache:
+  directories:
+    - "node_modules"
 
 script:
   - export COVERALLS_SERVICE_NAME=travis-ci
@@ -42,10 +46,8 @@ script:
   - npm run coverage
   - ./runTests.sh
 before_install:
-  - sudo apt-get update -qq
-  - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
-  - source ~/.nvm/nvm.sh && nvm install $NODE_VERSION && nvm use $NODE_VERSION
-  # Build Tools
+  # Prepare node and npm
+  - nvm install $NODE_VERSION && nvm use $NODE_VERSION
   - npm install -g npm@$NPM_VERSION
   # Show environment info
   - node --version
@@ -55,7 +57,6 @@ before_script:
   - npm install -g istanbul
   - npm install -g istanbul-coveralls
   - npm install -g nodeunit
-  - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 notifications:
   webhooks:
