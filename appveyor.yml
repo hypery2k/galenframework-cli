@@ -1,19 +1,21 @@
 # appveyor file
 # http://www.appveyor.com/docs/appveyor-yml
 environment:
-    matrix:
-        - JAVA_HOME: C:\Program Files\Java\jdk1.7.0
-        - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
-        # NPM
-        - NPM_VERSION: "2"
-        - NPM_VERSION: "3"
-        # node.js
-        - NODE_VERSION: "0.12"
-        - NODE_VERSION: "4.0"
-        - NODE_VERSION: "4.3"
-        - NODE_VERSION: "4"
-        - NODE_VERSION: "5.0"
-        - NODE_VERSION: "5"
+  matrix:
+    - NODE_VERSION: "4"
+      NPM_VERSION: "3"
+    - NODE_VERSION: "5"
+      NPM_VERSION: "3"
+    - NODE_VERSION: "6"
+      NPM_VERSION: "3"
+    - NODE_VERSION: "7"
+      NPM_VERSION: "3"
+    - NODE_VERSION: "7"
+      NPM_VERSION: "4"
+    - NODE_VERSION: "8"
+      NPM_VERSION: "4"
+    - NODE_VERSION: "8"
+      NPM_VERSION: "5"
 
 platform:
   - x86
