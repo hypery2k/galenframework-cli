@@ -35,10 +35,13 @@ build: off
 
 test_script:
   - cd core
+  - npm install .
   - npm test
   - npm install . -g
   - cd ..
   - cd cli
+  - npm install .
   - npm test
   - npm install . -g
   - .\runTests
+
