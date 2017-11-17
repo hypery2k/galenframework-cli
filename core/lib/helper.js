@@ -3,8 +3,8 @@
  * installed.
  */
 
-var fs = require('fs');
-var path = require('path');
+var fs = require('fs'),
+  path = require('path');
 
 
 /**
@@ -13,7 +13,7 @@ var path = require('path');
  */
 try {
   exports.path = path.resolve(__dirname, require('./location').location);
-} catch(e) {
+} catch (e) {
   // Must be running inside install script.
   exports.path = null;
 }
@@ -57,4 +57,27 @@ if (exports.path) {
     // Just ignore error if we don't have permission.
     // We did our best. Likely because phantomjs was already installed.
   }
+}
+
+exports.galenPath = function () {
+  return new Promise(function (resolve, reject) {
+
+    galenPath = path.resolve(__dirname + '/../node_modules/galenframework/bin/galen' + (process.platform === 'win32' ? '.cmd' : ''));
+    fs.stat(galenPath, function (err) {
+      // resolve for NPM3+
+      if (err) {
+        galenPath = path.resolve(__dirname + '/../../galenframework/bin/galen' + (process.platform === 'win32' ? '.cmd' : ''));
+        fs.stat(galenPath, function (err) {
+          // resolve for NPM3+
+          if (err) {
+            reject('Cannot find Galenframework at ' + galenPath);
+          } else {
+            resolve(galenPath);
+          }
+        });
+      } else {
+        resolve(galenPath);
+      }
+    });
+  });
 }

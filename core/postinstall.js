@@ -82,7 +82,7 @@ whichDeferred.promise
     }
   })
   .then(function (stdout) {
-    var regex = /^Version: ([0-9\.]+)$/
+    var regex = /^Version: ([0-9\.]+)$/;
     var result = stdout.trim().match(regex);
     var version = result[1];
     if (helper.version === version) {
@@ -139,10 +139,10 @@ function downloadAndInstallGalen() {
       fs.chmodSync(location + '/galen/galen', '755');
       fs.chmodSync(location + '/galen/galen.bat', '755');
       replace({
-        files: location + '/galen/galen.bat',
-        replace: 'com.galenframework.GalenMain %*',
-        with: 'com.galenframework.GalenMain %* -Djna.nosys=true'
-      },
+          files: location + '/galen/galen.bat',
+          replace: 'com.galenframework.GalenMain %*',
+          with: 'com.galenframework.GalenMain %* -Djna.nosys=true'
+        },
         function (error, changedFiles) {
           //Catch errors
           if (error) {
@@ -308,7 +308,7 @@ function requestBinary(requestOptions, filePath) {
     }
   })).on('progress', function (state) {
     if (!bar) {
-      bar = new Progress('  [:bar] :percent :etas', { total: state.total, width: 40 });
+      bar = new Progress('  [:bar] :percent :etas', {total: state.total, width: 40});
     }
     bar.curr = state.received;
     bar.tick(0);
@@ -330,7 +330,7 @@ function extractDownload(filePath, requestOptions, retry) {
   // extract to a unique directory in case multiple processes are
   // installing and extracting at once
   var extractedPath = filePath + '-extract-' + Date.now();
-  var options = { cwd: extractedPath };
+  var options = {cwd: extractedPath};
 
   fs.mkdirsSync(extractedPath, '0777');
   // Make double sure we have 0777 permissions; some operating systems

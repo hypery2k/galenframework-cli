@@ -28,25 +28,27 @@
   "bin": {
     "galen": "bin/galen"
   },
+  "main": "index",
   "dependencies": {
     "adm-zip": "0.4.7",
-    "fs-extra": "0.23.0",
-    "kew": "0.6.0",
+    "fs-extra": "0.26.2",
+    "kew": "0.7.0",
+    "npm-which": "3.0.1",
     "npmconf": "2.1.2",
     "npmlog": "4.0.0",
     "progress": "1.1.8",
     "replace-in-file": "1.0.2",
     "request": "2.60.0",
     "request-progress": "0.3.1",
-    "which": "1.1.1",
-    "yargs": "3.18.0"
+    "which": "1.2.0",
+    "yargs": "3.30.0"
   },
   "devDependencies": {
     "coveralls": "2.11.3",
     "istanbul": "0.3.17",
     "istanbul-coveralls": "1.0.3",
     "jscoverage": "0.6.0",
-    "jshint": "2.8.0",
+    "jshint": "2.9.5",
     "nodeunit": "0.9.1"
   },
   "repository": {
