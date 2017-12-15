@@ -1,3 +1,20 @@
+<a name="2.3.6"></a>
+## [2.3.6](https://github.com/hypery2k/galenframework-cli/compare/v2.3.5...v2.3.6) (2017-12-15)
+
+
+### Bug Fixes
+
+* **windows:** Resolve windows runtime error ([bca7ed8](https://github.com/hypery2k/galenframework-cli/commit/bca7ed8))
+
+
+### Features
+
+* **auto-update-webdriver:** Enable auto update for chromedriver and geckodriver (#48) ([0ab4b1e](https://github.com/hypery2k/galenframework-cli/commit/0ab4b1e))
+* **docker:** Create Docker image ([694998d](https://github.com/hypery2k/galenframework-cli/commit/694998d))
+* **galen:** Update Galen Version ([20fab19](https://github.com/hypery2k/galenframework-cli/commit/20fab19))
+
+
+
 <a name="2.3.5"></a>
 ## [2.3.5](https://github.com/hypery2k/galenframework-cli/compare/v2.3.4...v2.3.5) (2017-09-07)
 
