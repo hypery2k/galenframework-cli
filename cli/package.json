@@ -21,8 +21,10 @@
   "scripts": {
     "galen": "bin/galen",
     "postinstall": "node postinstall.js",
-    "test": "nodeunit --reporter=junit test/tests.js --output target",
-    "pretest": "jshint -c ../.jshintrc --filename *.js && jshint -c ../.jshintrc --filename lib/*.js && jshint -c ../.jshintrc --filename test/*.js",
+    "test": "npm run check && npm run unit-test",
+    "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
+    "jshint": "jshint -c ../.jshintrc --filename *.js && jshint -c ../.jshintrc --filename lib/*.js && jshint -c ../.jshintrc --filename test/*.js",
+    "check": "npm run jshint && nsp check",
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
   },
   "bin": {
@@ -49,7 +51,8 @@
     "istanbul-coveralls": "1.0.3",
     "jscoverage": "0.6.0",
     "jshint": "2.9.5",
-    "nodeunit": "0.9.1"
+    "nodeunit": "0.9.1",
+    "nsp": "3.1.0"
   },
   "repository": {
     "type": "git",
