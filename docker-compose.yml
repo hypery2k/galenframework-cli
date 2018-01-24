@@ -1,7 +1,7 @@
 version: '2'
 services:
   galenframework:
-    image: galenframework/runtime:$GALEN_VERSION
+    image: galenframework/cli:$GALEN_VERSION
     build:
       context: .
       dockerfile: Dockerfile
