@@ -32,8 +32,7 @@ node {
         sh "cd cli && npm install"
       }, docker: {
         sh "./docker-build-images.sh"
-      },
-        failFast: false
+      }, failFast: false
     }
 
     stage('Test') {
@@ -41,7 +40,7 @@ node {
         sh "cd core && npm run test"
       }, cli: {
         sh "cd cli && npm run test"
-      },
+      }, failFast: false
       junit '*/target/tests.js.xml'
     }
 

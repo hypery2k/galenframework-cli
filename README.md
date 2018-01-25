@@ -10,10 +10,9 @@ The [core](core/) module is just the node wrapper for [Galen](http://galenframew
 
 [![Known Vulnerabilities](https://snyk.io/test/github/hypery2k/galenframework-cli/badge.svg?targetFile=core%2Fpackage.json)](https://snyk.io/test/github/hypery2k/galenframework-cli?targetFile=core%2Fpackage.json)
 
-The [cli](cli/) module is a command line module for [Galen](http://galenframework.com). This includes the core above and webdriver downloads for different browsers.
+The [cli](cli/) module is a command line module for [Galen](http://galenframework.com). This includes the core above and webdriver downloads for different browsers. You can also use the [docker image](https://hub.docker.com/r/galenframework/cli/) for easier setup.
 
-[![Known Vulnerabilities](https://snyk.io/test/github/hypery2k/galenframework-cli/badge.svg?targetFile=cli%2Fpackage.json)](https://snyk.io/test/github/hypery2k/galenframework-cli?targetFile=cli%2Fpackage.json)
-
+[![Known Vulnerabilities](https://snyk.io/test/github/hypery2k/galenframework-cli/badge.svg?targetFile=cli%2Fpackage.json)](https://snyk.io/test/github/hypery2k/galenframework-cli?targetFile=cli%2Fpackage.json) [![Docker Build Status](https://img.shields.io/docker/build/galenframework/cli.svg)]()
 
 [![Join the chat at https://gitter.im/hypery2k/galenframework-cli](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hypery2k/galenframework-cli?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=15642797)](https://www.bountysource.com/trackers/15642797-hypery2k-galenframework-cli?utm_source=15642797&utm_medium=shield&utm_campaign=TRACKER_BADGE) [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=mreinhardt&url=https://github.com/hypery2k/galenframework-cli&title=badges&language=&tags=github&category=software)
 
