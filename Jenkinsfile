@@ -26,13 +26,22 @@ node {
     }
 
     stage('Build') {
-      sh "cd core && npm install"
-      sh "cd cli && npm install"
+      parallel core: {
+        sh "cd core && npm install"
+      }, cli: {
+        sh "cd cli && npm install"
+      }, docker: {
+        sh "./docker-build-images.sh"
+      },
+        failFast: false
     }
 
     stage('Test') {
-      sh "cd core && npm run test"
-      sh "cd cli && npm run test"
+      parallel core: {
+        sh "cd core && npm run test"
+      }, cli: {
+        sh "cd cli && npm run test"
+      },
       junit '*/target/tests.js.xml'
     }
 

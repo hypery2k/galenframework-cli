@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 LABEL authors="Martin Reinhardt <contact@martinreinhardt-online.de>"
 
-ENV NVM_DIR /usr/local/nvm
+ENV NVM_DIR /home/galen
 ENV NODE_VERSION 6.11.4
 ENV GALEN_VERSION 2.3.5
 ENV TEST_HOME /var/jenkins_home
@@ -29,9 +29,13 @@ RUN apt-get -qqy update \
     tzdata \
     sudo \
     unzip \
+    curl \
     wget \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
   && sed -i 's/securerandom\.source=file:\/dev\/random/securerandom\.source=file:\/dev\/urandom/' ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
+
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+RUN export JAVA_HOME
 
 #===================
 # Timezone settings
@@ -50,32 +54,6 @@ RUN useradd galen \
   && usermod -a -G sudo galen \
   && echo 'ALL ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers \
   && echo 'galen:secret' | chpasswd
-
-#========================================
-# Install Java 8
-#========================================
-RUN echo 'deb http://httpredir.debian.org/debian jessie-backports main' >> /etc/apt/sources.list.d/jessie-backports.list
-
-RUN set -x \
-    && apt-get update \
-    && apt-get install -y \
-        locales
-
-ENV LANG C.UTF-8
-RUN locale-gen $LANG
-
-RUN set -x \
-    && apt-get update \
-    && apt-get install -y -t \
-        jessie-backports \
-        ca-certificates-java \
-        openjdk-8-jre-headless \
-        openjdk-8-jre \
-        openjdk-8-jdk-headless \
-        openjdk-8-jdk
-
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
-RUN export JAVA_HOME
 
 #===================================================
 # Install xvfb
@@ -104,20 +82,11 @@ RUN ln -sf /usr/bin/xvfb-chrome /usr/bin/google-chrome
 #===================================================
 # Install firefox
 #===================================================
-RUN set -x \
-    && apt-get update \
-    && apt-get install -y \
-        pkg-mozilla-archive-keyring
-
-RUN echo 'deb http://security.debian.org/ jessie/updates main' >> /etc/apt/sources.list.d/jessie-updates.list
 
 RUN set -x \
     && apt-get update \
     && apt-get install -y \
-        xvfb \
-    && apt-get install -y -t \
-        jessie-backports \
-        firefox-esr
+        firefox
 
 ADD scripts/xvfb-firefox /usr/bin/xvfb-firefox
 RUN ln -sf /usr/bin/xvfb-firefox /usr/bin/firefox
@@ -140,7 +109,7 @@ USER galen
 #===================================================
 # Install nvm with node and npm
 #===================================================
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash \
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash \
     && . $NVM_DIR/nvm.sh \
     && nvm install $NODE_VERSION \
     && nvm alias default $NODE_VERSION \
