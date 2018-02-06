@@ -33,6 +33,7 @@ cache:
 script:
   - export COVERALLS_SERVICE_NAME=travis-ci
   - export COVERALLS_REPO_TOKEN=mqVTe91nICY38tHlFFtmZIjbzpghGZyos
+  - ./docker-build-images.sh
   - cd core
   - npm install .
   - npm run coverage
@@ -47,7 +48,6 @@ script:
   - npm install . -g
   - npm run coverage
   - ./runTests.sh
-  - ./docker-build-images.sh
 before_install:
   # Prepare node and npm
   - nvm install $NODE_VERSION && nvm use $NODE_VERSION
