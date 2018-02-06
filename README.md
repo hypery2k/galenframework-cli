@@ -33,5 +33,5 @@ The [cli](cli/) module is a command line module for [Galen](http://galenframewor
 
 
 ```
-docker run -v $(pwd)/galenframework-cli/core/test/:/var/test_scripts galenframework/cli:develop galen test /var/test_scripts/...
+docker run -v $(pwd)/galenframework-cli/core/test/:/var/test_scripts galenframework/cli galen test /var/test_scripts/...
 ```
