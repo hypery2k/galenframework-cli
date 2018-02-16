@@ -44,9 +44,9 @@
     "npmconf": "2.1.2",
     "npmlog": "4.0.0",
     "path": "0.12.7",
+    "snyk": "^1.69.7",
     "which": "1.2.0",
-    "yargs": "3.30.0",
-    "snyk": "^1.69.7"
+    "yargs": "3.30.0"
   },
   "devDependencies": {
     "coveralls": "2.11.3",
