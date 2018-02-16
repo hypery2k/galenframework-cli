@@ -16,6 +16,9 @@ env:
     - NODE_VERSION="9" NPM_VERSION="5" DISPLAY=:99
 
 
+services:
+  - docker
+
 addons:
   # From some tests it seems you can only have one firefox addon.
   # Adding two results in the last one defined being the one installed.
@@ -47,6 +50,7 @@ script:
   - npm install . -g
   - npm run coverage
   - ./runTests.sh
+  - ./docker-build-images.sh
 before_install:
   # Prepare node and npm
   - nvm install $NODE_VERSION && nvm use $NODE_VERSION
