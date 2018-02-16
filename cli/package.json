@@ -25,7 +25,9 @@
     "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
     "jshint": "jshint -c ../.jshintrc --filename *.js && jshint -c ../.jshintrc --filename lib/*.js && jshint -c ../.jshintrc --filename test/*.js",
     "check": "npm run jshint && nsp check",
-    "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm"
+    "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "bin": {
     "galen": "bin/galen"
@@ -43,7 +45,8 @@
     "npmlog": "4.0.0",
     "path": "0.12.7",
     "which": "1.2.0",
-    "yargs": "3.30.0"
+    "yargs": "3.30.0",
+    "snyk": "^1.69.7"
   },
   "devDependencies": {
     "coveralls": "2.11.3",
@@ -63,5 +66,6 @@
   "engines": {
     "node": ">= 4",
     "npm": ">= 3"
-  }
+  },
+  "snyk": true
 }
