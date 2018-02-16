@@ -27,7 +27,7 @@
     "check": "npm run jshint && nsp check",
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm i && npm run snyk-protect"
   },
   "bin": {
     "galen": "bin/galen"
@@ -44,7 +44,6 @@
     "npmconf": "2.1.2",
     "npmlog": "4.0.0",
     "path": "0.12.7",
-    "snyk": "^1.69.7",
     "which": "1.2.0",
     "yargs": "3.30.0"
   },
@@ -55,7 +54,8 @@
     "jscoverage": "0.6.0",
     "jshint": "2.9.5",
     "nodeunit": "0.9.1",
-    "nsp": "3.1.0"
+    "nsp": "3.1.0",
+    "snyk": "^1.69.7"
   },
   "repository": {
     "type": "git",
