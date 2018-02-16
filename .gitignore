@@ -14,5 +14,5 @@ cli/target/*
 
 # IDE
 .idea/*
-
+*.iml
 *.swp

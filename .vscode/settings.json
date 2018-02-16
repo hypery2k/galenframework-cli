@@ -1,0 +1,23 @@
+{
+  "eslint.enable": false,
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "editor.tabSize": 2,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    // exclude .js and .js.map files, when in a TypeScript project
+    "**/*.js": {
+      "when": "$(basename).ts"
+    },
+    "**/*.js.map": true,
+    "**/*.ngfactory.ts": true,
+    "**/*.ngsummary.json": true
+  },
+  "vsicons.presets.angular": true,
+  "json.format.enable": false,
+  "javascript.format.enable": true,
+  "typescript.format.enable": true
+}
