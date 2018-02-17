@@ -37,10 +37,12 @@ script:
   - export COVERALLS_SERVICE_NAME=travis-ci
   - export COVERALLS_REPO_TOKEN=mqVTe91nICY38tHlFFtmZIjbzpghGZyos
   - cd core
+  - npm i
   - npm install .
   - npm run coverage
   - cd ..
   - cd cli
+  - npm i
   - npm install . -g
   - npm run coverage
   - ./runTests.sh
