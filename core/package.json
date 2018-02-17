@@ -29,7 +29,7 @@
     "pretest": "jshint -c ../.jshintrc --filename *.js && jshint -c ../.jshintrc --filename lib/helper.js && jshint -c ../.jshintrc --filename test/*.js",
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm i && npm run snyk-protect"
+    "prepublish": "npm run snyk-protect"
   },
   "bin": {
     "galen": "bin/galen"

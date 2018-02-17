@@ -27,7 +27,7 @@
     "check": "npm run jshint && nsp check",
     "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm i && npm run snyk-protect"
+    "prepublish": "npm run snyk-protect"
   },
   "bin": {
     "galen": "bin/galen"
