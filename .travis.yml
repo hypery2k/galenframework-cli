@@ -19,6 +19,9 @@ env:
 services:
   - docker
 
+services:
+  - docker
+
 addons:
   # From some tests it seems you can only have one firefox addon.
   # Adding two results in the last one defined being the one installed.
@@ -36,6 +39,7 @@ cache:
 script:
   - export COVERALLS_SERVICE_NAME=travis-ci
   - export COVERALLS_REPO_TOKEN=mqVTe91nICY38tHlFFtmZIjbzpghGZyos
+  - ./docker-build-images.sh
   - cd core
   - npm i
   - npm install .

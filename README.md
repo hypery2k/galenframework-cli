@@ -26,12 +26,11 @@ The [cli](cli/) module is a command line module for [Galen](http://galenframewor
 >
 > Also via [greenaddress](https://greenaddress.it/pay/GA3ZPfh7As3Gc2oP6pQ1njxMij88u/)
 
-
 ##<a name="docker"> Docker
 
 ### Usage
 
 
 ```
-docker run -v $(pwd)/galenframework-cli/core/test/:/var/test_scripts galenframework/cli:develop galen test /var/test_scripts/...
+docker run -v $(pwd)/galenframework-cli/core/test/:/var/test_scripts galenframework/cli galen test /var/test_scripts/...
 ```
