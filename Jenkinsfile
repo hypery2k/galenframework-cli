@@ -5,7 +5,7 @@ properties properties: [
 
 @Library('mare-build-library')
 def nodeJS = new de.mare.ci.jenkins.NodeJS()
-def git = new de.holisticon.ci.jenkins.Git()
+def git = new de.mare.ci.jenkins.Git()
 
 timeout(60) {
   node('nodejs') {
