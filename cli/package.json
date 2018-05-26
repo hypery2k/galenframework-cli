@@ -37,7 +37,7 @@
         "check": "^1.0.0",
         "chromedriver": "^2.38.3",
         "fs-extra": "0.26.2",
-        "galenframework": "*",
+        "galenframework": "^2.3.6-develop-83",
         "geckodriver": "^1.11.0",
         "httpreq": "0.4.13",
         "kew": "0.7.0",
