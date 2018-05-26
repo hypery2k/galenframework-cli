@@ -38,12 +38,15 @@ timeout(60) {
       }
 
       stage('Test') {
-        parallel core: {
-          sh "cd core && npm run test"
-        }, cli: {
-          sh "cd cli && npm run test"
-        }, failFast: false
-        junit '*/target/tests.js.xml'
+        try {
+          parallel core: {
+            sh "cd core && npm run test"
+          }, cli: {
+            sh "cd cli && npm run test"
+          }, failFast: false
+        } finally {
+          junit '*/target/tests.js.xml'
+        }
       }
 
       if(git.isDevelopBranch() || git.isFeatureBranch()){

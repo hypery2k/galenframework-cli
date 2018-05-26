@@ -10,7 +10,7 @@ core/target/*
 cli/coverage/*
 cli/tmp/*
 cli/target/*
-
+lib/location.js
 
 # IDE
 .idea/*
