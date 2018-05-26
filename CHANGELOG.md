@@ -1,3 +1,24 @@
+<a name="2.3.7"></a>
+## [2.3.7](https://github.com/hypery2k/galenframework-cli/compare/v2.3.6...v2.3.7) (2018-05-26)
+
+
+### Bug Fixes
+
+* cli/package.json & cli/.snyk to reduce vulnerabilities ([d0328b6](https://github.com/hypery2k/galenframework-cli/commit/d0328b6))
+* **docker:** Basic docker integration ([d332566](https://github.com/hypery2k/galenframework-cli/commit/d332566))
+* **nodejs:** Resolve nodejs errors ([a564c7f](https://github.com/hypery2k/galenframework-cli/commit/a564c7f))
+
+
+### Features
+
+* **docker:** Adding Chrome and Firefox to Docker image ([d50f07c](https://github.com/hypery2k/galenframework-cli/commit/d50f07c))
+* **docker:** Basic CI for Docker ([c845838](https://github.com/hypery2k/galenframework-cli/commit/c845838))
+* **docker:** Fix Docker build issues ([bf4a4d3](https://github.com/hypery2k/galenframework-cli/commit/bf4a4d3))
+* **Galen:** Use newer Galen Version 2.3.7 ([2a3c53d](https://github.com/hypery2k/galenframework-cli/commit/2a3c53d))
+* **security:** Enable security checks ([4e1a449](https://github.com/hypery2k/galenframework-cli/commit/4e1a449))
+
+
+
 <a name="2.3.6"></a>
 ## [2.3.6](https://github.com/hypery2k/galenframework-cli/compare/v2.3.5...v2.3.6) (2017-12-15)
 
