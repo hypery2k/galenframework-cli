@@ -1,6 +1,6 @@
 {
     "name": "galenframework-cli",
-    "version": "2.3.6",
+    "version": "2.3.7",
     "description": "Just the node wrapper for the Galen Framework.",
     "homepage": "https://github.com/hypery2k/galenframework-cli",
     "bugs": {
@@ -37,7 +37,7 @@
         "check": "^1.0.0",
         "chromedriver": "^2.38.3",
         "fs-extra": "0.26.2",
-        "galenframework": "^2.3.6-develop-83",
+        "galenframework": "2.3.7",
         "geckodriver": "^1.11.0",
         "httpreq": "0.4.13",
         "kew": "0.7.0",
