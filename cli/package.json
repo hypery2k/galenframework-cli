@@ -55,13 +55,16 @@
     },
     "devDependencies": {
         "coveralls": "2.11.3",
+        "ejs": "2.6.1",
+        "handlebars": "4.0.11",
         "istanbul": "0.3.17",
         "istanbul-coveralls": "1.0.3",
         "jscoverage": "0.6.0",
         "jshint": "2.9.5",
         "nodeunit": "0.9.1",
         "nsp": "3.1.0",
-        "snyk": "^1.69.7"
+        "snyk": "^1.69.7",
+        "uglify-js": "3.3.27"
     },
     "repository": {
         "type": "git",
