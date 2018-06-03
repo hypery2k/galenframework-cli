@@ -26,7 +26,7 @@ The [cli](cli/) module is a command line module for [Galen](http://galenframewor
 >
 > Also via [greenaddress](https://greenaddress.it/pay/GA3ZPfh7As3Gc2oP6pQ1njxMij88u/)
 
-##<a name="docker"> Docker
+## <a name="docker">Docker
 
 ### Usage
 
