@@ -74,7 +74,7 @@
     "license": "MIT",
     "engine-strict": true,
     "engines": {
-        "node": ">= 4.5.0",
+        "node": ">= 6",
         "npm": ">= 3"
     },
     "_galenVersion": "2.3.7"
