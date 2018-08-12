@@ -34,7 +34,7 @@ timeout(60) {
         }
 
         stage('Test') {
-          sh "cd cli && npm run test"
+          sh "cd core && npm run test"
         }
 
         if(git.isDevelopBranch() || git.isFeatureBranch()){
