@@ -36,7 +36,7 @@
   },
   "main": "index",
   "dependencies": {
-    "adm-zip": "0.4.9",
+    "adm-zip": "0.4.11",
     "fs-extra": "0.26.2",
     "kew": "0.7.0",
     "npm-which": "3.0.1",
