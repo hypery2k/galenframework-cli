@@ -1,8 +1,7 @@
 // Copyright 2016 Martin Reinhardt
 
-/*
- * This simply downloads Galen
- */
+// This simply downloads Galen
+
 'use strict';
 
 var cp = require('child_process');
@@ -47,20 +46,15 @@ var tmpPath = null;
 var whichDeferred = kew.defer();
 which('galen', whichDeferred.makeNodeResolver());
 whichDeferred.promise
-    .then(function(result) {
-        return installAdditionalDrivers(result);
-    })
-    .fail(function(err) {
-        npmWhich('galen', function(err, result) {
-
-            if (err) {
-                log.error('Galen installation failed', err, err.stack);
-                exit(1);
-            } else {
-                return installAdditionalDrivers(result);
-            }
-        });
-    });
+    .then((result) => installAdditionalDrivers(result))
+    .fail(() => npmWhich('galen', (err, result) => {
+        if (err) {
+            log.error('Galen installation failed', err, err.stack);
+            exit(1);
+        } else {
+            return installAdditionalDrivers(result);
+        }
+    }));
 
 function installAdditionalDrivers(galenPath) {
     var defer = kew.defer();
@@ -74,21 +68,23 @@ function installAdditionalDrivers(galenPath) {
             }
 
             var contents = fs.readFileSync(galenPath, 'utf8');
-            if (/NPM_INSTALL_MARKER/.test(contents)) {
+            if ((/NPM_INSTALL_MARKER/).test(contents)) {
 
                 log.info('Looks like an `npm install -g`; unable to check for already installed version.');
                 throw new Error('Global install');
             } else {
                 var checkVersionDeferred = kew.defer();
                 cp.execFile(galenPath, ['--version'], checkVersionDeferred.makeNodeResolver());
-                return checkVersionDeferred.promise;
+
+return checkVersionDeferred.promise;
             }
         })
         .then(function() {
             log.info('galenframework-cli detected');
             var npmconfDeferred = kew.defer();
             npmconf.load(npmconfDeferred.makeNodeResolver());
-            return npmconfDeferred.promise;
+
+return npmconfDeferred.promise;
         })
         .then(function(conf) {
             tmpPath = findSuitableTempDirectory(conf);
@@ -104,20 +100,23 @@ function installAdditionalDrivers(galenPath) {
                     var downloadedFile = path.join(tmpPath, fileName);
                     if (!fs.existsSync(downloadedFile)) {
                         log.info('Downloading', downloadUrl);
-                        return requestBinary(downloadUrl, downloadedFile);
-                    } else {
-                        log.info('Download already available at', downloadedFile);
-                        return downloadedFile;
+
+return requestBinary(downloadUrl, downloadedFile);
                     }
+                        log.info('Download already available at', downloadedFile);
+
+return downloadedFile;
+
                 }).then(function(downloadedFile) {
                     // request to open safari extension installation
                     var spawn = require('child_process').spawn;
                     log.info('Opening file ', downloadedFile);
                     spawn('open', [downloadedFile], {
-                        detached: true
+                        'detached': true
                     });
                     exit(0);
-                }).fail(function(err) {
+                })
+.fail(function(err) {
                     log.error('Safari Driver installation failed', err, err.stack);
                     exit(1);
                 });
@@ -125,7 +124,7 @@ function installAdditionalDrivers(galenPath) {
                 exit(0);
             }
         })
-};
+}
 
 function exit(code) {
     validExit = true;
@@ -153,7 +152,8 @@ function findSuitableTempDirectory(npmConf) {
             var testFile = path.join(candidatePath, now + '.tmp');
             fs.writeFileSync(testFile, 'test');
             fs.unlinkSync(testFile);
-            return candidatePath;
+
+return candidatePath;
         } catch (e) {
             log.info(candidatePath, 'is not writable:', e.message);
         }
@@ -168,7 +168,7 @@ function requestBinary(url, dest) {
     var deferred = kew.defer();
     log.info('Receiving...');
 
-    httpreq.get(url, { binary: true }, function(err, res) {
+    httpreq.get(url, {'binary': true}, function(err, res) {
         if (err) {
             deferred.reject(err);
             log.error('Error making request.');
@@ -184,7 +184,8 @@ function requestBinary(url, dest) {
             });
         }
     });
-    return deferred.promise;
+
+return deferred.promise;
 }
 
 

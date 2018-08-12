@@ -1,79 +1,79 @@
 {
-  "name": "galenframework",
-  "version": "2.3.7",
-  "description": "The command line tool to use the Galen Framework. This includes the wrapper above and webdriver downloads for different browsers",
-  "homepage": "https://github.com/hypery2k/galenframework-cli",
-  "bugs": {
-    "url": "https://github.com/hypery2k/galenframework-cli/issues"
-  },
-  "keywords": [
-    "galen",
-    "galenframework",
-    "responsive",
-    "test",
-    "testing",
-    "webdriver",
-    "selenium",
-    "TDD",
-    "BDD"
-  ],
-  "author": "Martin Reinhardt",
-  "scripts": {
-    "galen": "bin/galen",
-    "build": "npm run tsc",
-    "tsc": "tsc",
-    "postinstall": "node postinstall.js",
-    "test": "npm run check && npm run unit-test",
-    "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
-    "check": "nsp check",
-    "pretest": "jshint -c ../.jshintrc --filename *.js && jshint -c ../.jshintrc --filename lib/helper.js && jshint -c ../.jshintrc --filename test/*.js",
-    "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
-  },
-  "bin": {
-    "galen": "bin/galen"
-  },
-  "main": "index",
-  "dependencies": {
-    "adm-zip": "0.4.11",
-    "fs-extra": "0.26.2",
-    "kew": "0.7.0",
-    "npm-which": "3.0.1",
-    "npmconf": "2.1.3",
-    "npmlog": "4.0.0",
-    "progress": "1.1.8",
-    "replace-in-file": "1.0.2",
-    "request": "2.84.0",
-    "request-progress": "0.3.1",
-    "which": "1.2.0",
-    "yargs": "3.30.0"
-  },
-  "devDependencies": {
-    "coveralls": "3.0.2",
-    "ejs": "2.6.1",
-    "handlebars": "4.0.11",
-    "istanbul": "0.4.5",
-    "istanbul-coveralls": "1.0.3",
-    "jshint": "2.9.5",
-    "marked": "0.4.0",
-    "nodeunit": "0.11.3",
-    "nsp": "3.1.0",
-    "snyk": "^1.69.7",
-    "tslint": "5.11.0",
-    "tslint-eslint-rules": "5.3.1",
-    "typedoc": "0.11.1",
-    "typescript": "2.9.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hypery2k/galenframework-cli.git"
-  },
-  "license": "MIT",
-  "engine-strict": true,
-  "engines": {
-    "node": ">= 8",
-    "npm": ">= 5"
-  },
-  "_galenVersion": "2.3.7"
+    "name": "galenframework",
+    "version": "2.3.7",
+    "description": "The command line tool to use the Galen Framework. This includes the wrapper above and webdriver downloads for different browsers",
+    "homepage": "https://github.com/hypery2k/galenframework-cli",
+    "bugs": {
+        "url": "https://github.com/hypery2k/galenframework-cli/issues"
+    },
+    "keywords": [
+        "galen",
+        "galenframework",
+        "responsive",
+        "test",
+        "testing",
+        "webdriver",
+        "selenium",
+        "TDD",
+        "BDD"
+    ],
+    "author": "Martin Reinhardt",
+    "scripts": {
+        "galen": "bin/galen",
+        "build": "npm run tsc",
+        "tsc": "tsc",
+        "postinstall": "node postinstall.js",
+        "test": "npm run check && npm run unit-test",
+        "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
+        "check": "nsp check",
+        "pretest": "eslint lib/*.js",
+        "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm",
+        "snyk-protect": "snyk protect",
+        "prepublish": "npm run snyk-protect"
+    },
+    "bin": {
+        "galen": "bin/galen"
+    },
+    "main": "index",
+    "dependencies": {
+        "adm-zip": "0.4.11",
+        "fs-extra": "0.26.2",
+        "kew": "0.7.0",
+        "npm-which": "3.0.1",
+        "npmconf": "2.1.3",
+        "npmlog": "4.0.0",
+        "progress": "1.1.8",
+        "replace-in-file": "1.0.2",
+        "request": "2.84.0",
+        "request-progress": "0.3.1",
+        "which": "1.2.0",
+        "yargs": "3.30.0"
+    },
+    "devDependencies": {
+        "coveralls": "3.0.2",
+        "ejs": "2.6.1",
+        "eslint": "^5.3.0",
+        "handlebars": "4.0.11",
+        "istanbul": "0.4.5",
+        "istanbul-coveralls": "1.0.3",
+        "marked": "0.4.0",
+        "nodeunit": "0.11.3",
+        "nsp": "3.1.0",
+        "snyk": "^1.69.7",
+        "tslint": "5.11.0",
+        "tslint-eslint-rules": "5.3.1",
+        "typedoc": "0.11.1",
+        "typescript": "2.9.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hypery2k/galenframework-cli.git"
+    },
+    "license": "MIT",
+    "engine-strict": true,
+    "engines": {
+        "node": ">= 8",
+        "npm": ">= 5"
+    },
+    "_galenVersion": "2.3.7"
 }

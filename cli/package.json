@@ -23,8 +23,8 @@
         "postinstall": "node postinstall.js",
         "test": "npm run check && npm run unit-test",
         "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
-        "jshint": "jshint -c ../.jshintrc --filename *.js && jshint -c ../.jshintrc --filename lib/*.js && jshint -c ../.jshintrc --filename test/*.js",
-        "check": "npm run jshint && nsp check",
+        "lint": "echo 0",
+        "check": "npm run lint && nsp check",
         "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm",
         "snyk-protect": "snyk protect",
         "prepublish": "npm run snyk-protect"
@@ -56,10 +56,10 @@
     "devDependencies": {
         "coveralls": "3.0.2",
         "ejs": "2.6.1",
+        "eslint": "^5.3.0",
         "handlebars": "4.0.11",
         "istanbul": "0.4.5",
         "istanbul-coveralls": "1.0.3",
-        "jshint": "2.9.5",
         "nodeunit": "0.11.3",
         "nsp": "3.1.0",
         "snyk": "^1.69.7"
