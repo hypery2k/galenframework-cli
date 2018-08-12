@@ -1,5 +1,6 @@
 var helper = require('./lib/helper');
 
 module.exports = {
-  galenPath: helper.galenPath
+    galenPath: helper.galenPath,
+    helper: helper
 };

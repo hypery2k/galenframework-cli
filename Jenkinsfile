@@ -27,34 +27,46 @@ timeout(60) {
         checkout scm
       }
 
-      stage('Build') {
-        parallel core: {
+      parallel core: {
+
+        stage('Build') {
           sh "cd core && npm install"
-        }, cli: {
+        }
+
+        stage('Test') {
+          sh "cd cli && npm run test"
+        }
+
+        if(git.isDevelopBranch() || git.isFeatureBranch()){
+          stage('Publish NPM snapshot') {
+            nodeJS.publishSnapshot('core', buildNumber, branchName)
+          }
+        }
+
+      }, cli: {
+
+        stage('Build') {
           sh "cd cli && npm install"
-        }, docker: {
+        }
+
+        stage('Test') {
+          sh "cd cli && npm run test"
+        }
+
+        if(git.isDevelopBranch() || git.isFeatureBranch()){
+          stage('Publish NPM snapshot') {
+            nodeJS.publishSnapshot('cli', buildNumber, branchName)
+          }
+        }
+
+      }, docker: {
+
+        stage('Build') {
           sh "./docker-build-images.sh"
-        }, failFast: false
-      }
-
-      stage('Test') {
-        try {
-          parallel core: {
-            sh "cd core && npm run test"
-          }, cli: {
-            sh "cd cli && npm run test"
-          }, failFast: false
-        } finally {
-          junit '*/target/tests.js.xml'
         }
-      }
 
-      if(git.isDevelopBranch() || git.isFeatureBranch()){
-        stage('Publish NPM snapshot') {
-          nodeJS.publishSnapshot('core', buildNumber, branchName)
-          nodeJS.publishSnapshot('cli', buildNumber, branchName)
-        }
-      }
+      }, failFast: false
+
 
     } catch (e) {
       mail subject: "${env.JOB_NAME} (${env.BUILD_NUMBER}): Error on build", to: 'github@martinreinhardt-online.de', body: "Please go to ${env.BUILD_URL}."
