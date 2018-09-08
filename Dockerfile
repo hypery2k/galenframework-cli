@@ -11,9 +11,9 @@ ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
 #================================================
 # Customize sources for apt-get
 #================================================
-RUN  echo "deb http://archive.ubuntu.com/ubuntu xenial main universe\n" > /etc/apt/sources.list \
-  && echo "deb http://archive.ubuntu.com/ubuntu xenial-updates main universe\n" >> /etc/apt/sources.list \
-  && echo "deb http://security.ubuntu.com/ubuntu xenial-security main universe\n" >> /etc/apt/sources.list
+RUN echo "deb http://archive.ubuntu.com/ubuntu xenial main universe\n" > /etc/apt/sources.list && \
+  echo "deb http://archive.ubuntu.com/ubuntu xenial-updates main universe\n" >> /etc/apt/sources.list && \
+  echo "deb http://security.ubuntu.com/ubuntu xenial-security main universe\n" >> /etc/apt/sources.list
 
 # No interactive frontend during docker build
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -37,7 +37,6 @@ RUN apt-get -qqy update \
   && sed -i 's/securerandom\.source=file:\/dev\/random/securerandom\.source=file:\/dev\/urandom/' ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
-RUN export JAVA_HOME
 
 #===================
 # Timezone settings
@@ -60,23 +59,15 @@ RUN useradd galen \
 #===================================================
 # Install xvfb
 #===================================================
-RUN set -x \
-    && apt-get update \
-    && apt-get install -y \
-        xvfb
+RUN set -x && apt-get update && apt-get install -y xvfb
 
 #===================================================
 # Install Chrome
 #===================================================
 
-RUN echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/chrome.list
-
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-
-RUN set -x \
-    && apt-get update \
-    && apt-get install -y \
-        google-chrome-stable
+RUN echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/chrome.list && \
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+  set -x && apt-get update && apt-get install -y google-chrome-stable
 
 ADD scripts/xvfb-chrome /usr/bin/xvfb-chrome
 RUN ln -sf /usr/bin/xvfb-chrome /usr/bin/google-chrome
@@ -85,10 +76,7 @@ RUN ln -sf /usr/bin/xvfb-chrome /usr/bin/google-chrome
 # Install firefox
 #===================================================
 
-RUN set -x \
-    && apt-get update \
-    && apt-get install -y \
-        firefox
+RUN set -x && apt-get update && apt-get install -y firefox
 
 ADD scripts/xvfb-firefox /usr/bin/xvfb-firefox
 RUN ln -sf /usr/bin/xvfb-firefox /usr/bin/firefox
@@ -97,11 +85,10 @@ RUN ln -sf /usr/bin/xvfb-firefox /usr/bin/firefox
 # This is needed for PhantomJS
 #===================================================
 
-RUN set -x && \
-    apt-get update && \
-    apt-get install -y \
-        bzip2 \
-        zip
+RUN set -x && apt-get update && apt-get install -y bzip2 zip
+
+# clean up
+RUN apt-get autoremove -y && rm -rf /var/lib/apt/lists/
 
 #===================================================
 # Run the following commands as non-privileged user
@@ -114,7 +101,6 @@ USER galen
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash && \
     . $NVM_DIR/nvm.sh && \
     nvm install $NODE_VERSION && nvm alias default $NODE_VERSION && nvm use default && \
-    npm install -g galenframework-cli@$GALEN_VERSION && \
-    export PATH=$PATH
+    npm install -g galenframework-cli@$GALEN_VERSION
 
 VOLUME /var/test_scripts
