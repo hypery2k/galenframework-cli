@@ -23,9 +23,9 @@
         "postinstall": "node postinstall.js",
         "test": "npm run check && npm run unit-test",
         "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
-        "lint": "echo 0",
+        "lint": "eslint --fix *.js",
         "check": "npm run lint && nsp check",
-        "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm",
+	"coverage": "echo 0",
         "snyk-protect": "snyk protect",
         "prepublish": "npm run snyk-protect"
     },
