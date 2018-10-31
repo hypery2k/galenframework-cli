@@ -29,33 +29,41 @@ timeout(60) {
 
       parallel core: {
 
-        stage('Build') {
-          sh "cd core && npm install"
-        }
+        dir('core') {
 
-        stage('Test') {
-          sh "cd core && npm run test"
-        }
-
-        if(git.isDevelopBranch() || git.isFeatureBranch()){
-          stage('Publish NPM snapshot') {
-            nodeJS.publishSnapshot('core', buildNumber, branchName)
+          stage('Build') {
+            nodeJS.nvm('install')
           }
+
+          stage('Test') {
+            nodeJS.nvmRun('test')
+          }
+
+          if(git.isDevelopBranch() || git.isFeatureBranch()){
+            stage('Publish NPM snapshot') {
+              nodeJS.publishSnapshot('.', buildNumber, branchName)
+            }
+          }
+
         }
+
 
       }, cli: {
 
-        stage('Build') {
-          sh "cd cli && npm install"
-        }
+        dir('cli') {
 
-        stage('Test') {
-          sh "cd cli && npm run test"
-        }
+          stage('Build') {
+            nodeJS.nvm('install')
+          }
 
-        if(git.isDevelopBranch() || git.isFeatureBranch()){
-          stage('Publish NPM snapshot') {
-            nodeJS.publishSnapshot('cli', buildNumber, branchName)
+          stage('Test') {
+            nodeJS.nvmRun('test')
+          }
+
+          if(git.isDevelopBranch() || git.isFeatureBranch()){
+            stage('Publish NPM snapshot') {
+              nodeJS.publishSnapshot('.', buildNumber, branchName)
+            }
           }
         }
 
