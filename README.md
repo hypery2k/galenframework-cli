@@ -37,3 +37,11 @@ The [cli](cli/) module is a command line module (NodeJS 8+) for [Galen](http://g
 ```
 docker run -v $(pwd)/galenframework-cli/core/test/:/var/test_scripts galenframework/cli galen test /var/test_scripts/...
 ```
+
+### Troubleshooting
+
+npm install throws "cannot access parent directories: Permission denied": 
+```
+npm config set user 0
+npm config set unsafe-perm true
+```
