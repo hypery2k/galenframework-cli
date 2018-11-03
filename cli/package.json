@@ -23,9 +23,9 @@
         "postinstall": "node postinstall.js",
         "test": "npm run check && npm run unit-test",
         "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
-        "lint": "echo 0",
-        "check": "npm run lint && nsp check",
-        "coverage": "echo 0",
+        "lint": "eslint --fix *.js",
+        "check": "npm run lint && npm audit",
+        "coverage": "istanbul cover nodeunit test/tests.js && istanbul-coveralls --no-rm",
         "snyk-protect": "snyk protect",
         "prepublish": "npm run snyk-protect"
     },
@@ -61,7 +61,6 @@
         "istanbul": "0.4.5",
         "istanbul-coveralls": "1.0.3",
         "nodeunit": "0.11.3",
-        "nsp": "3.1.0",
         "snyk": "^1.69.7"
     },
     "repository": {
