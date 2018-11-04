@@ -38,12 +38,12 @@ script:
   - cd core
   - npm i
   - npm install .
-  - npm run coverage
+  - npm run test
   - cd ..
   - cd cli
   - npm i
   - npm install . -g
-  - npm run coverage
+  - npm run test
   - ./runTests.sh
   - cd ..
   - ./docker-build-images.sh
