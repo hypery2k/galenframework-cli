@@ -24,7 +24,7 @@
         "test": "npm run check && npm run unit-test",
         "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
         "lint": "eslint --fix *.js",
-        "check": "npm run lint && npm audit",
+        "check": "npm audit",
         "coverage": "istanbul cover nodeunit test/tests.js && istanbul-coveralls --no-rm",
         "snyk-protect": "snyk protect",
         "prepublish": "npm run snyk-protect"
