@@ -1,3 +1,45 @@
+<a name="2.4.0"></a>
+# [2.4.0](https://github.com/hypery2k/galenframework-cli/compare/v2.3.7...v2.4.0) (2018-11-04)
+
+
+### Bug Fixes
+
+* **build:** Disable failing checks for now ([55f1f59](https://github.com/hypery2k/galenframework-cli/commit/55f1f59))
+* **Build:** Disable coverage ([d7a776b](https://github.com/hypery2k/galenframework-cli/commit/d7a776b))
+* **Build:** Disable coverage for now ([c62b83e](https://github.com/hypery2k/galenframework-cli/commit/c62b83e))
+* **Docker:** Corrected docker path run error ([420a5a8](https://github.com/hypery2k/galenframework-cli/commit/420a5a8))
+* **security:** Overwrite version to overcome vulnerabilities ([e01cced](https://github.com/hypery2k/galenframework-cli/commit/e01cced))
+* cli/package.json to reduce vulnerabilities ([5b496ce](https://github.com/hypery2k/galenframework-cli/commit/5b496ce))
+* core/package.json to reduce vulnerabilities ([7f20753](https://github.com/hypery2k/galenframework-cli/commit/7f20753))
+* core/package.json to reduce vulnerabilities ([04308b1](https://github.com/hypery2k/galenframework-cli/commit/04308b1))
+* **Security:** Corrected dependencies for adm-zip ([e8cd733](https://github.com/hypery2k/galenframework-cli/commit/e8cd733))
+* **Security:** Use new lodash to solve dependency issues ([5df0d34](https://github.com/hypery2k/galenframework-cli/commit/5df0d34))
+* **Tests:** Corrected test run ([06f28ea](https://github.com/hypery2k/galenframework-cli/commit/06f28ea))
+
+
+### Features
+
+* **Docker:** Use NodeJS in Docker ([ea647c4](https://github.com/hypery2k/galenframework-cli/commit/ea647c4))
+* **Galen:** Use Galen version 2.4.0 ([5d153bf](https://github.com/hypery2k/galenframework-cli/commit/5d153bf))
+* **Galen:** Use latest Galen version ([cdbb474](https://github.com/hypery2k/galenframework-cli/commit/cdbb474))
+* **nodejs:** Drop older NodeJS support ([0b568ad](https://github.com/hypery2k/galenframework-cli/commit/0b568ad))
+* **NodeJS:** Drop support for older NodeJS versions ([0286768](https://github.com/hypery2k/galenframework-cli/commit/0286768))
+* **Security:** Drop insecure nsp package in favour to `npm audit` ([318be32](https://github.com/hypery2k/galenframework-cli/commit/318be32))
+* **Security:** Resolve vulnerabilities ([4725410](https://github.com/hypery2k/galenframework-cli/commit/4725410))
+
+
+### Reverts
+
+* **CLI:** disable eslint tests ([608ce44](https://github.com/hypery2k/galenframework-cli/commit/608ce44))
+
+
+### BREAKING CHANGES
+
+* **NodeJS:** Neede NodeJS 8+ from now on!
+* **nodejs:** Only support most recent NodeJS runtimes
+
+
+
 <a name="2.3.7"></a>
 ## [2.3.7](https://github.com/hypery2k/galenframework-cli/compare/v2.3.6...v2.3.7) (2018-05-26)
 
