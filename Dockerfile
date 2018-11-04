@@ -2,8 +2,7 @@ FROM ubuntu:16.04
 LABEL authors="Martin Reinhardt <contact@martinreinhardt-online.de>"
 
 ENV NVM_DIR /home/galen
-ENV NODE_VERSION 6.11.4
-ENV GALEN_VERSION 2.3.5
+ENV NODE_VERSION 8.12.0
 ENV TEST_HOME /var/jenkins_home
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
