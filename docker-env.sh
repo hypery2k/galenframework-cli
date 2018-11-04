@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-export GALEN_VERSION=2.3.5
+export GALEN_VERSION=2.4.0
