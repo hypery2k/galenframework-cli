@@ -1,4 +1,12 @@
-<a name="2.4.0"></a>
+## [2.4.1](https://github.com/hypery2k/galenframework-cli/compare/v2.4.0...v2.4.1) (2018-12-23)
+
+
+### Features
+
+* **Galen:** Use latest Galen version ([8a068a8](https://github.com/hypery2k/galenframework-cli/commit/8a068a8))
+
+
+
 # [2.4.0](https://github.com/hypery2k/galenframework-cli/compare/v2.3.7...v2.4.0) (2018-11-04)
 
 
@@ -7,7 +15,7 @@
 * **build:** Disable failing checks for now ([55f1f59](https://github.com/hypery2k/galenframework-cli/commit/55f1f59))
 * **Build:** Disable coverage ([d7a776b](https://github.com/hypery2k/galenframework-cli/commit/d7a776b))
 * **Build:** Disable coverage for now ([c62b83e](https://github.com/hypery2k/galenframework-cli/commit/c62b83e))
-* **Docker:** Corrected docker path run error ([420a5a8](https://github.com/hypery2k/galenframework-cli/commit/420a5a8))
+* **Docker:** Corrected docker path run error ([420a5a8](https://github.com/hypery2k/galenframework-cli/commit/420a5a8)), closes [#60](https://github.com/hypery2k/galenframework-cli/issues/60)
 * **security:** Overwrite version to overcome vulnerabilities ([e01cced](https://github.com/hypery2k/galenframework-cli/commit/e01cced))
 * cli/package.json to reduce vulnerabilities ([5b496ce](https://github.com/hypery2k/galenframework-cli/commit/5b496ce))
 * core/package.json to reduce vulnerabilities ([7f20753](https://github.com/hypery2k/galenframework-cli/commit/7f20753))
@@ -40,28 +48,26 @@
 
 
 
-<a name="2.3.7"></a>
 ## [2.3.7](https://github.com/hypery2k/galenframework-cli/compare/v2.3.6...v2.3.7) (2018-05-26)
 
 
 ### Bug Fixes
 
 * cli/package.json & cli/.snyk to reduce vulnerabilities ([d0328b6](https://github.com/hypery2k/galenframework-cli/commit/d0328b6))
-* **docker:** Basic docker integration ([d332566](https://github.com/hypery2k/galenframework-cli/commit/d332566))
-* **nodejs:** Resolve nodejs errors ([a564c7f](https://github.com/hypery2k/galenframework-cli/commit/a564c7f))
+* **docker:** Basic docker integration ([d332566](https://github.com/hypery2k/galenframework-cli/commit/d332566)), closes [#49](https://github.com/hypery2k/galenframework-cli/issues/49)
+* **nodejs:** Resolve nodejs errors ([a564c7f](https://github.com/hypery2k/galenframework-cli/commit/a564c7f)), closes [#51](https://github.com/hypery2k/galenframework-cli/issues/51)
 
 
 ### Features
 
-* **docker:** Adding Chrome and Firefox to Docker image ([d50f07c](https://github.com/hypery2k/galenframework-cli/commit/d50f07c))
-* **docker:** Basic CI for Docker ([c845838](https://github.com/hypery2k/galenframework-cli/commit/c845838))
-* **docker:** Fix Docker build issues ([bf4a4d3](https://github.com/hypery2k/galenframework-cli/commit/bf4a4d3))
+* **docker:** Adding Chrome and Firefox to Docker image ([d50f07c](https://github.com/hypery2k/galenframework-cli/commit/d50f07c)), closes [#49](https://github.com/hypery2k/galenframework-cli/issues/49)
+* **docker:** Basic CI for Docker ([c845838](https://github.com/hypery2k/galenframework-cli/commit/c845838)), closes [#49](https://github.com/hypery2k/galenframework-cli/issues/49)
+* **docker:** Fix Docker build issues ([bf4a4d3](https://github.com/hypery2k/galenframework-cli/commit/bf4a4d3)), closes [#49](https://github.com/hypery2k/galenframework-cli/issues/49)
 * **Galen:** Use newer Galen Version 2.3.7 ([2a3c53d](https://github.com/hypery2k/galenframework-cli/commit/2a3c53d))
 * **security:** Enable security checks ([4e1a449](https://github.com/hypery2k/galenframework-cli/commit/4e1a449))
 
 
 
-<a name="2.3.6"></a>
 ## [2.3.6](https://github.com/hypery2k/galenframework-cli/compare/v2.3.5...v2.3.6) (2017-12-15)
 
 
@@ -72,13 +78,12 @@
 
 ### Features
 
-* **auto-update-webdriver:** Enable auto update for chromedriver and geckodriver (#48) ([0ab4b1e](https://github.com/hypery2k/galenframework-cli/commit/0ab4b1e))
+* **auto-update-webdriver:** Enable auto update for chromedriver and geckodriver ([#48](https://github.com/hypery2k/galenframework-cli/issues/48)) ([0ab4b1e](https://github.com/hypery2k/galenframework-cli/commit/0ab4b1e))
 * **docker:** Create Docker image ([694998d](https://github.com/hypery2k/galenframework-cli/commit/694998d))
 * **galen:** Update Galen Version ([20fab19](https://github.com/hypery2k/galenframework-cli/commit/20fab19))
 
 
 
-<a name="2.3.5"></a>
 ## [2.3.5](https://github.com/hypery2k/galenframework-cli/compare/v2.3.4...v2.3.5) (2017-09-07)
 
 
@@ -89,21 +94,20 @@
 
 ### Features
 
-* **debugging:** Adding debugging feature ([1856ccb](https://github.com/hypery2k/galenframework-cli/commit/1856ccb))
-* **debugging:** Adding debugging feature ([510f8ec](https://github.com/hypery2k/galenframework-cli/commit/510f8ec))
+* **debugging:** Adding debugging feature ([1856ccb](https://github.com/hypery2k/galenframework-cli/commit/1856ccb)), closes [#13](https://github.com/hypery2k/galenframework-cli/issues/13) [#46](https://github.com/hypery2k/galenframework-cli/issues/46)
+* **debugging:** Adding debugging feature ([510f8ec](https://github.com/hypery2k/galenframework-cli/commit/510f8ec)), closes [#13](https://github.com/hypery2k/galenframework-cli/issues/13) [#46](https://github.com/hypery2k/galenframework-cli/issues/46)
 
 
 
-<a name="2.3.4"></a>
 ## [2.3.4](https://github.com/hypery2k/galenframework-cli/compare/v2.3.3...v2.3.4) (2017-06-14)
 
 
 ### Bug Fixes
 
-* **install-error:** Disable node resolver (#44) ([fe3124b](https://github.com/hypery2k/galenframework-cli/commit/fe3124b))
-* **install-error:** see #44 ([229abb0](https://github.com/hypery2k/galenframework-cli/commit/229abb0))
-* **local-install-error:** #44 ([9037f36](https://github.com/hypery2k/galenframework-cli/commit/9037f36))
-* **local-install-error:** #44 ([e7b0503](https://github.com/hypery2k/galenframework-cli/commit/e7b0503))
+* **install-error:** Disable node resolver ([#44](https://github.com/hypery2k/galenframework-cli/issues/44)) ([fe3124b](https://github.com/hypery2k/galenframework-cli/commit/fe3124b))
+* **install-error:** see [#44](https://github.com/hypery2k/galenframework-cli/issues/44) ([229abb0](https://github.com/hypery2k/galenframework-cli/commit/229abb0))
+* **local-install-error:** [#44](https://github.com/hypery2k/galenframework-cli/issues/44) ([9037f36](https://github.com/hypery2k/galenframework-cli/commit/9037f36))
+* **local-install-error:** [#44](https://github.com/hypery2k/galenframework-cli/issues/44) ([e7b0503](https://github.com/hypery2k/galenframework-cli/commit/e7b0503))
 
 
 ### Features
@@ -113,7 +117,6 @@
 
 
 
-<a name="2.3.3"></a>
 ## [2.3.3](https://github.com/hypery2k/galenframework-cli/compare/v2.3.2...v2.3.3) (2017-04-03)
 
 
@@ -127,7 +130,6 @@
 
 
 
-<a name="2.3.2"></a>
 ## [2.3.2](https://github.com/hypery2k/galenframework-cli/compare/v2.3.1...v2.3.2) (2016-11-21)
 
 
@@ -138,97 +140,78 @@
 
 
 
-<a name="2.3.0"></a>
 # [2.3.0](https://github.com/hypery2k/galenframework-cli/compare/v2.2.6...v2.3.0) (2016-07-14)
 
 
 
-<a name="2.2.6"></a>
 ## [2.2.6](https://github.com/hypery2k/galenframework-cli/compare/v2.2.5...v2.2.6) (2016-07-09)
 
 
 
-<a name="2.2.2"></a>
 ## [2.2.2](https://github.com/hypery2k/galenframework-cli/compare/v2.2.1...v2.2.2) (2016-03-01)
 
 
 
-<a name="2.2.1"></a>
 ## [2.2.1](https://github.com/hypery2k/galenframework-cli/compare/v2.2.0...v2.2.1) (2015-12-15)
 
 
 
-<a name="2.2.0"></a>
 # [2.2.0](https://github.com/hypery2k/galenframework-cli/compare/v2.1.3...v2.2.0) (2015-12-06)
 
 
 
-<a name="2.1.3"></a>
 ## [2.1.3](https://github.com/hypery2k/galenframework-cli/compare/v2.1.2...v2.1.3) (2015-11-23)
 
 
 
-<a name="2.1.2"></a>
 ## [2.1.2](https://github.com/hypery2k/galenframework-cli/compare/v2.1.1...v2.1.2) (2015-10-03)
 
 
 
-<a name="2.1.1"></a>
 ## [2.1.1](https://github.com/hypery2k/galenframework-cli/compare/v2.1.0...v2.1.1) (2015-10-03)
 
 
 
-<a name="2.1.0"></a>
 # [2.1.0](https://github.com/hypery2k/galenframework-cli/compare/v2.0.10...v2.1.0) (2015-09-24)
 
 
 
-<a name="2.0.10"></a>
 ## [2.0.10](https://github.com/hypery2k/galenframework-cli/compare/v2.0.9...v2.0.10) (2015-09-21)
 
 
 
-<a name="2.0.9"></a>
 ## [2.0.9](https://github.com/hypery2k/galenframework-cli/compare/v2.0.8...v2.0.9) (2015-09-14)
 
 
 
-<a name="2.0.8"></a>
 ## [2.0.8](https://github.com/hypery2k/galenframework-cli/compare/v2.0.7...v2.0.8) (2015-08-27)
 
 
 
-<a name="2.0.7"></a>
 ## [2.0.7](https://github.com/hypery2k/galenframework-cli/compare/v2.0.6...v2.0.7) (2015-08-14)
 
 
 
-<a name="2.0.6"></a>
 ## [2.0.6](https://github.com/hypery2k/galenframework-cli/compare/v2.0.5...v2.0.6) (2015-08-12)
 
 
 
-<a name="2.0.5"></a>
 ## [2.0.5](https://github.com/hypery2k/galenframework-cli/compare/v2.0.4...v2.0.5) (2015-08-04)
 
 
 
-<a name="2.0.4"></a>
 ## [2.0.4](https://github.com/hypery2k/galenframework-cli/compare/v2.0.3...v2.0.4) (2015-08-03)
 
 
 
-<a name="1.6.4"></a>
 ## [1.6.4](https://github.com/hypery2k/galenframework-cli/compare/v1.6.3...v1.6.4) (2015-06-17)
 
 
 
-<a name="1.6.3"></a>
 ## [1.6.3](https://github.com/hypery2k/galenframework-cli/compare/v1.6.2...v1.6.3) (2015-05-03)
 
 
 
-<a name="1.6.2"></a>
 ## 1.6.2 (2015-04-24)
 
 
