@@ -28,7 +28,7 @@ build: off
 test_script:
   - cd core
   - npm install .
-  - npm test
+  - npm run coverage
   - npm install . -g
   - cd ..
   - cd cli

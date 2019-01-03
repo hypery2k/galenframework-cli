@@ -34,7 +34,7 @@ script:
   - cd core
   - npm i
   - npm install .
-  - npm run test
+  - npm run coverage
   - cd ..
   - cd cli
   - npm i
