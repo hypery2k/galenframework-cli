@@ -53,7 +53,7 @@ script:
   - ./docker-build-images.sh
 after_script:
   - cd core
-  - ../cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ../cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT  || true
 before_install:
   # Prepare node and npm
   - nvm install $NODE_VERSION && nvm use $NODE_VERSION
