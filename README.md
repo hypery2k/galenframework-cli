@@ -19,19 +19,14 @@ The [cli](cli/) module is a command line module (NodeJS 8+) for [Galen](http://g
 
 [![Join the chat at https://gitter.im/hypery2k/galenframework-cli](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hypery2k/galenframework-cli?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=15642797)](https://www.bountysource.com/trackers/15642797-hypery2k-galenframework-cli?utm_source=15642797&utm_medium=shield&utm_campaign=TRACKER_BADGE) [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=mreinhardt&url=https://github.com/hypery2k/galenframework-cli&title=badges&language=&tags=github&category=software)
 
-<a name="donation"></a>
-> Feel free to **donate**
->
-> <a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=H8TR8246RCDJG">
-> <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"/>
-> </img></a>
-> Or donate Bitcoins: bitcoin:3NKtxw1SRYgess5ev4Ri54GekoAgkR213D
->
-> [![Bitcoin](https://martinreinhardt-online.de/bitcoin.png)](bitcoin:3NKtxw1SRYgess5ev4Ri54GekoAgkR213D)
->
-> Also via [greenaddress](https://greenaddress.it/pay/GA3ZPfh7As3Gc2oP6pQ1njxMij88u/)
+## Donation
 
-## <a name="docker">Docker
+Feel free to [donate via Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=H8TR8246RCDJG) or [Bitcoins ](bitcoin:3NKtxw1SRYgess5ev4Ri54GekoAgkR213D): bitcoin:3NKtxw1SRYgess5ev4Ri54GekoAgkR213D
+
+[![Bitcoin](https://martinreinhardt-online.de/bitcoin.png)](bitcoin:3NKtxw1SRYgess5ev4Ri54GekoAgkR213D)
+ Also via [greenaddress](https://greenaddress.it/pay/GA3ZPfh7As3Gc2oP6pQ1njxMij88u/)
+
+## Docker
 
 ### Usage
 
