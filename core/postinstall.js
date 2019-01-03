@@ -6,27 +6,25 @@
 
 'use strict';
 
-var requestProgress = require('request-progress');
-var replace = require('replace-in-file');
-var Progress = require('progress');
-var AdmZip = require('adm-zip');
-var cp = require('child_process');
-var fs = require('fs-extra');
-var helper = require('./lib/helper');
-var kew = require('kew');
-var npmconf = require('npmconf');
-var path = require('path');
-var request = require('request');
-var url = require('url');
-var which = require('which');
-var log = require('npmlog');
+const requestProgress = require('request-progress');
+const replace = require('replace-in-file');
+const Progress = require('progress');
+const AdmZip = require('adm-zip');
+const cp = require('child_process');
+const fs = require('fs-extra');
+const helper = require('./lib/helper');
+const kew = require('kew');
+const npmconf = require('npmconf');
+const path = require('path');
+const request = require('request');
+const url = require('url');
+const which = require('which');
+const log = require('npmlog');
 
-var cdnUrl = process.env.npm_config_galen_url ||
-  process.env.GALEN_CDNURL ||
-  'https://github.com/galenframework/galen/releases/download/';
-var downloadUrl = cdnUrl + '/galen-' + helper.version + '/galen-bin-' + helper.version + '.zip';
+const cdnUrl = process.env.npm_config_galen_url || process.env.GALEN_CDNURL || 'https://github.com/galenframework/galen/releases/download/';
+const downloadUrl = cdnUrl + '/galen-' + helper.version + '/galen-bin-' + helper.version + '.zip';
 
-var originalPath = process.env.PATH;
+const originalPath = process.env.PATH;
 
 // If the process exits without going through exit(), then we did not complete.
 var validExit = false;
@@ -43,10 +41,10 @@ process.on('exit', function () {
 // put ./bin on their path
 process.env.PATH = helper.cleanPath(originalPath);
 
-var libPath = path.join(__dirname, 'lib');
-var pkgPath = path.join(libPath, 'galen');
-var galenPath = null;
-var tmpPath = null;
+const libPath = path.join(__dirname, 'lib');
+const pkgPath = path.join(libPath, 'galen');
+let galenPath = null;
+let tmpPath = null;
 
 // If the user manually installed galen, we want
 // to use the existing version.
@@ -57,13 +55,11 @@ var tmpPath = null;
 // Do not re-use an npm-installed galen, because
 // that can lead to weird circular dependencies between
 // local versions and global versions.
-var whichDeferred = kew.defer();
+const whichDeferred = kew.defer();
 which('galen', whichDeferred.makeNodeResolver());
 whichDeferred.promise
-  .then(function (result) {
+  .then((result) => {
     galenPath = result;
-
-
     // Horrible hack to avoid problems during global install. We check to see if
     // the file `which` found is our own bin script.
     if (galenPath.indexOf(path.join('npm', 'galenframework')) !== -1) {
@@ -71,20 +67,20 @@ whichDeferred.promise
       throw new Error('Global install');
     }
 
-    var contents = fs.readFileSync(galenPath, 'utf8');
+    const contents = fs.readFileSync(galenPath, 'utf8');
     if (/NPM_INSTALL_MARKER/.test(contents)) {
       log.info('Looks like an `npm install -g`; unable to check for already installed version.');
       throw new Error('Global install');
     } else {
-      var checkVersionDeferred = kew.defer();
+      const checkVersionDeferred = kew.defer();
       cp.execFile(galenPath, ['--version'], checkVersionDeferred.makeNodeResolver());
       return checkVersionDeferred.promise;
     }
   })
-  .then(function (stdout) {
-    var regex = /^Version: ([0-9\.]+)$/;
-    var result = stdout.trim().match(regex);
-    var version = result[1];
+  .then((stdout) => {
+    const regex = /^Version: ([0-9\.]+)$/;
+    const result = stdout.trim().match(regex);
+    const version = result[1];
     if (helper.version === version) {
       writeLocationFile(galenPath);
       log.info('galenframework is already installed at', galenPath + '.');
@@ -100,13 +96,13 @@ whichDeferred.promise
 function downloadAndInstallGalen() {
   // Trying to use a local file failed, so initiate download and install
   // steps instead.
-  var npmconfDeferred = kew.defer();
+  const npmconfDeferred = kew.defer();
   npmconf.load(npmconfDeferred.makeNodeResolver());
-  return npmconfDeferred.promise.then(function (conf) {
+  return npmconfDeferred.promise.then((conf) => {
     tmpPath = findSuitableTempDirectory(conf);
 
-    var fileName = downloadUrl.split('/').pop();
-    var downloadedFile = path.join(tmpPath, fileName);
+    const fileName = downloadUrl.split('/').pop();
+    const downloadedFile = path.join(tmpPath, fileName);
 
     log.info('Running at platform: ' + process.platform);
 
@@ -123,14 +119,10 @@ function downloadAndInstallGalen() {
       };
     }
   })
-    .then(function (response) {
-      return extractDownload(response.downloadedFile, response.requestOptions, false);
-    })
-    .then(function (extractedPath) {
-      return copyIntoPlace(extractedPath, pkgPath);
-    })
-    .then(function () {
-      var location = libPath;
+    .then((response) => extractDownload(response.downloadedFile, response.requestOptions, false))
+    .then((extractedPath) => copyIntoPlace(extractedPath, pkgPath))
+    .then(() => {
+      const location = libPath;
       writeLocationFile(location);
 
       log.info('Done. galen binary available at ', location);
@@ -142,16 +134,15 @@ function downloadAndInstallGalen() {
         files: location + '/galen/galen.bat',
         replace: 'com.galenframework.GalenMain %*',
         with: 'com.galenframework.GalenMain %* -Djna.nosys=true'
-      },
-        function (error, changedFiles) {
-          //Catch errors
-          if (error) {
-            log.error('Error occurred:', error);
-          }
-          //List changed files
-          log.info('Modified files:', changedFiles.join(', '));
-          exit(0);
-        });
+      }, (error, changedFiles) => {
+        //Catch errors
+        if (error) {
+          log.error('Error occurred:', error);
+        }
+        //List changed files
+        log.info('Modified files:', changedFiles.join(', '));
+        exit(0);
+      });
     })
     .fail(function (err) {
       log.error('Galen installation failed', err, err.stack);
@@ -190,22 +181,22 @@ function exit(code) {
  * @function
  */
 function findSuitableTempDirectory(npmConf) {
-  var now = Date.now();
-  var candidateTmpDirs = [
+  const now = Date.now();
+  const candidateTmpDirs = [
     process.env.TMPDIR || process.env.TEMP || npmConf.get('tmp'),
     path.join(process.cwd(), 'tmp',
       '/tmp')
   ];
 
-  for (var i = 0; i < candidateTmpDirs.length; i++) {
-    var candidatePath = path.join(candidateTmpDirs[i], 'galenframework');
+  for (let i = 0; i < candidateTmpDirs.length; i++) {
+    const candidatePath = path.join(candidateTmpDirs[i], 'galenframework');
 
     try {
       fs.mkdirsSync(candidatePath, '0777');
       // Make double sure we have 0777 permissions; some operating systems
       // default umask does not allow write by default.
       fs.chmodSync(candidatePath, '0777');
-      var testFile = path.join(candidatePath, now + '.tmp');
+      const testFile = path.join(candidatePath, now + '.tmp');
       fs.writeFileSync(testFile, 'test');
       fs.unlinkSync(testFile);
       return candidatePath;
@@ -225,9 +216,9 @@ function findSuitableTempDirectory(npmConf) {
  * @function
  */
 function getRequestOptions(conf) {
-  var strictSSL = conf.get('strict-ssl');
+  const strictSSL = conf.get('strict-ssl');
 
-  var options = {
+  let options = {
     uri: downloadUrl,
     encoding: null, // Get response as a buffer
     followRedirect: true, // The default download path redirects to a CDN URL.
@@ -235,11 +226,11 @@ function getRequestOptions(conf) {
     strictSSL: strictSSL
   };
 
-  var proxyUrl = conf.get('https-proxy') || conf.get('http-proxy') || conf.get('proxy');
+  let proxyUrl = conf.get('https-proxy') || conf.get('http-proxy') || conf.get('proxy');
   if (proxyUrl) {
 
     // Print using proxy
-    var proxy = url.parse(proxyUrl);
+    let proxy = url.parse(proxyUrl);
     if (proxy.auth) {
       // Mask password
       proxy.auth = proxy.auth.replace(/:.*$/, ':******');
@@ -254,7 +245,7 @@ function getRequestOptions(conf) {
   }
 
   // Use certificate authority settings from npm
-  var ca = conf.get('ca');
+  const ca = conf.get('ca');
   if (ca) {
     log.info('Using npmconf ca');
     options.ca = ca;
@@ -271,12 +262,12 @@ function getRequestOptions(conf) {
  * @function
  */
 function requestBinary(requestOptions, filePath) {
-  var deferred = kew.defer();
-  var writePath = filePath + '-download-' + Date.now();
+  const deferred = kew.defer();
+  const writePath = filePath + '-download-' + Date.now();
 
   log.info('Receiving...');
-  var bar = null;
-  requestProgress(request(requestOptions, function (error, response, body) {
+  let bar = null;
+  requestProgress(request(requestOptions, (error, response, body) => {
     log.info('');
     if (!error && response.statusCode === 200) {
       fs.writeFileSync(writePath, body);
@@ -306,7 +297,7 @@ function requestBinary(requestOptions, filePath) {
         'log at https://github.com/hypery2k/galenframework-cli/issues');
       exit(1);
     }
-  })).on('progress', function (state) {
+  })).on('progress', (state) => {
     if (!bar) {
       bar = new Progress('  [:bar] :percent :etas', { total: state.total, width: 40 });
     }
@@ -326,11 +317,11 @@ function requestBinary(requestOptions, filePath) {
  * @function
  */
 function extractDownload(filePath, requestOptions, retry) {
-  var deferred = kew.defer();
+  const deferred = kew.defer();
   // extract to a unique directory in case multiple processes are
   // installing and extracting at once
-  var extractedPath = filePath + '-extract-' + Date.now();
-  var options = { cwd: extractedPath };
+  const extractedPath = filePath + '-extract-' + Date.now();
+  let options = { cwd: extractedPath };
 
   fs.mkdirsSync(extractedPath, '0777');
   // Make double sure we have 0777 permissions; some operating systems
@@ -341,7 +332,7 @@ function extractDownload(filePath, requestOptions, retry) {
     log.info('Extracting zip contents');
 
     try {
-      var zip = new AdmZip(filePath);
+      let zip = new AdmZip(filePath);
       zip.extractAllTo(extractedPath, true);
       deferred.resolve(extractedPath);
     } catch (err) {
@@ -382,15 +373,14 @@ function copyIntoPlace(extractedPath, targetPath) {
   log.info('Removing', targetPath);
   return kew.nfcall(fs.remove, targetPath).then(function () {
     // Look for the extracted directory, so we can rename it.
-    var files = fs.readdirSync(extractedPath);
-    for (var i = 0; i < files.length; i++) {
-      var file = path.join(extractedPath, files[i]);
+    const files = fs.readdirSync(extractedPath);
+    for (let i = 0; i < files.length; i++) {
+      const file = path.join(extractedPath, files[i]);
       if (fs.statSync(file).isDirectory() && file.indexOf(helper.version) !== -1) {
         log.info('Copying extracted folder', file, '->', targetPath);
         return kew.nfcall(fs.move, file, targetPath);
       }
     }
-
     log.info('Could not find extracted file', files);
     throw new Error('Could not find extracted file');
   });

@@ -4,21 +4,21 @@
 
 'use strict';
 
-var cp = require('child_process');
-var fs = require('fs-extra');
-var helper = require('galenframework/lib/helper');
-var kew = require('kew');
-var npmconf = require('npmconf');
-var path = require('path');
-var httpreq = require('httpreq');
-var which = require('which');
-var npmWhich = require('npm-which')(process.cwd());
-var log = require('npmlog');
+const cp = require('child_process');
+const fs = require('fs-extra');
+const helper = require('galenframework/lib/helper');
+const kew = require('kew');
+const npmconf = require('npmconf');
+const path = require('path');
+const httpreq = require('httpreq');
+const which = require('which');
+const npmWhich = require('npm-which')(process.cwd());
+const log = require('npmlog');
 
-var originalPath = process.env.PATH;
+const originalPath = process.env.PATH;
 
 // If the process exits without going through exit(), then we did not complete.
-var validExit = false;
+let validExit = false;
 
 process.on('exit', function () {
     if (!validExit) {
@@ -32,8 +32,6 @@ process.on('exit', function () {
 // put ./bin on their path
 process.env.PATH = helper.cleanPath(originalPath);
 
-var tmpPath = null;
-
 // If the user manually installed galen, we want
 // to use the existing version.
 //
@@ -43,7 +41,7 @@ var tmpPath = null;
 // Do not re-use an npm-installed galen, because
 // that can lead to weird circular dependencies between
 // local versions and global versions.
-var whichDeferred = kew.defer();
+let whichDeferred = kew.defer();
 which('galen', whichDeferred.makeNodeResolver());
 whichDeferred.promise
     .then((result) => installAdditionalDrivers(result))
@@ -57,19 +55,17 @@ whichDeferred.promise
     }));
 
 function installAdditionalDrivers(galenPath) {
-    var defer = kew.defer();
+    let defer = kew.defer();
     defer.resolve();
-    defer.promise.then(function () {
+    defer.promise.then(() => {
         // Horrible hack to avoid problems during global install. We check to see if
         // the file `which` found is our own bin script.
         if (galenPath.indexOf(path.join('npm', 'galenframework-cli')) !== -1) {
             log.info('Looks like an `npm install -g` on windows; unable to check for already installed version.');
             throw new Error('Global install');
         }
-
-        var contents = fs.readFileSync(galenPath, 'utf8');
+        let contents = fs.readFileSync(galenPath, 'utf8');
         if ((/NPM_INSTALL_MARKER/).test(contents)) {
-
             log.info('Looks like an `npm install -g`; unable to check for already installed version.');
             throw new Error('Global install');
         } else {
@@ -78,79 +74,20 @@ function installAdditionalDrivers(galenPath) {
 
             return checkVersionDeferred.promise;
         }
+    }).then(() => {
+        log.info('galenframework-cli detected');
+        let npmconfDeferred = kew.defer();
+        npmconf.load(npmconfDeferred.makeNodeResolver());
+        return npmconfDeferred.promise;
+    }).then(() => {
+        exit(0);
     })
-        .then(function () {
-            log.info('galenframework-cli detected');
-            var npmconfDeferred = kew.defer();
-            npmconf.load(npmconfDeferred.makeNodeResolver());
-
-            return npmconfDeferred.promise;
-        })
-        .then(function () {
-            exit(0);
-        })
 }
 
 function exit(code) {
     validExit = true;
     process.env.PATH = originalPath;
     process.exit(code || 0);
-}
-
-
-function findSuitableTempDirectory(npmConf) {
-    var now = Date.now();
-    var candidateTmpDirs = [
-        process.env.TMPDIR || process.env.TEMP || npmConf.get('tmp'),
-        '/tmp',
-        path.join(process.cwd(), 'tmp')
-    ];
-
-    for (var i = 0; i < candidateTmpDirs.length; i++) {
-        var candidatePath = path.join(candidateTmpDirs[i], 'galenframework-cli');
-
-        try {
-            fs.mkdirsSync(candidatePath, '0777');
-            // Make double sure we have 0777 permissions; some operating systems
-            // default umask does not allow write by default.
-            fs.chmodSync(candidatePath, '0777');
-            var testFile = path.join(candidatePath, now + '.tmp');
-            fs.writeFileSync(testFile, 'test');
-            fs.unlinkSync(testFile);
-
-            return candidatePath;
-        } catch (e) {
-            log.info(candidatePath, 'is not writable:', e.message);
-        }
-    }
-
-    log.error('Can not find a writable tmp directory.');
-    exit(1);
-}
-
-
-function requestBinary(url, dest) {
-    var deferred = kew.defer();
-    log.info('Receiving...');
-
-    httpreq.get(url, { 'binary': true }, function (err, res) {
-        if (err) {
-            deferred.reject(err);
-            log.error('Error making request.');
-        } else {
-            fs.writeFile(dest, res.body, function (err) {
-                if (err) {
-                    deferred.reject(err);
-                    log.info('Error writing file');
-                } else {
-                    log.info('Saved to', dest);
-                    deferred.resolve(dest);
-                }
-            });
-        }
-    });
-
-    return deferred.promise;
 }
 
 
