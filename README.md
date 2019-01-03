@@ -2,8 +2,10 @@
 
 [Galen](http://galenframework.com) allows automated testing of look and feel for your responsive websites.
 
-[![Build Status](https://travis-ci.org/hypery2k/galenframework-cli.svg?branch=master)](https://travis-ci.org/hypery2k/galenframework-cli) [![Build status](https://ci.appveyor.com/api/projects/status/fbwy88pc9ia6429w/branch/master?svg=true)](https://ci.appveyor.com/project/hypery2k/galenframework-cli/branch/master) [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE) [![Code Climate](https://codeclimate.com/github/hypery2k/galenframework-cli/badges/gpa.svg)](https://codeclimate.com/github/hypery2k/galenframework-cli)
-
+[![Build Status](https://travis-ci.org/hypery2k/galenframework-cli.svg?branch=master)](https://travis-ci.org/hypery2k/galenframework-cli) 
+[![Build status](https://ci.appveyor.com/api/projects/status/fbwy88pc9ia6429w/branch/master?svg=true)](https://ci.appveyor.com/project/hypery2k/galenframework-cli/branch/master) [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE) 
+[![Code Climate](https://codeclimate.com/github/hypery2k/galenframework-cli/badges/gpa.svg)](https://codeclimate.com/github/hypery2k/galenframework-cli)
+[![Coverage Status](https://coveralls.io/repos/github/hypery2k/galenframework-cli/badge.svg?branch=master)](https://coveralls.io/github/hypery2k/galenframework-cli?branch=master)
 
 [![Throughput Graph](https://graphs.waffle.io/hypery2k/galenframework-cli/throughput.svg)](https://waffle.io/hypery2k/galenframework-cli/metrics/throughput)
 

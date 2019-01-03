@@ -1,4 +1,5 @@
 *.log
+cc-test-reporter
 core/node_modules/*
 cli/node_modules/*
 core/lib/galen/*

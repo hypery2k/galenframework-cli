@@ -27,7 +27,7 @@
         "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
         "check": "npm audit",
         "pretest": "eslint lib/*.js",
-        "coverage": "istanbul -- cover nodeunit test/tests.js && istanbul-coveralls --no-rm",
+        "coverage": "nyc --reporter=lcov --temp-dir=coverage npm run test && istanbul-coveralls --no-rm",
         "snyk-protect": "snyk protect",
         "prepublish": "npm run snyk-protect"
     },
@@ -58,6 +58,7 @@
         "istanbul": "0.4.5",
         "marked": "0.4.0",
         "nodeunit": "0.11.3",
+        "nyc": "^13.1.0",
         "snyk": "^1.69.7",
         "tslint": "5.11.0",
         "tslint-eslint-rules": "5.3.1",

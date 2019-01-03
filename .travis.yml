@@ -27,9 +27,17 @@ cache:
   directories:
     - "node_modules"
 
+before_script:
+  - npm install -g jshint
+  - npm install -g istanbul
+  - npm install -g istanbul-coveralls
+  - npm install -g nodeunit
+  - "sh -e /etc/init.d/xvfb start"
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
   - export COVERALLS_SERVICE_NAME=travis-ci
-  - export COVERALLS_REPO_TOKEN=mqVTe91nICY38tHlFFtmZIjbzpghGZyos
   - ./docker-build-images.sh
   - cd core
   - npm i
@@ -43,6 +51,9 @@ script:
   - ./runTests.sh
   - cd ..
   - ./docker-build-images.sh
+after_script:
+  - cd core
+  - ../cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 before_install:
   # Prepare node and npm
   - nvm install $NODE_VERSION && nvm use $NODE_VERSION
@@ -51,12 +62,6 @@ before_install:
   # Show environment info
   - node --version
   - npm --version
-before_script:
-  - npm install -g jshint
-  - npm install -g istanbul
-  - npm install -g istanbul-coveralls
-  - npm install -g nodeunit
-  - "sh -e /etc/init.d/xvfb start"
 notifications:
   webhooks:
     urls:
