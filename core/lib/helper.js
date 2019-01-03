@@ -32,7 +32,7 @@ exports.version = require('../package.json')._galenVersion;
  * @param {string} path
  * @return {string}
  */
-exports.cleanPath = function(path) {
+exports.cleanPath = function (path) {
     'use strict';
 
     return path
@@ -59,15 +59,15 @@ if (exports.path) {
     }
 }
 
-exports.galenPath = function() {
-    return new Promise(function(resolve, reject) {
+exports.galenPath = function () {
+    return new Promise(function (resolve, reject) {
 
         var galenPath = path.resolve(__dirname + '/../node_modules/galenframework/bin/galen' + (process.platform === 'win32' ? '.cmd' : ''));
-        fs.stat(galenPath, function(err) {
+        fs.stat(galenPath, function (err) {
             // resolve for NPM3+
             if (err) {
                 galenPath = path.resolve(__dirname + '/../../galenframework/bin/galen' + (process.platform === 'win32' ? '.cmd' : ''));
-                fs.stat(galenPath, function(err) {
+                fs.stat(galenPath, function (err) {
                     // resolve for NPM3+
                     if (err) {
                         reject('Cannot find Galenframework at ' + galenPath);

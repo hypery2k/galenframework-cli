@@ -20,7 +20,7 @@ var originalPath = process.env.PATH;
 // If the process exits without going through exit(), then we did not complete.
 var validExit = false;
 
-process.on('exit', function() {
+process.on('exit', function () {
     if (!validExit) {
         log.info('Install exited unexpectedly');
         exit(1);
@@ -59,35 +59,35 @@ whichDeferred.promise
 function installAdditionalDrivers(galenPath) {
     var defer = kew.defer();
     defer.resolve();
-    defer.promise.then(function() {
-            // Horrible hack to avoid problems during global install. We check to see if
-            // the file `which` found is our own bin script.
-            if (galenPath.indexOf(path.join('npm', 'galenframework-cli')) !== -1) {
-                log.info('Looks like an `npm install -g` on windows; unable to check for already installed version.');
-                throw new Error('Global install');
-            }
+    defer.promise.then(function () {
+        // Horrible hack to avoid problems during global install. We check to see if
+        // the file `which` found is our own bin script.
+        if (galenPath.indexOf(path.join('npm', 'galenframework-cli')) !== -1) {
+            log.info('Looks like an `npm install -g` on windows; unable to check for already installed version.');
+            throw new Error('Global install');
+        }
 
-            var contents = fs.readFileSync(galenPath, 'utf8');
-            if ((/NPM_INSTALL_MARKER/).test(contents)) {
+        var contents = fs.readFileSync(galenPath, 'utf8');
+        if ((/NPM_INSTALL_MARKER/).test(contents)) {
 
-                log.info('Looks like an `npm install -g`; unable to check for already installed version.');
-                throw new Error('Global install');
-            } else {
-                var checkVersionDeferred = kew.defer();
-                cp.execFile(galenPath, ['--version'], checkVersionDeferred.makeNodeResolver());
+            log.info('Looks like an `npm install -g`; unable to check for already installed version.');
+            throw new Error('Global install');
+        } else {
+            var checkVersionDeferred = kew.defer();
+            cp.execFile(galenPath, ['--version'], checkVersionDeferred.makeNodeResolver());
 
-return checkVersionDeferred.promise;
-            }
-        })
-        .then(function() {
+            return checkVersionDeferred.promise;
+        }
+    })
+        .then(function () {
             log.info('galenframework-cli detected');
             var npmconfDeferred = kew.defer();
             npmconf.load(npmconfDeferred.makeNodeResolver());
 
-return npmconfDeferred.promise;
+            return npmconfDeferred.promise;
         })
-        .then(function() {
-          exit(0);
+        .then(function () {
+            exit(0);
         })
 }
 
@@ -118,7 +118,7 @@ function findSuitableTempDirectory(npmConf) {
             fs.writeFileSync(testFile, 'test');
             fs.unlinkSync(testFile);
 
-return candidatePath;
+            return candidatePath;
         } catch (e) {
             log.info(candidatePath, 'is not writable:', e.message);
         }
@@ -133,12 +133,12 @@ function requestBinary(url, dest) {
     var deferred = kew.defer();
     log.info('Receiving...');
 
-    httpreq.get(url, {'binary': true}, function(err, res) {
+    httpreq.get(url, { 'binary': true }, function (err, res) {
         if (err) {
             deferred.reject(err);
             log.error('Error making request.');
         } else {
-            fs.writeFile(dest, res.body, function(err) {
+            fs.writeFile(dest, res.body, function (err) {
                 if (err) {
                     deferred.reject(err);
                     log.info('Error writing file');
@@ -150,7 +150,7 @@ function requestBinary(url, dest) {
         }
     });
 
-return deferred.promise;
+    return deferred.promise;
 }
 
 

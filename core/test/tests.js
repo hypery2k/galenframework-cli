@@ -3,7 +3,6 @@
  * functions correctly.
  */
 
-var childProcess = require('child_process');
 var fs = require('fs');
 var path = require('path');
 var helper = require('../lib/helper');

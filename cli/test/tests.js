@@ -3,12 +3,11 @@
  * functions correctly.
  */
 
-var childProcess = require('child_process');
 var fs = require('fs');
 var path = require('path');
 var helper = require('galenframework/lib/helper');
 
-exports.testCleanPath = function(test) {
+exports.testCleanPath = function (test) {
     test.expect(5);
     test.equal('/Users/hypery2k/bin', helper.cleanPath('/Users/hypery2k/bin:./bin'));
     test.equal('/Users/hypery2k/bin:/usr/bin', helper.cleanPath('/Users/hypery2k/bin:./bin:/usr/bin'));
