@@ -1,3 +1,28 @@
+## [2.4.2](https://github.com/hypery2k/galenframework-cli/compare/v2.4.1...v2.4.2) (2019-01-31)
+
+
+### Bug Fixes
+
+* **Build:** Disable coverage check on Windows CI build ([afa5c2b](https://github.com/hypery2k/galenframework-cli/commit/afa5c2b))
+* **Build:** Ignore cc-report error code ([04b6a39](https://github.com/hypery2k/galenframework-cli/commit/04b6a39))
+* **CI:** Disable git autocrlf ([343b392](https://github.com/hypery2k/galenframework-cli/commit/343b392))
+* **Windows:** Use supported NodeJS version on Win CI build ([b820eb9](https://github.com/hypery2k/galenframework-cli/commit/b820eb9)), closes [#62](https://github.com/hypery2k/galenframework-cli/issues/62)
+
+
+### Features
+
+* **CodeQuality:** Adding codeclimate support ([e14606c](https://github.com/hypery2k/galenframework-cli/commit/e14606c))
+* **Galen:** Use latest Galen version ([0934523](https://github.com/hypery2k/galenframework-cli/commit/0934523))
+* **Safari:** Drop Safari extentsion installation ([0317629](https://github.com/hypery2k/galenframework-cli/commit/0317629))
+* **Webdriver:** Update geckodriver and chromedriver ([b13d3df](https://github.com/hypery2k/galenframework-cli/commit/b13d3df))
+
+
+### BREAKING CHANGES
+
+* **Safari:** No legacy safari  webdriver extension for Selenium
+
+
+
 ## [2.4.1](https://github.com/hypery2k/galenframework-cli/compare/v2.4.0...v2.4.1) (2018-12-23)
 
 
