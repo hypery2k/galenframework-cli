@@ -1,11 +1,24 @@
 FROM ubuntu:16.04
-LABEL authors="Martin Reinhardt <contact@martinreinhardt-online.de>"
+ENV SUMMARY="galne-runtime"
+ENV DESCRIPTION="Application runtime for Galenframework"
+ENV AUTHOR="Martin Reinhardt <contact@martinreinhardt-online.de"
+ENV TZ="Europe/Berlin"
 
 ENV NVM_DIR /home/galen
 ENV NODE_VERSION 8.12.0
 ENV TEST_HOME /var/jenkins_home
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
+
+LABEL summary="$SUMMARY" \
+      description="$DESCRIPTION" \
+      version="$VERSION" \
+      author="$AUTHOR" \
+      io.k8s.description="$DESCRIPTION" \
+      io.k8s.display-name="galen-runtime" \
+      io.k8s.tags="galen,galenframework,layout-testing,testing" \
+      com.redhat.component="galen-runtime-container"\
+      org.label-schema.license=MIT
 
 #================================================
 # Customize sources for apt-get
