@@ -75,5 +75,5 @@
         "node": ">= 8",
         "npm": ">= 5"
     },
-    "_galenVersion": "2.4.2"
+    "_galenVersion": "2.4.3"
 }
