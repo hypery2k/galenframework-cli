@@ -1,3 +1,15 @@
+## [2.4.3](https://github.com/hypery2k/galenframework-cli/compare/v2.4.2...v2.4.3) (2019-02-18)
+
+
+### Features
+
+* **Docker:** Proper labels for docker runtime ([db5aec1](https://github.com/hypery2k/galenframework-cli/commit/db5aec1))
+* **Galen:** Use latest Galen version ([5a3c61a](https://github.com/hypery2k/galenframework-cli/commit/5a3c61a))
+* **Security:** Resolve security alerts ([667e898](https://github.com/hypery2k/galenframework-cli/commit/667e898))
+* **Webdriver:** Use latest chromedriver and pin geckodriver ([99cb4af](https://github.com/hypery2k/galenframework-cli/commit/99cb4af))
+
+
+
 ## [2.4.2](https://github.com/hypery2k/galenframework-cli/compare/v2.4.1...v2.4.2) (2019-01-31)
 
 
