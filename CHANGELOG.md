@@ -1,3 +1,18 @@
+## [2.4.4](https://github.com/hypery2k/galenframework-cli/compare/v2.4.3...v2.4.4) (2019-03-15)
+
+
+### Bug Fixes
+
+* **Geckodriver:** Use newer version ([30e790c](https://github.com/hypery2k/galenframework-cli/commit/30e790c))
+
+
+### Features
+
+* **Galen:** Use latest Galen version ([df0eefb](https://github.com/hypery2k/galenframework-cli/commit/df0eefb))
+* **Galen:** Use latest Galen version ([c676fc5](https://github.com/hypery2k/galenframework-cli/commit/c676fc5))
+
+
+
 ## [2.4.3](https://github.com/hypery2k/galenframework-cli/compare/v2.4.2...v2.4.3) (2019-02-18)
 
 
