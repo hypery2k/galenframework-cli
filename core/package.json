@@ -52,7 +52,7 @@
     "devDependencies": {
         "@toolisticon/istanbul-coveralls": "1.0.0",
         "coveralls": "3.0.2",
-        "ejs": "2.6.1",
+        "ejs": "2.6.2",
         "eslint": "^5.14.0",
         "handlebars": "^4.1.0",
         "istanbul": "0.4.5",
