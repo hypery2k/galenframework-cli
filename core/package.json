@@ -44,7 +44,7 @@
         "npmlog": "4.0.0",
         "progress": "1.1.8",
         "replace-in-file": "1.0.2",
-        "request": "2.84.0",
+        "request": "2.88.0",
         "request-progress": "0.3.1",
         "which": "1.2.0",
         "yargs": "3.30.0"
