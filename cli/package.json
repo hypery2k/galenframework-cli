@@ -38,7 +38,7 @@
         "chromedriver": "^2.46.0",
         "fs-extra": "0.26.2",
         "galenframework": "2.4.4",
-        "geckodriver": "^1.15.1",
+        "geckodriver": "^1.16.2",
         "httpreq": "0.4.13",
         "kew": "0.7.0",
         "ms": "2.0.0",
@@ -58,10 +58,10 @@
         "coveralls": "3.0.2",
         "ejs": "2.6.1",
         "eslint": "^5.14.0",
-        "handlebars": "^4.1.0",
+        "handlebars": "^4.1.2",
         "istanbul": "0.4.5",
         "nodeunit": "0.11.3",
-        "nyc": "^13.3.0",
+        "nyc": "^14.1.1",
         "snyk": "^1.132.2"
     },
     "repository": {
