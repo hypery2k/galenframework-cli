@@ -60,7 +60,7 @@
         "nodeunit": "0.11.3",
         "nyc": "^14.1.1",
         "snyk": "^1.132.2",
-        "tslint": "5.19.0",
+        "tslint": "5.20.0",
         "tslint-eslint-rules": "5.4.0",
         "typedoc": "^0.15.0",
         "typescript": "3.5.3"
