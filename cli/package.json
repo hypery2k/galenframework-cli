@@ -1,78 +1,78 @@
 {
-    "name": "galenframework-cli",
-    "version": "2.4.4",
-    "description": "Just the node wrapper for the Galen Framework.",
-    "homepage": "https://github.com/hypery2k/galenframework-cli",
-    "bugs": {
-        "url": "https://github.com/hypery2k/galenframework-cli/issues"
-    },
-    "keywords": [
-        "galen",
-        "galenframework",
-        "responsive",
-        "test",
-        "testing",
-        "webdriver",
-        "selenium",
-        "TDD",
-        "BDD"
-    ],
-    "author": "Martin Reinhardt",
-    "scripts": {
-        "galen": "bin/galen",
-        "postinstall": "node postinstall.js",
-        "test": "npm run check && npm run unit-test",
-        "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
-        "lint": "eslint --fix *.js",
-        "check": "npm audit",
-        "coverage": "nyc --reporter=lcov --temp-dir=coverage npm run test && istanbul-coveralls --no-rm",
-        "snyk-protect": "snyk protect",
-        "prepublish": "npm run snyk-protect"
-    },
-    "bin": {
-        "galen": "bin/galen"
-    },
-    "preferGlobal": true,
-    "dependencies": {
-        "check": "^1.0.0",
-        "chromedriver": "^2.46.0",
-        "fs-extra": "0.26.2",
-        "galenframework": "2.4.4",
-        "geckodriver": "^1.16.2",
-        "httpreq": "0.4.13",
-        "kew": "0.7.0",
-        "ms": "2.0.0",
-        "npm-which": "3.0.1",
-        "npmlog": "4.0.0",
-        "path": "0.12.7",
-        "run": "^1.4.0",
-        "sshpk": "1.14.1",
-        "stringstream": "0.0.6",
-        "tough-cookie": "2.3.4",
-        "tunnel-agent": "0.6.0",
-        "which": "1.2.0",
-        "yargs": "3.30.0"
-    },
-    "devDependencies": {
-        "@toolisticon/istanbul-coveralls": "1.0.0",
-        "coveralls": "3.0.2",
-        "ejs": "2.6.1",
-        "eslint": "^5.14.0",
-        "handlebars": "^4.1.2",
-        "istanbul": "0.4.5",
-        "nodeunit": "0.11.3",
-        "nyc": "^14.1.1",
-        "snyk": "^1.132.2"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/hypery2k/galenframework-cli.git"
-    },
-    "license": "MIT",
-    "engine-strict": true,
-    "engines": {
-        "node": ">= 8",
-        "npm": ">= 5"
-    },
-    "snyk": true
+  "name": "galenframework-cli",
+  "version": "2.4.4",
+  "description": "Just the node wrapper for the Galen Framework.",
+  "homepage": "https://github.com/hypery2k/galenframework-cli",
+  "bugs": {
+    "url": "https://github.com/hypery2k/galenframework-cli/issues"
+  },
+  "keywords": [
+    "galen",
+    "galenframework",
+    "responsive",
+    "test",
+    "testing",
+    "webdriver",
+    "selenium",
+    "TDD",
+    "BDD"
+  ],
+  "author": "Martin Reinhardt",
+  "scripts": {
+    "galen": "bin/galen",
+    "postinstall": "node postinstall.js",
+    "test": "npm run check && npm run unit-test",
+    "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
+    "lint": "eslint --fix *.js",
+    "check": "npm audit",
+    "coverage": "nyc --reporter=lcov --temp-dir=coverage npm run test && istanbul-coveralls --no-rm",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "bin": {
+    "galen": "bin/galen"
+  },
+  "preferGlobal": true,
+  "dependencies": {
+    "check": "^1.0.0",
+    "chromedriver": "^2.46.0",
+    "fs-extra": "0.26.2",
+    "galenframework": "2.4.4",
+    "geckodriver": "^1.16.2",
+    "httpreq": "0.4.13",
+    "kew": "0.7.0",
+    "ms": "2.0.0",
+    "npm-which": "3.0.1",
+    "npmlog": "4.0.0",
+    "path": "0.12.7",
+    "run": "^1.4.0",
+    "sshpk": "1.14.1",
+    "stringstream": "0.0.6",
+    "tough-cookie": "2.3.4",
+    "tunnel-agent": "0.6.0",
+    "which": "1.2.0",
+    "yargs": "3.30.0",
+    "snyk": "^1.230.5"
+  },
+  "devDependencies": {
+    "@toolisticon/istanbul-coveralls": "1.0.0",
+    "coveralls": "3.0.2",
+    "ejs": "2.6.1",
+    "eslint": "^5.14.0",
+    "handlebars": "^4.1.2",
+    "istanbul": "0.4.5",
+    "nodeunit": "0.11.3",
+    "nyc": "^14.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hypery2k/galenframework-cli.git"
+  },
+  "license": "MIT",
+  "engine-strict": true,
+  "engines": {
+    "node": ">= 8",
+    "npm": ">= 5"
+  },
+  "snyk": true
 }
