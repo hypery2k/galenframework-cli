@@ -20,6 +20,7 @@
   "author": "Martin Reinhardt",
   "scripts": {
     "galen": "bin/galen",
+    "preinstall": "npx npm-force-resolutions",
     "postinstall": "node postinstall.js",
     "test": "npm run check && npm run unit-test",
     "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
@@ -62,7 +63,11 @@
     "handlebars": "^4.1.2",
     "istanbul": "0.4.5",
     "nodeunit": "0.11.3",
+    "npm-force-resolutions": "0.0.3",
     "nyc": "^14.1.1"
+  },
+  "resolutions": {
+    "https-proxy-agent": "^3.0.0"
   },
   "repository": {
     "type": "git",
