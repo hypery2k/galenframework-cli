@@ -1,8 +1,11 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.10.1
+version: v1.13.5
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:request:20160119':
     - galenframework > request:
         patched: '2018-02-15T16:29:24.906Z'
+  SNYK-JS-HTTPSPROXYAGENT-469131:
+    - geckodriver > https-proxy-agent:
+        patched: '2019-10-04T07:42:24.535Z'
