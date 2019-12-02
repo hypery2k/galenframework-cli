@@ -27,10 +27,10 @@
         "test": "npm run check && npm run unit-test",
         "unit-test": "nodeunit --reporter=junit test/tests.js --output target",
         "check": "npm audit",
-        "pretest": "eslint lib/*.js",
+        "lint": "eslint lib/*.js",
         "coverage": "nyc --reporter=lcov --temp-dir=coverage npm run test && istanbul-coveralls --no-rm",
         "snyk-protect": "snyk protect",
-        "prepublish": "npm run snyk-protect"
+        "prepare": "npm run snyk-protect"
     },
     "bin": {
         "galen": "bin/galen"
@@ -54,8 +54,8 @@
         "@toolisticon/istanbul-coveralls": "1.0.0",
         "coveralls": "3.0.6",
         "ejs": "2.6.1",
-        "eslint": "^6.1.0",
-        "handlebars": "^4.4.5",
+        "eslint": "^6.7.2",
+        "handlebars": "^4.5.3",
         "istanbul": "0.4.5",
         "marked": "^0.7.0",
         "nodeunit": "0.11.3",

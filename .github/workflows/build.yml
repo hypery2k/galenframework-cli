@@ -1,0 +1,78 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build-core:
+    name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: [10, 12, 13]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Use Node.js ${{ matrix.node_version }}
+      uses: actions/setup-node@v1
+      with:
+        version: ${{ matrix.node_version }}
+
+    - name: npm install, build and test
+      run: |
+        cd core
+        npm install
+        npm test
+
+  build-cli:
+    name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: [10, 12, 13]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Use Node.js ${{ matrix.node_version }}
+      uses: actions/setup-node@v1
+      with:
+        version: ${{ matrix.node_version }}
+
+    - name: npm install, build and test
+      run: |
+        cd cli
+        npm install
+        npm install . -g
+        npm test
+  deploy:
+    needs: [build-core, build-cli]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+  
+      - name: publish release package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
+          (cd core && npm i && npm publish)
+          (cd cli && npm i && npm publish)
+        if: github.ref == 'master'
+      
+      - name: publish preview package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
+          PACKAGE_VERSION=$(node -p -e "require('./core/package.json').version") 
+          CURRENT_TIME=$(date +%s)
+          NEW_VERSION=${PACKAGE_VERSION}-build${CURRENT_TIME}
+          (cd core && npm i && npm version $NEW_VERSION --no-git-tag-version && npm publish  --tag next)
+          (cd cli && npm i && npm i galenframework@next --E && npm version $NEW_VERSION && npm publish  --tag next)
+        if: github.ref == 'develop'

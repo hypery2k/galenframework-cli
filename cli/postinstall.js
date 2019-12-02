@@ -41,7 +41,7 @@ process.env.PATH = helper.cleanPath(originalPath);
 // Do not re-use an npm-installed galen, because
 // that can lead to weird circular dependencies between
 // local versions and global versions.
-let whichDeferred = kew.defer();
+const whichDeferred = kew.defer();
 which('galen', whichDeferred.makeNodeResolver());
 whichDeferred.promise
     .then((result) => installAdditionalDrivers(result))
@@ -55,7 +55,7 @@ whichDeferred.promise
     }));
 
 function installAdditionalDrivers(galenPath) {
-    let defer = kew.defer();
+    const defer = kew.defer();
     defer.resolve();
     defer.promise.then(() => {
         // Horrible hack to avoid problems during global install. We check to see if
@@ -64,7 +64,7 @@ function installAdditionalDrivers(galenPath) {
             log.info('Looks like an `npm install -g` on windows; unable to check for already installed version.');
             throw new Error('Global install');
         }
-        let contents = fs.readFileSync(galenPath, 'utf8');
+        const contents = fs.readFileSync(galenPath, 'utf8');
         if ((/NPM_INSTALL_MARKER/).test(contents)) {
             log.info('Looks like an `npm install -g`; unable to check for already installed version.');
             throw new Error('Global install');
@@ -76,10 +76,12 @@ function installAdditionalDrivers(galenPath) {
         }
     }).then(() => {
         log.info('galenframework-cli detected');
-        let npmconfDeferred = kew.defer();
+        const npmconfDeferred = kew.defer();
         npmconf.load(npmconfDeferred.makeNodeResolver());
-        return npmconfDeferred.promise;
-    }).then(() => {
+
+return npmconfDeferred.promise;
+    })
+.then(() => {
         exit(0);
     })
 }
