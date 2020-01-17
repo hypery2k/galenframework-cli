@@ -65,7 +65,7 @@
         "tslint": "5.20.0",
         "tslint-eslint-rules": "5.4.0",
         "typedoc": "^0.15.0",
-        "typescript": "3.5.3"
+        "typescript": "3.7.5"
     },
     "resolutions": {
         "handlebars": "^4.3.0"
