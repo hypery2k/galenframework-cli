@@ -64,7 +64,7 @@
         "snyk": "^1.132.2",
         "tslint": "5.20.0",
         "tslint-eslint-rules": "5.4.0",
-        "typedoc": "^0.15.0",
+        "typedoc": "^0.16.9",
         "typescript": "3.5.3"
     },
     "resolutions": {
