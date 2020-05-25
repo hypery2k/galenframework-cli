@@ -54,7 +54,7 @@
         "@toolisticon/istanbul-coveralls": "1.0.0",
         "coveralls": "3.0.6",
         "ejs": "2.6.1",
-        "eslint": "^6.7.2",
+        "eslint": "^7.1.0",
         "handlebars": "^4.5.3",
         "istanbul": "0.4.5",
         "marked": "^0.7.0",
