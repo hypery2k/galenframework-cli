@@ -1,1 +1,0 @@
-module.exports.location = '/Users/mreinhardt/git/job/galen/galenframework-cli/core/lib';

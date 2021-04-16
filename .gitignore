@@ -5,7 +5,7 @@ cli/node_modules/*
 core/lib/galen/*
 cli/lib/galen/*
 core/lib/location.js
-lcli/ib/location.js
+cli/ib/location.js
 core/coverage/*
 core/target/*
 cli/coverage/*
