@@ -27,9 +27,7 @@
         "unit-test": "jasmine --reporter=jasmine-ts-console-reporter spec/*.spec.js",
         "check": "npm audit",
         "lint": "eslint lib/*.js",
-        "coverage": "nyc --reporter=lcov --temp-dir=coverage npm run test && istanbul-coveralls --no-rm",
-        "snyk-protect": "snyk protect",
-        "prepare": "npm run snyk-protect"
+        "coverage": "nyc --reporter=lcov --temp-dir=coverage npm run test && istanbul-coveralls --no-rm"
     },
     "bin": {
         "galen": "bin/galen"
@@ -60,7 +58,6 @@
         "marked": "^0.7.0",
         "npm-force-resolutions": "0.0.3",
         "nyc": "^14.1.1",
-        "snyk": "^1.542.0",
         "tslint": "5.20.0",
         "tslint-eslint-rules": "5.4.0",
         "typedoc": "^0.15.0",
