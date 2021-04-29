@@ -1,5 +1,5 @@
 sudo: required
-dist: trusty
+dist: focal
 language: node_js
 after_success: npm run coverage && cat ./coverage/lcov.info | coveralls
 
@@ -17,7 +17,7 @@ addons:
   firefox: latest
   apt:
     sources:
-      - google-chrome
+      - sourceline: 'deb http://dl.google.com/linux/chrome/deb/ stable main'
     packages:
       - google-chrome-stable
 cache:

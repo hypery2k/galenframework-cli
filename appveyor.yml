@@ -31,10 +31,10 @@ test_script:
   - cd core
   - npm install .
   - npm test
-  - npm install . -g
+  - npm install . -g --force
   - cd ..
   - cd cli
   - npm install .
   - npm test
-  - npm install . -g
+  - npm install . -g --force
   - .\runTests
