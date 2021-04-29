@@ -5,9 +5,8 @@ after_success: npm run coverage && cat ./coverage/lcov.info | coveralls
 
 env:
   matrix:
-    - NODE_VERSION="8" DISPLAY=:99
-    - NODE_VERSION="10" NDISPLAY=:99
-    - NODE_VERSION="11" DISPLAY=:99
+    - NODE_VERSION="12" DISPLAY=:99
+    - NODE_VERSION="14" DISPLAY=:99
 
 services:
   - docker

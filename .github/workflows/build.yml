@@ -8,7 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node_version: [10, 12, 13]
+        node_version: [12, 14]
         os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
@@ -55,7 +55,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-  
+
       - name: publish release package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
@@ -64,13 +64,13 @@ jobs:
           (cd core && npm i && npm publish)
           (cd cli && npm i && npm publish)
         if: github.ref == 'master'
-      
+
       - name: publish preview package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
-          PACKAGE_VERSION=$(node -p -e "require('./core/package.json').version") 
+          PACKAGE_VERSION=$(node -p -e "require('./core/package.json').version")
           CURRENT_TIME=$(date +%s)
           NEW_VERSION=${PACKAGE_VERSION}-build${CURRENT_TIME}
           (cd core && npm i && npm version $NEW_VERSION --no-git-tag-version && npm publish  --tag next)
