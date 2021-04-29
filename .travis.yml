@@ -9,6 +9,7 @@ env:
     - NODE_VERSION="14" DISPLAY=:99
 
 services:
+  - xvfb
   - docker
 
 addons:
@@ -29,7 +30,6 @@ before_script:
   - npm install -g istanbul
   - npm install -g istanbul-coveralls
   - npm install -g nodeunit
-  - 'sh -e /etc/init.d/xvfb start'
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
@@ -44,8 +44,8 @@ script:
   - cd cli
   - npm i
   - npm install . -g
-  - npm run test
-  - ./runTests.sh
+  - xvfb-run npm run test
+  - xvfb-run ./runTests.sh
   - cd ..
   - ./docker-build-images.sh
 after_script:
