@@ -55,6 +55,7 @@
         "handlebars": "^4.7.7",
         "istanbul": "0.4.5",
         "jasmine": "^3.7.0",
+        "jasmine-ts-console-reporter": "^3.1.1",
         "marked": "^0.7.0",
         "npm-force-resolutions": "0.0.3",
         "nyc": "^14.1.1",
