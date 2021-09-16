@@ -49,7 +49,7 @@
         "tough-cookie": "2.3.4",
         "tunnel-agent": "0.6.0",
         "which": "1.2.0",
-        "yargs": "3.30.0"
+        "yargs": "15.0.1"
     },
     "devDependencies": {
         "@toolisticon/istanbul-coveralls": "1.0.0",
