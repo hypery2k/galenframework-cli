@@ -35,7 +35,7 @@
         "check": "^1.0.0",
         "chromedriver": "*",
         "fs-extra": "0.26.2",
-        "galenframework": "^2.4.4-1",
+        "galenframework": "^2.4.4-build42",
         "geckodriver": "^2.0.4",
         "httpreq": "0.4.13",
         "kew": "0.7.0",
@@ -54,10 +54,9 @@
     "devDependencies": {
         "@toolisticon/istanbul-coveralls": "1.0.0",
         "coveralls": "3.0.2",
-        "ejs": "2.6.1",
+        "ejs": "^3.1.7",
         "eslint": "^5.16.0",
         "handlebars": "^4.7.7",
-        "istanbul": "0.4.5",
         "jasmine": "^3.7.0",
         "jasmine-ts-console-reporter": "^3.1.1",
         "nyc": "^14.1.1"
