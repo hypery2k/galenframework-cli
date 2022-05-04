@@ -37,7 +37,7 @@
         "fs-extra": "0.26.2",
         "galenframework": "^2.4.4-build42",
         "geckodriver": "^2.0.4",
-        "httpreq": "0.4.13",
+        "httpreq": "0.5.2",
         "kew": "0.7.0",
         "ms": "2.0.0",
         "npm-which": "3.0.1",
