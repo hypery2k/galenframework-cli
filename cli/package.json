@@ -34,7 +34,7 @@
     "dependencies": {
         "check": "^1.0.0",
         "chromedriver": "*",
-        "fs-extra": "0.26.2",
+        "fs-extra": "0.30.0",
         "galenframework": "^2.4.4-build42",
         "geckodriver": "^2.0.4",
         "httpreq": "0.4.13",
