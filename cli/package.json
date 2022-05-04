@@ -44,7 +44,7 @@
         "npmlog": "4.0.0",
         "path": "0.12.7",
         "run": "^1.4.0",
-        "sshpk": "1.14.1",
+        "sshpk": "1.17.0",
         "stringstream": "0.0.6",
         "tough-cookie": "2.3.4",
         "tunnel-agent": "0.6.0",
