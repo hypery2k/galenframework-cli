@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build-core:
-    name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    name: Build Core on node ${{ matrix.node_version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -26,7 +26,7 @@ jobs:
         npm test
 
   build-cli:
-    name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    name: Build CLI on node ${{ matrix.node_version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
