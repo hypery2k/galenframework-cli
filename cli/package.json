@@ -36,7 +36,7 @@
         "chromedriver": "^101.0.0",
         "fs-extra": "0.26.2",
         "galenframework": "^2.4.4-build43",
-        "geckodriver": "^3.0.1",
+        "geckodriver": "^4.0.0",
         "httpreq": "^0.5.2",
         "yargs": "3.30.0"
     },
